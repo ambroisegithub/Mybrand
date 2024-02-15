@@ -389,6 +389,7 @@ font-size: 12px;
   padding-right: 100px;
   padding-top: 20px;
   height: auto;
+  padding-bottom: 20px;
 }
 .serviceContainer >.Servicep{
   font-size: 20px;
@@ -403,6 +404,31 @@ color: white;
 margin-bottom: 20px;
 font-weight: bold;
 
+}
+.gridContainer{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+
+  grid-gap:10px;
+}
+.gridBox {
+  background-color: #2A2C39;
+  color: white;
+  /* text-align: center; */
+  padding: 20px;
+}
+
+/* Apply this style to each grid item */
+.gridContainer > div {
+  background-color: #2A2C39;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+.gridBox img{
+  color: white;
+  width: 56px;
+  height: 56px;
 }
   @media screen and (max-width:768px) {
 
