@@ -271,7 +271,7 @@ font-size: 12px;
       .maincontainersectionTwo .aboutmeContainer{
         flex: 1;
         position: relative;
-        width: 640px;
+        /* width: 640px; */
         /* border: 1px solid white; */
         padding-top: 20px;
         padding-top: 20px;
@@ -319,7 +319,7 @@ font-size: 12px;
       .design{
         display: flex;
         flex-direction: row;
-        gap: 60px;
+        gap: 20px;
         flex-wrap: wrap;
         margin-bottom: 30px;
       }
@@ -342,8 +342,6 @@ font-size: 12px;
         flex-wrap: wrap;
         gap: 5px;
         width: auto;
-     
-
         background-color: #343A40;
         border-radius: 50px;
     
@@ -371,11 +369,7 @@ font-size: 12px;
   margin-right: 5px;
 
 }
-.mediaconatinerContent .mediaConatainermail box-icon{
 
-  color: white;
-
-} 
 
 .mediaContainerp >p{
   padding: 2px;
@@ -408,14 +402,14 @@ font-weight: bold;
 .gridContainer{
   display:grid;
   grid-template-columns:repeat(4, 1fr);
-
-  grid-gap:10px;
+  grid-gap:20px;
 }
 .gridBox {
-  background-color: #2A2C39;
-  color: white;
-  /* text-align: center; */
-  padding: 20px;
+ background-color: #2A2C39;
+ color: white;
+ padding: 20px;
+ border-radius: 10px;
+
 }
 
 /* Apply this style to each grid item */
@@ -429,6 +423,26 @@ font-weight: bold;
   color: white;
   width: 56px;
   height: 56px;
+  margin-bottom: 10px;
+}
+.gridBox h1{
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+.gridBox p{
+  color: white;
+  margin-bottom: 30px;
+}
+.gridBox >p >.spanone1{
+color: #858792;
+margin-right: 25px;
+font-size: 13px;
+font-weight: bold;
+}
+.gridBox > p >.spantwo2{
+  color: #858792;
+margin-right: 20px;
+font-size: 20px;
 }
   @media screen and (max-width:768px) {
 
@@ -477,23 +491,36 @@ font-weight: bold;
       flex-direction: column;
     }
 
-    .mediaConatiner{
+    /* .mediaConatiner{
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
+    } */
+    .serviceContainer{
+      padding-left: 20px;
+      padding-right: 20px;
     }
-    
+    .gridContainer{
+      display:grid;
+      grid-template-columns:repeat(1, 1fr);
+      grid-gap:10px;
+    }
+    .maincontainersectionTwo{
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    /* .gridBox {
+      background-color: #2A39;
+      color: white;
+      padding: 0px;
+      border-radius: 10px;
+     
+     } */
   }
 
 
   @media only screen and (min-width: 320px) and (max-width: 480px) {
-     .mainconatiner{
-      gap: 20px;
-      display: flex;
-      flex-direction: column;
-      padding-left: 5px;
-      padding-right: 5px;
-    }
+ 
 
     .mainone{
       flex: 1;
@@ -506,6 +533,10 @@ font-weight: bold;
       width: 100%;
       height: 517px;
 
+    }
+    .maincontainersectionTwo{
+      padding-left: 10px;
+      padding-right: 10px;
     }
     .design{
       display: flex;
@@ -521,13 +552,42 @@ font-weight: bold;
       flex-direction: column;
     }
 
-    .mediaConatiner{
+    /* .{
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
+    } */
+    .serviceContainer{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .gridContainer{
+      display:grid;
+      grid-template-columns:repeat(1, 1fr);
+      grid-gap:10px;
     }
   }
   
-  @media only screen and (min-width: 769px) and (max-width: 1024px) {
+  @media only screen and (min-width: 769px) and (max-width: 1189px) {
+
+    .gridContainer{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      grid-gap:10px;
+    }
+    .gridBox >p >.spanone1{
+      color: #858792;
+      margin-right: 5px;
+      font-size: 13px;
+      font-weight: bold;
+      }
+      .maincontainersectionTwo{
+        display: flex;
+        flex-direction: column;
+      }
+      .mainconatiner{
+        display: flex;
+        flex-direction: column;
+      }
 
   }
