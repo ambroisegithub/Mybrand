@@ -379,7 +379,30 @@ font-size: 12px;
 
 .mediaContainerp >p{
   padding: 2px;
+  color: white;
+}
+
+.serviceContainer{
+  border: 1px solid white;
+  width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  height: auto;
+}
+.serviceContainer >.Servicep{
+  font-size: 20px;
+color: #858792;
+margin-bottom: 20px;
+font-weight: bold;
+
+}
+.serviceContainer >.Servicep1{
+  font-size: 32px;
 color: white;
+margin-bottom: 20px;
+font-weight: bold;
+
 }
   @media screen and (max-width:768px) {
 
