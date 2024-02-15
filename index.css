@@ -244,16 +244,16 @@ font-size: 12px;
         padding-top: 30px;
         /* background-color: skyblue; */
         background-image: linear-gradient(to top, #1F2937, #4F46E5);
-        padding-left: 20px;
-        padding-right: 20px;
-        border: 1px solid white;
+        padding-left: 100px;
+        padding-right: 100px;
+        /* border: 1px solid white; */
         padding-bottom: 30px;
         margin-bottom: 20px;
       }
   
       .maincontainersectionTwo .aboutMeImagecontainer{
         flex:1;
-        border: 1px solid white;
+        /* border: 1px solid white; */
         padding-top: 20px;
         padding-top: 20px;
         padding-left: 15px;
@@ -272,7 +272,7 @@ font-size: 12px;
         flex: 1;
         position: relative;
         width: 640px;
-        border: 1px solid white;
+        /* border: 1px solid white; */
         padding-top: 20px;
         padding-top: 20px;
         padding-left: 15px;
@@ -342,14 +342,12 @@ font-size: 12px;
         flex-wrap: wrap;
         gap: 5px;
         width: auto;
-       padding-left: 15px;
-       padding-right: 15px;
+     
 
         background-color: #343A40;
         border-radius: 50px;
     
 }
-
 
 .mediaconatinerContent{
   padding: 10px;
