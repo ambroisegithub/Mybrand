@@ -87,7 +87,7 @@ padding-right: 100px;
 flex: 1;
 padding-top: 20px;
 box-sizing: border-box;
-border: 1px solid white;
+/* border: 1px solid white; */
 }
 
 .ImageContainers {
@@ -254,7 +254,7 @@ margin-top: 3px;
       background-image: linear-gradient(to top, #1F2937, #4F46E5);
       padding-left: 100px;
       padding-right: 100px;
-      border: 1px solid white;
+      /* border: 1px solid white; */
       padding-bottom: 30px;
       margin-bottom: 20px;
       height: auto;
@@ -262,11 +262,7 @@ margin-top: 3px;
 
     .maincontainersectionTwo .aboutMeImagecontainer{
       flex:1;
-      border: 1px solid white;
-      /* padding-top: 20px;
-      padding-top: 20px; */
-      /* padding-left: 15px; */
-      /* padding-bottom: 10px; */
+      /* border: 1px solid white; */
       margin-bottom: 20px;
       height: 517px;
 
@@ -281,7 +277,7 @@ margin-top: 3px;
       flex: 1;
       position: relative;
       /* width: 640px; */
-      border: 1px solid white;
+      /* border: 1px solid white; */
       padding-top: 20px;
       padding-top: 20px;
       /* padding-bottom: 10px; */
@@ -386,7 +382,7 @@ color: white;
 }
 
 .serviceContainer{
-border: 1px solid white;
+/* border: 1px solid white; */
 width: 100%;
 padding-left: 100px;
 padding-right: 100px;
@@ -469,7 +465,7 @@ padding-right: 100px;
 margin-top: 20px;
 padding-bottom: 30px;
 
-margin-bottom: 20px;
+/* margin-bottom: 20px; */
 }
 
 .SkillsContainerOne >h1{
@@ -562,8 +558,7 @@ padding-right: 100px;
 padding-bottom: 20px;
 background-color: #2A2C39;
 /* margin-top: 20px;
-padding-bottom: 30px; */
-
+padding-top: 30px; */
 margin-bottom: 20px;
 }
 .projectSection .awesome p{
@@ -726,9 +721,11 @@ display: flex;
 flex-direction: row;
 gap: 20px;
 /* border: 1px solid white; */
-padding: 100px;
+padding-left: 100px;
+padding-right: 100px;
 justify-content: space-between;
 background-color: #2A2C39;
+padding-top: 30px;
 }
 .contactUsContainer .getIttouch p {
 color: #858792;
@@ -854,7 +851,7 @@ height: 111px;
 width: 100%;
 display: flex;
 /* border: 1px solid white; */
-margin-top: 20px;
+/* margin-top: 20px; */
 /* background-image: linear-gradient(to top, #1F2937, #4F46E5); */
 justify-content: center;
 text-align: center;
@@ -1054,6 +1051,33 @@ flex-direction: column;
     padding-right: 10px;
 
     }
+
+    .registermain{
+      display: flex;
+      flex-direction: column;
+
+      }
+
+      .sectionFivemain{
+        display: flex;
+        flex-direction: column;
+     
+        }
+        .registerStyle .regiterInput >input{
+          margin-top: 20px;
+          width: 500px;
+          height: 56px;
+      
+          }
+          .textArea textarea{
+            width: 550px;
+            }
+            .Footer input{
+              width: 350px;
+              margin-bottom: 10px;
+            
+            
+            }
 }
 
 
@@ -1162,7 +1186,39 @@ flex-direction: column;
 
       }
       
+.sectionFivemain{
+display: flex;
+flex-direction: column;
+gap: 20px;
+/* border: 1px solid white; */
+padding-left: 10px;
+padding-right: 10px;
+justify-content: space-between;
+background-color: #2A2C39;
+}
+.registermain{
+  display: flex;
+  flex-direction: column;
 
+  }
+
+  .registerStyle .regiterInput >input{
+    margin-top: 20px;
+    width: 340px;
+    height: 56px;
+
+    }
+
+    .textArea textarea{
+      width: 340px;
+      }
+
+      .Footer input{
+        width: 350px;
+        margin-bottom: 10px;
+      
+      
+      }
 }
 
 
@@ -1183,39 +1239,18 @@ flex-direction: column;
     width: 200px;
     height: 220px;
     }
-}
-/* @media only screen and (min-width: 769px) and (max-width: 1131px) { */
-  /* .maincontainersectionTwo{
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: auto;
-  }
 
-  .maincontainersectionTwo .aboutMeImagecontainer{
-    flex:1;
-    /* border: 1px solid white; */
-    /* padding-top: 20px;
-    padding-top: 20px;
-    padding-left: 15px;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    height: 400px;
+    .registermain{
+      display: flex;
+      flex-direction: column;
 
-  } */
-/* }  */
 
-@media only screen and (min-width: 769px) and (max-width: 1629px) {.maincontainersectionTwo{
-  /* flex-direction: column;
-  order: 2;
-  height: 100%;
-}
-.maincontainersectionTwo .aboutMeImagecontainer {
-height: 10px;order: 1; */
+      }
 
 }
 
+
+@media only screen and (min-width: 769px) and (max-width: 1629px) {
 .gridContainer{
 display:grid;
 grid-template-columns:repeat(2, 1fr);
@@ -1240,4 +1275,14 @@ grid-template-columns: repeat(2,1fr);
     padding-left: 100px;
     padding-right: 100px;
   }
+
+  .sectionFivemain{
+    display: flex;
+    flex-direction: column;
+ 
+    }
+    /* .registermain{
+flex-direction: column;
+    } */
+
 }
