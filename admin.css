@@ -1,0 +1,414 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    overflow-x: hidden;   
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 80px 1fr 80px;
+    grid-template-areas:
+        'aside header'
+        'aside main'
+        'aside footer';
+    height: auto;
+/* gap: 24px; */
+}
+.header{
+    grid-area: header;
+    background-color: #343A40;
+    padding-top:10px ;
+    padding-bottom: 10px;
+}
+.semi-header{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    
+}
+.aside{
+    grid-area: aside;
+    background-color: #2A2C39;
+   padding-left: 30px;
+   padding-top: 30px;
+   padding-right: 20px;
+}
+.aside h1{
+    color: #858792;
+    /* background-color: white; */
+    font-weight: bold;
+    font-size: 40px;
+    padding-bottom: 200px;
+}
+.aside .icon-contents .icons a{
+text-decoration: none;
+color: white;
+margin-bottom: 20px;
+}
+.aside .icon-contents .icons {
+
+    margin-bottom: 40px;
+    }
+    .aside .icon-contents .icons a{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+        /* justify-content: space-around; */
+        
+    }
+
+    .aside .icon-contents .icons a i{
+     width: 24px;
+     height: 24px;
+     /* background-color:blue; */
+     justify-content: center;
+     font-size: 24px;
+        
+    }
+
+    .aside .icon-contents .icons a i{
+        width: 24px;
+        height: 24px;
+        /* background-color:blue; */
+        justify-content: center;
+        font-size: 24px;
+           
+       }
+
+       .aside .icon-contents .icons a .text{
+           font-size: 15px;
+           font-weight: bold;
+       }
+.main{
+    grid-area: main;
+    background-color: white;
+    margin: 20px;
+}
+.footer{
+    grid-area: footer;
+background-image: linear-gradient(to top, #1F2937, #4F46E5);
+}
+
+.overview-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 24px;
+}
+.overview-content > * {
+    background-color: #2A2C39;
+    padding: 24px;
+    border-radius: 5px;
+    font-size: 16px;
+    /* color: #fff; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.overview-card .overview{
+    margin-bottom: 10px;
+}
+.overview span i{
+    margin-right: 15px;
+    height: 24px;
+    width: 24px;
+    font-weight: bold;
+   color: white;
+    /* background-color: blue; */
+    font-size:24px ;
+
+}
+.users{
+    color: white;
+    font-weight: bold;
+}
+
+.overview span {
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.overview1 .one{
+font-size: 18px;
+font-weight: bold;
+color: white;
+margin-right:10px ;
+}
+
+.overview1 .two{
+    color: white;
+    margin-right: 10px;
+
+}
+
+.overview1 .three{
+    font-size: 16px;
+    color: #ABABAB;
+    font-weight: bold;
+}
+.notification {
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    padding: 16px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+  .notification-image{
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+    gap: 30px;
+    /* background-color: white; */
+    align-items: center;
+    text-align: center;
+  }
+
+  .notification-image .notification-image2{
+    width: 50px;
+    height: 50px;
+  }
+  .notification-image .notification-image2 img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+.input-Search input{
+    outline: none;
+    border: none;
+    border-radius: 3px;
+padding: 15px;
+width: 300px;
+/* font-size: 15px; */
+font-weight: bold;
+}
+.input-Search input::placeholder{
+font-weight: bold;
+font-size: 15px;
+}
+.input-Search{
+    display: flex;
+    gap: 5px;
+}
+.input-Search button{
+    outline: none;
+    border: none;
+    padding: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 3px;
+    background-color: #555;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+.chart-content{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 24px;
+    margin-top: 20px;
+
+}
+.chart-content  .blogs{
+    border-radius: 5px;
+    padding: 20px; 
+}
+
+.blogs{
+    width: 100%;
+    
+}
+.blogi{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+.blogi div{
+    background-color: white;
+    width: 50%;
+}
+.blogi div input{
+    width: 100%;
+}
+.blogFlex{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+.blogs .blog1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.blogs .blog1 .file.date input{
+    width: 100%;
+}
+
+.blogi  input[type="file"] {
+    background-color: #343A40;
+    padding: 20px;
+    border: 1px solid #858792;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    color: #858792;
+    width: 100%;
+
+}
+
+.blogs .blog2  input{
+    background-color: #343A40;
+    padding: 20px;
+    border: 1px solid #858792;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    color:black;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.blogs .blog3 textarea{
+    background-color: #343A40;
+    padding: 20px;
+    border: 1px solid #858792;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    color:black;
+    width: 100%;
+   
+    margin-bottom: 20px;
+    height: 150px;
+}
+
+.file,.date,.blogtitle,.Textarea{
+    display: flex;
+    flex-direction: column;
+}
+.blogi input[type="date"] {
+    background-color: #343A40;
+    padding: 20px;
+    border: 1px solid #858792;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    color: #858792;
+}
+.blog1 ,.blog2, .blogi label{
+color: white;
+font-weight: bold;
+margin-bottom: 10px;
+margin-top: 10px;
+}
+.chart-content .blogs{
+    background-color: #2A2C39;
+}
+.Textarea label{
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.blogpostbutton button{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    background-color: #5B69E2;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    color: white;
+    border-radius: 3px;
+}
+.blogsComment{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.blogsComment h1{
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+.blogsComment p{
+    color: #ABABAB;
+    font-weight: bold;
+    font-size: 15px;
+    padding-right: 5px;
+}
+.blogButtons{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+
+    
+}
+.blogButtons button{
+    padding: 5px;
+    border-radius: 2px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+
+}
+
+.blogButtons .two{
+    background-color: red;
+    color: white;
+}
+.recentBlogs{
+    width: 100%;
+    height: 500px;
+    border: 1px solid black;
+}
+@media (max-width: 767px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header header"
+            "aside main"
+            "footer footer";
+    }
+/* .chart-content {
+        grid-template-columns: 1fr;
+    } */
+    .overview-content {
+        grid-template-columns: 1fr;
+    }
+}
