@@ -3,9 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <title>Admin Dashboard</title>
 </head>
 <body>
-    
+    <div class="grid-container">
+        <header class="header">
+            <div class="semi-header">
+               <div class="input-Search">
+                    <input type="text" title="Search" placeholder="search">
+                <button aria-label="Search"><i class="fa fa-search"></i></button>
+                </div>
+                  <div class="notification-image">
+                    <div class="notification-image1">
+                        <a href="#" class="notification">
+                            <span>Mails</span>
+                            <span class="badge">3</span>
+                          </a>
+                    </div>
+                    <div class="notification-image2">
+                        <img src="./images/ambrois.png" alt="">
+                    </div>
+                  </div>
+            </div>
+ 
+        </header>
+        <aside class="aside">
+            <h1>
+                AMB
+            </h1>
+            <div class="icon-contents">
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-th-large" aria-hidden="true"></i></div><div class="text">Dashboard</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-user" aria-hidden="true"></i></div><div class="text">Contact US</div></a>
+                  </div>
+
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-users" aria-hidden="true"></i> </div><div class="text">Users </div></a>
+                  </div>
+
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-commenting" aria-hidden="true"></i></div><div class="text">Total Comments</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-rss" aria-hidden="true"></i></div><div class="text">Blogs </div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-cog" aria-hidden="true"></i></div><div class="text">Setting </div></a>
+                  </div>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="overview-content">
+                <div class="overview-card">
+                    <div class="overview">
+                        <span><i class="fa fa-users" aria-hidden="true"></i> <span class="users">Total Users</span></span>
+                    </div>
+                    <div class="overview1">
+                        <span><span class="one">8%</span><span class="two">From Last Week</span><span class="three">2568</span></span>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview">
+                        <span><i class="fa fa-users" aria-hidden="true"></i> <span class="users">Total Users</span></span>
+                    </div>
+                    <div class="overview1">
+                        <span><span class="one">8%</span><span class="two">From Last Week</span><span class="three">2568</span></span>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview">
+                        <span><i class="fa fa-users" aria-hidden="true"></i> <span class="users">Total Users</span></span>
+                    </div>
+                    <div class="overview1">
+                        <span><span class="one">8%</span><span class="two">From Last Week</span><span class="three">2568</span></span>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview">
+                        <span><i class="fa fa-users" aria-hidden="true"></i> <span class="users">Total Users</span></span>
+                    </div>
+                    <div class="overview1">
+                        <span><span class="one">8%</span><span class="two">From Last Week</span><span class="three">2568</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-content">
+                <div class="blogs">
+                    <form action="blog">
+                        <div class="blogFlex">
+                            <div class="blogi">
+                                <label for="Image">Image</label>
+                                <input type="file" title="Image" id="">
+                              </div>
+                              <div class="blogi">
+                                <label for="Image">Date</label>
+                                <input type="date" title="Image" id="">
+                              </div>
+                        </div>
+
+                        <div class="blog2">
+                            <label for="Blog Title">Blog Title</label>
+                            <input type="text" title="blog title" placeholder="Blog Tile">
+                        </div>
+                        <div class="blog3">
+                            <div class="Textarea">
+                            <label for="Blog Description">Blog Description</label>
+                            <textarea name="" id=""  title="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="blogpostbutton">
+                            <button>Post Blog</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="blogs">
+                    <div class="blogsComment">
+                        <div>
+                            <h1>Ambroise Muhayimana</h1>
+                        </div>
+                        <div>
+                            <p>Lorem Ipsum is simply dummy text of the printing  Lorem Ipsum is simply dummy text of the printing</p>
+                            
+                        </div>
+                        <div class="blogButtons">
+                            <button class="one">Reply</button>
+                            <button class="two">Reject</button>
+                        </div>
+                    </div>
+                    <div class="blogsComment">
+                        <div>
+                            <h1>Ambroise Muhayimana</h1>
+                        </div>
+                        <div>
+                            <p>Lorem Ipsum is simply dummy text of the printing  Lorem Ipsum is simply dummy text of the printing</p>
+                            
+                        </div>
+                        <div class="blogButtons">
+                            <button class="one">Reply</button>
+                            <button class="two">Reject</button>
+                        </div>
+                    </div>
+                    <div class="blogsComment">
+                        <div>
+                            <h1>Ambroise Muhayimana</h1>
+                        </div>
+                        <div>
+                            <p>Lorem Ipsum is simply dummy text of the printing  Lorem Ipsum is simply dummy text of the printing</p>
+                            
+                        </div>
+                        <div class="blogButtons">
+                            <button class="one">Reply</button>
+                            <button class="two">Reject</button>
+                        </div>
+                    </div>
+                    <div class="blogsComment">
+                        <div>
+                            <h1>Ambroise Muhayimana</h1>
+                        </div>
+                        <div>
+                            <p>Lorem Ipsum is simply dummy text of the printing  Lorem Ipsum is simply dummy text of the printing</p>
+                            
+                        </div>
+                        <div class="blogButtons">
+                            <button class="one">Reply</button>
+                            <button class="two">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="blogsComment">
+                        <div>
+                            <h1>Ambroise Muhayimana</h1>
+                        </div>
+                        <div>
+                            <p>Lorem Ipsum is simply dummy text of the printing  Lorem Ipsum is simply dummy text of the printing</p>
+                            
+                        </div>
+                        <div class="blogButtons">
+                            <button class="one">Reply</button>
+                            <button class="two">Reject</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div>
+                <h1>Recent Blogs</h1>
+                <div class="recentBlogs">
+
+                </div>
+            </div>
+        </main>
+        <footer class="footer"></footer>
+    </div>
 </body>
 </html>
