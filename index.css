@@ -26,7 +26,8 @@ body{
   padding-top: 20px;
   padding-bottom: 20px;
   align-items: center;
-  z-index: 1000; /* Set a high z-index to ensure the navigation bar stays on top */
+  z-index: 1000; 
+  /* Set a high z-index to ensure the navigation bar stays on top */
 }
 main {
   background-color: #343A40;
@@ -43,7 +44,14 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* margin-bottom: 1000px;Set a high z-index to ensure the navigation bar stays on top */
+
   /* z-index: 1; */
+}
+.sectionOne{
+  width: 100%;
+  height: auto;
+  padding-top: 40px;
 }
 .logo-container > a {
   color: #858792;
@@ -52,7 +60,8 @@ nav {
   font-size: 40px;
   justify-content: center;
   font-weight: bold;
-  /* padding-left: 40px;background-color: white; */
+  padding-left: 58px;
+  /* background-color: white; */
 
   
 }
@@ -124,7 +133,7 @@ z-index: 1;
   outline: none;
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
   
 
@@ -143,10 +152,11 @@ margin-top: 30px;
 }
 .mainconatiner .mainone .descriptiontwo > p{
 color:#858792;
-font-size: 16px;
+font-size: 20px;
+font-weight: bold;
 }
 .buttoncontainer{
-margin-top: 50px;
+margin-top: 30px;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
