@@ -7,7 +7,9 @@
 body{
     font-family: 'Arial', sans-serif;
     font-size: 16px;
-    overflow-x: hidden;   
+    overflow-x: hidden; 
+    height: auto
+    ;  
 }
 .grid-container {
     display: grid;
@@ -28,11 +30,17 @@ body{
 }
 .semi-header{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
     align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
     
+}
+.showHideBAr i{
+    color: white;
+    display: none;
 }
 .aside{
     grid-area: aside;
@@ -46,7 +54,7 @@ body{
     /* background-color: white; */
     font-weight: bold;
     font-size: 40px;
-    padding-bottom: 200px;
+    padding-bottom: 40px;
 }
 .aside .icon-contents .icons a{
 text-decoration: none;
@@ -88,10 +96,14 @@ margin-bottom: 20px;
            font-size: 15px;
            font-weight: bold;
        }
+       .hamburger{
+        display: none;
+       }
 .main{
     grid-area: main;
     background-color: white;
     margin: 20px;
+    height: auto;
 }
 .footer{
     grid-area: footer;
@@ -226,6 +238,19 @@ font-size: 15px;
     font-size: 15px;
     font-weight: bold;
 
+}
+.SearchIcon button{
+    outline: none;
+    border: none;
+    padding: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 3px;
+    background-color: #555;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    display: none;
 }
 
 .chart-content{
@@ -549,22 +574,24 @@ margin-top: 10px;
   }
   .tbl thead tr th{
     color:white;
-    font-size:1rem;
+    font-size:0.5rem;
     padding:0.8rem;
     vertical-align:top;
-    /* letter-spacing: 0.2rem; */
+    letter-spacing: 0.2rem;
     border:1 px solid #aab7b8;
+    /* margin-right: 100px; */
       
   }
   
   
   .tbl tbody  tr td{
-  /* text-align:center; */
+  text-align:start;
     font-weight:normal;
     /* letter-spacing:0.2rem; */
     border:1px solid #aab7ba;
     font-size:1rem;
     padding:0.8rem;
+    /* justify-content: space-between; */
       
   }
   .tbl tr:nth-child(even) {
@@ -576,6 +603,63 @@ margin-top: 10px;
     width: 40px;
     height: 40px;
   }
+  
+
+  /* Style for the modal */
+.modal {
+    display: none;
+    position: fixed;
+    border-radius: 5px;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
+  
+  .modal-content {
+    background-color:white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+
+    width: 80%;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .modal-content input{
+    outline: none;
+    border: 1px solid #343A40;
+    padding: 10px;
+    border-radius: 3px;
+
+}
+.modal-content button{
+    color:white;
+    font-weight: bold;
+    background-color:#858792 ;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+
+}
+  /* .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  } */
+
   
   @media(max-width:768px){
     .tbl thead{
@@ -592,7 +676,7 @@ margin-top: 10px;
     }
     
     .tbl tbody tr td{
-      /* text-align:right; */
+      text-align:right;
       position:relative;
     }
     .tbl td::before{
@@ -600,10 +684,54 @@ margin-top: 10px;
       position:absolute;
       left:0;
       width:50%;
-      /* text-align:left; */
-      /* padding-left:1.2rem; */
+      text-align:left;
+      padding-left:1.2rem;
+    }
+
+    .overview-content{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chart-content{
+        grid-template-columns: repeat(1,1fr);
+
+    
+    }
+    .input-Search input{
+        width: 280px;
+    }
+    .showHideBAr i{
+        color: white;
+        display: inline;
+    }
+    .aside{
+        display: none;
+    }
+
+    .aside {
+        display: none; 
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+
+    #openHam,
+    #closeHam {
+        display: block; 
+    }
+    .hamburger{
+        display: inline;
+    }
+    .SearchIcon button{
+
+        display: block;
+    }
+    .input-Search{
+        display: none;
     }
   }
+
+
 @media (max-width: 767px) {
     .grid-container {
         grid-template-columns: 1fr;
@@ -618,4 +746,53 @@ margin-top: 10px;
     .overview-content {
         grid-template-columns: 1fr;
     }
+    .aside h1{
+        font-size: 20px;   
+       }
+       .SearchIcon button{
+
+        display: block;
+    }
+    .input-Search{
+        display: none;
+    }
 }
+
+@media only screen and (min-width: 280px) and (max-width: 540px) {
+
+    .overview-content{
+        grid-template-columns: repeat(1, 1fr);
+    }  
+    
+    .chart-content{
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .input-Search input{
+        width: 250px;
+    }
+    .input-Search{
+        display: none;
+    }
+    .showHideBAr i{
+        color: white;
+        display: inline;
+    }
+    .aside h1{
+     font-size: 20px;   
+    }
+    #openHam,
+    #closeHam {
+        display: block; 
+    }
+    .hamburger{
+        display: block;
+    }
+    .SearchIcon button{
+
+        display: block;
+    }
+}
+
+
+

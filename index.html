@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -27,14 +28,14 @@
             </div>
 
             <div class="navigation-items" id="navigation-items">
-                <a href="">Home</a>
+                <a href="#home">Home</a>
             
-                <a href="">About</a>
-                <a href="">Services</a>
-                <a href="">Portfolio</a>
-                <a href="">Login</a>
-                <a href="">Blog</a>
-                <a href="">Contact Me</a>
+                <a href="#about">About</a>
+                <a href="#service">Services</a>
+                <a href="#portifolio">Portfolio</a>
+                <a href="./login.html">Login</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact Me</a>
             </div>
         </nav>
     </header> 
@@ -43,7 +44,7 @@
 
 <main>
     <section class="sectionOne">
-        <div class="mainconatiner">
+        <div class="mainconatiner" id="home">
             <div class="mainone">
                 <button class="hithere">Hi There 👋!!!</button>
                 <div class="descriptionone">
@@ -86,7 +87,7 @@
     </section>
 
     <section class="sectionTwo">
-        <div class="maincontainersectionTwo">
+        <div class="maincontainersectionTwo" id="about">
             <div class="aboutmeContainer">
     
                     <p class="aboutme">About Me</p>
@@ -146,7 +147,7 @@
 
 <section class="sectionThree">
 
-    <div class="serviceContainer">
+    <div class="serviceContainer" id="service">
           <p class="Servicep">Service</p>
           <p class="Servicep1">Service Provide For My Clients.</p>
           <div class="gridContainer">
@@ -205,7 +206,7 @@
 
 
 
-<section class="sectionFour">
+<section class="sectionFour" id="skill">
     <div class="skills">
         <div class="SkillsContainerOne">
             <h1>
@@ -299,7 +300,7 @@
      
 </section>
 
-<section class="sectionFour">
+<section class="sectionFour" id="portifolio">
     <div class="projectSection">
         <div class="awesome">
             <p>Awesome Project</p>
@@ -332,8 +333,8 @@
     </div>
 </section>
 
-<section class="sectionFive">
-    <div class="blogSectionmain">
+<section class="sectionFive" id="blog">
+    <div class="blogSectionmain" >
         <div class="latestTips">
             <p>My Blogs</p>
             <h1>Latest Tips & Tricks</h1>
@@ -349,13 +350,88 @@
                     <p class="until">to line these up.</p>
                 </p>
                 <div class="likeComment">
-                    <p><span>>></span> <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span></p>
-                    <p><span>>></span> <span><i class="fa fa-comment-o" aria-hidden="true"></i></span></p>
+                    <p><span class="one">>></span><span class="two"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span></p>
+                    <p><span class="one">>></span> <span class="two"><i class="fa fa-comment-o" aria-hidden="true" onclick=""><button class="open-button" onclick="openForm()">Add Comment</button></i></span></p>
+                    <div class="form-popup" id="myForm">
+                        <form  class="form-container">
+                          <label for="email"><b>Email</b></label>
+                          <input type="text" class="commentInput" placeholder="Enter Email" name="email" required>
+                      
+                          <label for="Subject"><b>Subject</b></label>
+                          <input type="text" class="commentInput" placeholder="Enter subject" name="subject" required>
+                          <label for="Enter Text Comments">Enter Text Comments</label>
+                          <div class="container_textEditor">
+                            <div class="toolbar">
+                                <div class="head">
+                                    <input type="text" placeholder="Filename" value="untitled" id="filename">
+                                    <select onchange="fileHandle(this.value); this.selectedIndex=0" title="select">
+                                        <option value="" selected="" hidden="" disabled="">File</option>
+                                        <option value="new">New file</option>
+                                        <option value="txt">Save as txt</option>
+                                        <option value="pdf">Save as pdf</option>
+                                    </select>
+                                    <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;" title="select">
+                                        <option value="" selected="" hidden="" disabled="">Format</option>
+                                        <option value="h1">Heading 1</option>
+                                        <option value="h2">Heading 2</option>
+                                        <option value="h3">Heading 3</option>
+                                        <option value="h4">Heading 4</option>
+                                        <option value="h5">Heading 5</option>
+                                        <option value="h6">Heading 6</option>
+                                        <option value="p">Paragraph</option>
+                                    </select>
+                                    <select onchange="formatDoc('fontSize', this.value); this.selectedIndex=0;" title="select">
+                                        <option value="" selected="" hidden="" disabled="">Font size</option>
+                                        <option value="1">Extra small</option>
+                                        <option value="2">Small</option>
+                                        <option value="3">Regular</option>
+                                        <option value="4">Medium</option>
+                                        <option value="5">Large</option>
+                                        <option value="6">Extra Large</option>
+                                        <option value="7">Big</option>
+                                    </select>
+                                    <div class="color">
+                                        <span>Color</span>
+                                        <input type="color" oninput="formatDoc('foreColor', this.value); this.value='#000000';" title="select">
+                                    </div>
+                                    <div class="color">
+                                        <span>Background</span>
+                                        <input type="color" oninput="formatDoc('hiliteColor', this.value); this.value='#000000';" title="select">
+                                    </div>
+                                </div>
+                                <div class="btn-toolbar">
+                                    <button onclick="formatDoc('undo')" title="Undo"><i class='bx bx-undo'></i></button>
+                                    <button onclick="formatDoc('redo')" title="Redo"><i class='bx bx-redo'></i></button>
+                                    <button onclick="formatDoc('bold')" title="Bold"><i class='bx bx-bold'></i></button>
+                                    <button onclick="formatDoc('underline')" title="Underline"><i class='bx bx-underline'></i></button>
+                                    <button onclick="formatDoc('italic')" title="Italic"><i class='bx bx-italic'></i></button>
+                                    <button onclick="formatDoc('strikeThrough')" title="Strike Through"><i class='bx bx-strikethrough'></i></button>
+                                    <button onclick="formatDoc('justifyLeft')" title="Align Left"><i class='bx bx-align-left'></i></button>
+                                    <button onclick="formatDoc('justifyCenter')" title="Align Center"><i class='bx bx-align-middle'></i></button>
+                                    <button onclick="formatDoc('justifyRight')" title="Align Right"><i class='bx bx-align-right'></i></button>
+                                    <button onclick="formatDoc('justifyFull')" title="Justify"><i class='bx bx-align-justify'></i></button>
+                                    <button onclick="formatDoc('insertOrderedList')" title="Ordered List"><i class='bx bx-list-ol'></i></button>
+                                    <button onclick="formatDoc('insertUnorderedList')" title="Unordered List"><i class='bx bx-list-ul'></i></button>
+                                    <button onclick="addLink()" title="Add Link"><i class='bx bx-link'></i></button>
+                                    <button onclick="formatDoc('unlink')" title="Remove Link"><i class='bx bx-unlink'></i></button>
+                                    <button id="show-code" data-active="false" title="Toggle Code View">&lt;/&gt;</button>
+                                    
+                                </div>
+                            </div>
+                            <div id="content" contenteditable="true" spellcheck="false">
+                                Start, Texting.
+                            </div>
+                        </div>
+                        
+                          <button type="submit" class="btn">Post Your Comments</button>
+                          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        </form>
+                      </div>
                 </div>
             </div>
             <div class="blogpartThree">
               <div>
-                <button >Read More >></button>
+                <button id="singleBlog">Read More >></button>
               </div>
             </div>
           </div>
@@ -371,13 +447,13 @@
                     <p class="until">to line these up.</p>
                 </p>
                 <div class="likeComment">
-                    <p><span>>></span> <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span></p>
-                    <p><span>>></span> <span><i class="fa fa-comment-o" aria-hidden="true"></i></span></p>
+                    <p><span class="one">>></span><span class="two"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span></p>
+                    <p><span class="one">>></span> <span class="two"><i class="fa fa-comment-o" aria-hidden="true"></i></span></p>
                 </div>
             </div>
             <div class="blogpartThree">
               <div>
-                <button >Read More >></button>
+                <button id="singleBlog">Read More >></button>
               </div>
             </div>
           </div>
@@ -393,19 +469,19 @@
                     <p class="until">to line these up.</p>
                 </p>
                 <div class="likeComment">
-                    <p><span>>></span> <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span></p>
-                    <p><span>>></span> <span><i class="fa fa-comment-o" aria-hidden="true"></i></span></p>
+                    <p><span class="one">>></span><span class="two"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span></p>
+                    <p><span class="one">>></span> <span class="two"><i class="fa fa-comment-o" aria-hidden="true"></i></span></p>
                 </div>
             </div>
             <div class="blogpartThree">
               <div>
-                <button >Read More >></button>
+                <button id="singleBlog" >Read More >></button>
               </div>
             </div>
           </div>
     </div>
 </section>
-<section class="sectionFive">
+<section class="sectionFive" id="contact">
     <div class="sectionFivemain">
         <div class="sectionFiveParent">
             <div class="contactUsContainer">
@@ -469,7 +545,7 @@
                        
                     </div>
                     <div class="registerStyle">
-                        <label for="FullName">Full Name</label>
+                        <label for="FullName">Phone Number</label>
                         <div class="regiterInput">
                             <input type="text"  title="Full Name" placeholder="Ambroise .M">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -480,7 +556,7 @@
     
                 <div>
                     <div class="registerStyle">
-                        <label for="FullName">Full Name</label>
+                        <label for="FullName">Email Adress</label>
                         <div class="regiterInput">
                             <input type="text"  title="Full Name" placeholder="Ambroise .M">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -488,7 +564,7 @@
                        
                     </div>
                     <div class="registerStyle">
-                        <label for="FullName">Full Name</label>
+                        <label for="FullName">Subject</label>
                         <div class="regiterInput">
                             <input type="text"  title="Full Name" placeholder="Ambroise .M">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -501,14 +577,16 @@
                 <p>Message</p>
                 <textarea name="message" id=""  title="text Message"></textarea>
             </div>
-
+            <div>
+                <button class="sendMessage">Send Message</button>
+            </div>
         </div>
     </div>
 </section>
 
 <section class="sectionSix">
     <div class="Footer">
-        <div class="footerContainer">
+        <div class="footerContaine.r">
             <p>Get Latest Updates</p>
             <h1>Subscribe For Newsletter</h1>
             <div>

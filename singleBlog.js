@@ -14,3 +14,8 @@ openHam.addEventListener("click", () =>
 closeHam.addEventListener("click", () =>
   hamburgerEvent("none", "none", "block")
 );
+
+document.getElementById("goToSignup").addEventListener("click", function () {
+  window.location.href = "register.html";
+});
+
