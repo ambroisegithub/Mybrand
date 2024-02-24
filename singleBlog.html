@@ -41,14 +41,95 @@
         <img src="./images/blog-feed-img-1.webp" alt="">
 
         
-        <div>
+        <div class="businessbetween">
             <h1>Business</h1>
+            <p>-07 february ,2024</p>
         </div>
         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
             The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-<p>
-    <span><a href=""><i href="#" class="fa fa-facebook"></i></a></span> <a href=""><i href="#" class="fa fa-twitter"></i></a><span><a href=""><i href="#" class="fa fa-linkedin"></i></a></span>
-</p>
+     <p>
+        <span class="share">Share</span><span> <a href=""><i class="fa fa-facebook"></i></a> <a href=""><i class="fa fa-twitter"></i></a><a href=""><i href="#" class="fa fa-linkedin"></i></a></span>
+        <span class="share">Like</span><span> <i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+     </p>
+
+     <div>
+        <button class="open-button" onclick="openForm()">Add Comment</button>
+        <div class="form-popup" id="myForm">
+            <form  class="form-container">
+              <label for="email"><b>Email</b></label>
+              <button type="button"  onclick="closeForm()" class="close">X</button>
+              <input type="text" class="commentInput" placeholder="Enter Email" name="email" required>
+          
+              <label for="Subject"><b>Subject</b></label>
+              <input type="text" class="commentInput" placeholder="Enter subject" name="subject" required>
+              <label for="Enter Text Comments">Enter Text Comments</label>
+              <div class="container_textEditor">
+                <div class="toolbar">
+                    <div class="head">
+                        <input type="text" placeholder="Filename" value="untitled" id="filename">
+                        <select onchange="fileHandle(this.value); this.selectedIndex=0" title="select">
+                            <option value="" selected="" hidden="" disabled="">File</option>
+                            <option value="new">New file</option>
+                            <option value="txt">Save as txt</option>
+                            <option value="pdf">Save as pdf</option>
+                        </select>
+                        <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;" title="select">
+                            <option value="" selected="" hidden="" disabled="">Format</option>
+                            <option value="h1">Heading 1</option>
+                            <option value="h2">Heading 2</option>
+                            <option value="h3">Heading 3</option>
+                            <option value="h4">Heading 4</option>
+                            <option value="h5">Heading 5</option>
+                            <option value="h6">Heading 6</option>
+                            <option value="p">Paragraph</option>
+                        </select>
+                        <select onchange="formatDoc('fontSize', this.value); this.selectedIndex=0;" title="select">
+                            <option value="" selected="" hidden="" disabled="">Font size</option>
+                            <option value="1">Extra small</option>
+                            <option value="2">Small</option>
+                            <option value="3">Regular</option>
+                            <option value="4">Medium</option>
+                            <option value="5">Large</option>
+                            <option value="6">Extra Large</option>
+                            <option value="7">Big</option>
+                        </select>
+                        <div class="color">
+                            <span>Color</span>
+                            <input type="color" oninput="formatDoc('foreColor', this.value); this.value='#000000';" title="select">
+                        </div>
+                        <div class="color">
+                            <span>Background</span>
+                            <input type="color" oninput="formatDoc('hiliteColor', this.value); this.value='#000000';" title="select">
+                        </div>
+                    </div>
+                    <div class="btn-toolbar">
+                        <button onclick="formatDoc('undo')" title="Undo"><i class='bx bx-undo'></i></button>
+                        <button onclick="formatDoc('redo')" title="Redo"><i class='bx bx-redo'></i></button>
+                        <button onclick="formatDoc('bold')" title="Bold"><i class='bx bx-bold'></i></button>
+                        <button onclick="formatDoc('underline')" title="Underline"><i class='bx bx-underline'></i></button>
+                        <button onclick="formatDoc('italic')" title="Italic"><i class='bx bx-italic'></i></button>
+                        <button onclick="formatDoc('strikeThrough')" title="Strike Through"><i class='bx bx-strikethrough'></i></button>
+                        <button onclick="formatDoc('justifyLeft')" title="Align Left"><i class='bx bx-align-left'></i></button>
+                        <button onclick="formatDoc('justifyCenter')" title="Align Center"><i class='bx bx-align-middle'></i></button>
+                        <button onclick="formatDoc('justifyRight')" title="Align Right"><i class='bx bx-align-right'></i></button>
+                        <button onclick="formatDoc('justifyFull')" title="Justify"><i class='bx bx-align-justify'></i></button>
+                        <button onclick="formatDoc('insertOrderedList')" title="Ordered List"><i class='bx bx-list-ol'></i></button>
+                        <button onclick="formatDoc('insertUnorderedList')" title="Unordered List"><i class='bx bx-list-ul'></i></button>
+                        <button onclick="addLink()" title="Add Link"><i class='bx bx-link'></i></button>
+                        <button onclick="formatDoc('unlink')" title="Remove Link"><i class='bx bx-unlink'></i></button>
+                        <button id="show-code" data-active="false" title="Toggle Code View">&lt;/&gt;</button>
+                        
+                    </div>
+                </div>
+                <div id="content" contenteditable="true" spellcheck="false">
+                    Start, Texting.
+                </div>
+            </div>
+            
+              <button type="submit" class="btn">Post Your Comments</button>
+            </form>
+          </div>
+      </div>
     </div>
 
 
@@ -56,18 +137,30 @@
 
 <div class="blogDescription">
     <img src="./images//blog-feed-img-1.webp" alt="">
-    <h1>Business</h1>
+    <div class="busInfo">
+        <h1>Business</h1>
+        <button class="more">Read More</button>
+        <p>-07 february ,2024</p>
+    </div>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
 </div>
 <div class="blogDescription">
     <img src="./images//blog-feed-img-1.webp" alt="">
-    <h1>Web in business</h1>
+    <div class="busInfo">
+        <h1>Business</h1>
+        <button class="more">Read More</button>
+        <p>-07 february ,2024</p>
+    </div>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
 </div>
 
 <div class="blogDescription">
     <img src="./images//blog-feed-img-1.webp" alt="">
-    <h1>Mobile Developments</h1>
+    <div class="busInfo">
+        <h1>Business</h1>
+        <button class="more">Read More</button>
+        <p>-07 february ,2024</p>
+    </div>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
 </div>
     </div>

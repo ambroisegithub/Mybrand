@@ -99,4 +99,16 @@ function openModal() {
   
   // Update the button click event to open the modal
   document.querySelector('.input-Search button').addEventListener('click', openModal);
+
+
+  const mainContent = document.querySelector(".main");
+
+   mainContent.addEventListener("scroll", function () {
+  const scrollPosition = mainContent.scrollTop;
+
+  // Adjust the styles of header and aside based on the scroll position
+  document.querySelector(".header").style.top = `${scrollPosition}px`;
+  document.querySelector(".aside").style.top = `${scrollPosition}px`;
+});
+
   

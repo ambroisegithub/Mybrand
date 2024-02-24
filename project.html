@@ -3,10 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet</title>
+    <link rel="stylesheet" href="project.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <title>Admin Dashboard</title>
 </head>
 <body>
-   <h1>Welcome To projects</h1>
-   <button>Click here To View All Users</button>
+    <div class="grid-container">
+        <header class="header">
+            <div class="semi-header">
+              <div class="amb">
+                <h1>
+                    AMB
+                </h1>
+            </div>
+                <div class="hamburger">
+                    <span id="openHam">&#9776;</span>
+                    <span id="closeHam">&#x2716;</span>
+                </div>
+               <div class="input-Search">
+                    <input type="text" title="Search" placeholder="search">
+                <button aria-label="Search"><i class="fa fa-search"></i></button>
+                </div>
+                  <div class="notification-image">
+                    <div class="SearchIcon"><button aria-label="Search" onclick="openModal()"><i class="fa fa-search"></i></button></div>
+                    <div id="searchModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <input type="text" id="searchInput" placeholder="Search...">
+                            <button onclick="performSearch()">Search</button>
+                        </div>
+                    </div>
+                    <div class="notification-image1">
+                        <a href="#" class="notification">
+                            <span>Mails</span>
+                            <span class="badge">3</span>
+                          </a>
+                    </div>
+                    <div class="notification-image2">
+                        <img src="./images/ambrois.png" alt="">
+                    </div>
+                  </div>
+            </div>
+ 
+        </header>
+        <aside class="aside" id="aside-container">
+            <h1>
+                AMB
+            </h1>
+
+            <div class="icon-contents">
+                  <div class="icons">
+                    <a href="./Admin.html"><div><i class="fa fa-th-large" aria-hidden="true"></i></div><div class="text">Dashboard</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-user" aria-hidden="true"></i></div><div class="text">Contact US</div></a>
+                  </div>
+
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-users" aria-hidden="true"></i> </div><div class="text"> Create Users </div></a>
+                  </div>
+
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-commenting" aria-hidden="true"></i></div><div class="text">Total Comments</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-rss" aria-hidden="true"></i></div><div class="text">Blogs </div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-briefcase" aria-hidden="true"></i></div><div class="text">Projects</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-bell" aria-hidden="true"></i></div><div class="text">Subscribers</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="#"><div><i class="fa fa-cog" aria-hidden="true"></i></div><div class="text">Setting </div></a>
+                  </div>
+            </div>
+        </aside>
+        <main class="main">
+          <div class="chart-content">
+            <div class="blogs">
+                <div>
+                  <div class="crateNewBlog">
+                    <button> + Create New Project</button>
+                </div>
+                    <div class="blogFlex">
+                        <div class="blogi">
+                            <label for="Image">Project Image</label>
+                            <input type="file" title="Image" id="">
+                          </div>
+                          <div class="blogi">
+                            <label for="Image">Date Project Published</label>
+                            <input type="date" title="Image" id="">
+                          </div>
+                    </div>
+
+                    <div class="blog2">
+                        <label for="Blog Title">Project Title</label>
+                        <input type="text" title="blog title" placeholder="Blog Tile">
+                    </div>
+                    <div class="blog2">
+                      <label for="Project Description">Project Description</label>
+                    </div>
+                    <div class="container_textEditor">
+
+                        <div class="toolbar">
+                            <div class="head">
+                                <input type="text" placeholder="Filename" value="untitled" id="filename">
+                                <select onchange="fileHandle(this.value); this.selectedIndex=0" title="select">
+                                    <option value="" selected="" hidden="" disabled="">File</option>
+                                    <option value="new">New file</option>
+                                    <option value="txt">Save as txt</option>
+                                    <option value="pdf">Save as pdf</option>
+                                </select>
+                                <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;" title="select">
+                                    <option value="" selected="" hidden="" disabled="">Format</option>
+                                    <option value="h1">Heading 1</option>
+                                    <option value="h2">Heading 2</option>
+                                    <option value="h3">Heading 3</option>
+                                    <option value="h4">Heading 4</option>
+                                    <option value="h5">Heading 5</option>
+                                    <option value="h6">Heading 6</option>
+                                    <option value="p">Paragraph</option>
+                                </select>
+                                <select onchange="formatDoc('fontSize', this.value); this.selectedIndex=0;" title="select">
+                                    <option value="" selected="" hidden="" disabled="">Font size</option>
+                                    <option value="1">Extra small</option>
+                                    <option value="2">Small</option>
+                                    <option value="3">Regular</option>
+                                    <option value="4">Medium</option>
+                                    <option value="5">Large</option>
+                                    <option value="6">Extra Large</option>
+                                    <option value="7">Big</option>
+                                </select>
+                                <div class="color">
+                                    <span>Color</span>
+                                    <input type="color" oninput="formatDoc('foreColor', this.value); this.value='#000000';" title="select">
+                                </div>
+                                <div class="color">
+                                    <span>Background</span>
+                                    <input type="color" oninput="formatDoc('hiliteColor', this.value); this.value='#000000';" title="select">
+                                </div>
+                            </div>
+                            <div class="btn-toolbar">
+                                <button onclick="formatDoc('undo')" title="Undo"><i class='bx bx-undo'></i></button>
+                                <button onclick="formatDoc('redo')" title="Redo"><i class='bx bx-redo'></i></button>
+                                <button onclick="formatDoc('bold')" title="Bold"><i class='bx bx-bold'></i></button>
+                                <button onclick="formatDoc('underline')" title="Underline"><i class='bx bx-underline'></i></button>
+                                <button onclick="formatDoc('italic')" title="Italic"><i class='bx bx-italic'></i></button>
+                                <button onclick="formatDoc('strikeThrough')" title="Strike Through"><i class='bx bx-strikethrough'></i></button>
+                                <button onclick="formatDoc('justifyLeft')" title="Align Left"><i class='bx bx-align-left'></i></button>
+                                <button onclick="formatDoc('justifyCenter')" title="Align Center"><i class='bx bx-align-middle'></i></button>
+                                <button onclick="formatDoc('justifyRight')" title="Align Right"><i class='bx bx-align-right'></i></button>
+                                <button onclick="formatDoc('justifyFull')" title="Justify"><i class='bx bx-align-justify'></i></button>
+                                <button onclick="formatDoc('insertOrderedList')" title="Ordered List"><i class='bx bx-list-ol'></i></button>
+                                <button onclick="formatDoc('insertUnorderedList')" title="Unordered List"><i class='bx bx-list-ul'></i></button>
+                                <button onclick="addLink()" title="Add Link"><i class='bx bx-link'></i></button>
+                                <button onclick="formatDoc('unlink')" title="Remove Link"><i class='bx bx-unlink'></i></button>
+                                <button id="show-code" data-active="false" title="Toggle Code View">&lt;/&gt;</button>
+                                
+                            </div>
+                        </div>
+                        <div id="content" contenteditable="true" spellcheck="false">
+                            Start, Texting.
+                        </div>
+                    </div>
+                    
+                    <div class="blogpostbutton">
+                        <button>Post Blog</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div class="container_table">
+                <div class="tbl_container">
+            <p>Recent Projects</p>
+                  <table class="tbl">
+                    <thead>
+                      <tr>
+                        <th>Project Id</th>
+                        <th>Image</th>
+                        <th>Project Title</th>
+                        <th>Description</th>
+                        <th>Date Created</th>
+                        <th colspan="2">Action</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <tr>
+                        <td data-table="Blog Id">001</td>
+                        <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
+                        <td data-table="Blog Title">web development</td>
+                        <td data-table="Description">The crucial way of how someone can distribute thier products global</td>
+                        <td data-table="Date Created">02/02/2024</td>
+                        <td>
+                          <button class="btn_edit"Edit data-table="Edit">Edit</button>
+                          <button class="btn_trash" data-table="Delete">Delete</button>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td data-table="Blog Id">001</td>
+                        <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
+                        <td data-table="Blog Title">web development</td>
+                        <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
+                        <td data-table="Date Created">02/02/2024</td>
+                        <td>
+                          <button class="btn_edit"Edit data-table="Edit">Edit</button>
+                          <button class="btn_trash" data-table="Delete">Delete</button>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td data-table="Blog Id">001</td>
+                        <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
+                        <td data-table="Blog Title">web development</td>
+                        <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
+                        <td data-table="Date Created">02/02/2024</td>
+                        <td>
+                          <button class="btn_edit"Edit data-table="Edit">Edit</button>
+                          <button class="btn_trash" data-table="Delete">Delete</button>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td data-table="Blog Id">001</td>
+                        <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
+                        <td data-table="Blog Title">web development</td>
+                        <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
+                        <td data-table="Date Created">02/02/2024</td>
+                        <td>
+                          <button class="btn_edit"Edit data-table="Edit">Edit</button>
+                          <button class="btn_trash" data-table="Delete">Delete</button>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td data-table="Blog Id">001</td>
+                        <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
+                        <td data-table="Blog Title">web development</td>
+                        <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
+                        <td data-table="Date Created">02/02/2024</td>
+                        <td>
+                          <button class="btn_edit"Edit data-table="Edit">Edit</button>
+                          <button class="btn_trash" data-table="Delete">Delete</button>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td data-table="Blog Id">001</td>
+                        <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
+                        <td data-table="Blog Title">web development</td>
+                        <td data-table="Description">The crucial way of how someone can distribute thier products global web</td>
+                        <td data-table="Date Created">02/02/2024</td>
+                        <td>
+                          <button class="btn_edit"Edit data-table="Edit">Edit</button>
+                          <button class="btn_trash" data-table="Delete">Delete</button>
+                        </td> 
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>  
+        </div>
+        </main>
+        <footer class="footer"></footer>
+    </div>
+    <script src="project.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 </html>

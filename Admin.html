@@ -13,6 +13,11 @@
     <div class="grid-container">
         <header class="header">
             <div class="semi-header">
+                <div class="amb">
+                    <h1>
+                        AMB
+                    </h1>
+                </div>
                 <div class="hamburger">
                     <span id="openHam">&#9776;</span>
                     <span id="closeHam">&#x2716;</span>
@@ -44,41 +49,33 @@
  
         </header>
         <aside class="aside" id="aside-container">
-            <h1>
-                AMB
-            </h1>
-
             <div class="icon-contents">
                   <div class="icons">
                     <a href="#"><div><i class="fa fa-th-large" aria-hidden="true"></i></div><div class="text">Dashboard</div></a>
                   </div>
-                  <div class="icons">
-                    <a href="#"><div><i class="fa fa-user" aria-hidden="true"></i></div><div class="text">Contact US</div></a>
-                  </div>
 
                   <div class="icons">
-                    <a href="#"><div><i class="fa fa-users" aria-hidden="true"></i> </div><div class="text">Users </div></a>
-                  </div>
-
-                  <div class="icons">
-                    <a href="#"><div><i class="fa fa-commenting" aria-hidden="true"></i></div><div class="text">Total Comments</div></a>
+                    <a href="./users.html"><div><i class="fa fa-users" aria-hidden="true"></i> </div><div class="text">Create Users </div></a>
                   </div>
                   <div class="icons">
-                    <a href="#"><div><i class="fa fa-rss" aria-hidden="true"></i></div><div class="text">Blogs </div></a>
+                    <a href="./manageContactUS.html"><div><i class="fa fa-envelope" aria-hidden="true"></i></div><div class="text">View Contact Us</div></a>
                   </div>
                   <div class="icons">
-                    <a href="#"><div><i class="fa fa-briefcase" aria-hidden="true"></i></div><div class="text">Projects</div></a>
+                    <a href="#"><div><i class="fa fa-commenting" aria-hidden="true"></i></div><div class="text">Manage Comments</div></a>
                   </div>
                   <div class="icons">
-                    <a href="#"><div><i class="fa fa-bell" aria-hidden="true"></i></div><div class="text">Subscribers</div></a>
+                    <a href="#blogs"><div><i class="fa fa-rss" aria-hidden="true"></i></div><div class="text">All Blogs </div></a>
                   </div>
                   <div class="icons">
-                    <a href="#"><div><i class="fa fa-cog" aria-hidden="true"></i></div><div class="text">Setting </div></a>
+                    <a href="./project.html"><div><i class="fa fa-briefcase" aria-hidden="true"></i></div><div class="text">Projects</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="./personalIfonfmation.html"><div><i class="fa fa-user" aria-hidden="true"></i></div><div class="text">Personal Information</div></a>
                   </div>
             </div>
         </aside>
         <main class="main">
-            <div class="overview-content">
+            <div class="overview-content" >
                 <div class="overview-card">
                     <div class="overview">
                         <span><i class="fa fa-users" aria-hidden="true"></i> <span class="users">Total Users</span></span>
@@ -104,7 +101,7 @@
                     </div>
                 </div>
                 <div class="overview-card">
-                    <div class="overview">
+                    <div class="overview" >
                         <span><i class="fa fa-bell" aria-hidden="true"></i> <span class="users">Total Subscribers</span></span>
                     </div>
                     <div class="overview1">
@@ -113,8 +110,11 @@
                 </div>
             </div>
             <div class="chart-content">
-                <div class="0s">
+                <div class="blogs">
                     <div>
+                        <div class="crateNewBlog">
+                            <button> + Create New Blog</button>
+                        </div>
                         <div class="blogFlex">
                             <div class="blogi">
                                 <label for="Image">Image</label>
@@ -198,7 +198,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="blogs">
+                <div class="blogs" id="contactuS">
+                    <div class="recentcontact">
+                        <p>Recents Contact Us</p>
+                    </div>
                     <div class="blogsComment">
                         <div>
                             <h1>Ambroise Muhayimana</h1>
@@ -208,7 +211,7 @@
                             
                         </div>
                         <div class="blogButtons">
-                            <button class="one">Reply</button>
+                            <button class="one">view</button>
                             <button class="two">Reject</button>
                         </div>
                     </div>
@@ -221,7 +224,7 @@
                             
                         </div>
                         <div class="blogButtons">
-                            <button class="one">Reply</button>
+                            <button class="one">view</button>
                             <button class="two">Reject</button>
                         </div>
                     </div>
@@ -234,7 +237,7 @@
                             
                         </div>
                         <div class="blogButtons">
-                            <button class="one">Reply</button>
+                            <button class="one">view</button>
                             <button class="two">Reject</button>
                         </div>
                     </div>
@@ -247,7 +250,7 @@
                             
                         </div>
                         <div class="blogButtons">
-                            <button class="one">Reply</button>
+                            <button class="one">view</button>
                             <button class="two">Reject</button>
                         </div>
                     </div>
@@ -261,16 +264,15 @@
                             
                         </div>
                         <div class="blogButtons">
-                            <button class="one">Reply</button>
+                            <button class="one">view</button>
                             <button class="two">Reject</button>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <div>
-                <div class="container_table">
+
+            <div >
+                <div class="container_table" >
                     <div class="tbl_container">
                 <p>Recent Blogs</p>
                       <table class="tbl">
@@ -302,7 +304,7 @@
                             <td data-table="Blog Id">001</td>
                             <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
                             <td data-table="Blog Title">web development</td>
-                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web development</td>
+                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
                             <td data-table="Date Created">02/02/2024</td>
                             <td>
                               <button class="btn_edit"Edit data-table="Edit">Edit</button>
@@ -314,7 +316,7 @@
                             <td data-table="Blog Id">001</td>
                             <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
                             <td data-table="Blog Title">web development</td>
-                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web development</td>
+                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
                             <td data-table="Date Created">02/02/2024</td>
                             <td>
                               <button class="btn_edit"Edit data-table="Edit">Edit</button>
@@ -326,7 +328,7 @@
                             <td data-table="Blog Id">001</td>
                             <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
                             <td data-table="Blog Title">web development</td>
-                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web development</td>
+                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
                             <td data-table="Date Created">02/02/2024</td>
                             <td>
                               <button class="btn_edit"Edit data-table="Edit">Edit</button>
@@ -338,7 +340,7 @@
                             <td data-table="Blog Id">001</td>
                             <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
                             <td data-table="Blog Title">web development</td>
-                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web development</td>
+                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web </td>
                             <td data-table="Date Created">02/02/2024</td>
                             <td>
                               <button class="btn_edit"Edit data-table="Edit">Edit</button>
@@ -350,8 +352,8 @@
                             <td data-table="Blog Id">001</td>
                             <td data-table="Image"><img src="./images/ambroise.png" alt="blog Image"></td>
                             <td data-table="Blog Title">web development</td>
-                            <td data-table="Description">The crucial way of how someone can distribute thier products global is web development</td>
-                            <td data-table="Date Created">02/02/2024</td>>
+                            <td data-table="Description">The crucial way of how someone can distribute thier products global web</td>
+                            <td data-table="Date Created">02/02/2024</td>
                             <td>
                               <button class="btn_edit"Edit data-table="Edit">Edit</button>
                               <button class="btn_trash" data-table="Delete">Delete</button>
@@ -363,7 +365,7 @@
                   </div>  
             </div>
         </main>
-        <footer class="footer"></footer>
+        <footer class="footer" id="blogs"></footer>
     </div>
     <script src="admin.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
