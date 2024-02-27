@@ -86,8 +86,8 @@
                     <h1>My Profile</h1>
                 </div>
                 <div class="completeButton">
-                    <button class="completeAccount">+ Complete Profile</button>
-                    <button class="updateAccount">+ update Account</button>
+                    <button class="completeAccount" onclick="openProfileModal()">+ Complete Profile</button>
+                    <button class="updateAccount" onclick="openProfileModal()">+ Update Account</button>
                 </div>
             </div>
 
@@ -102,13 +102,13 @@
                         <span class="one"> <i class="fa fa-facebook" aria-hidden="true"></i></span><span class="two">FaceBook</span>
                     </div>
                     <div class="mediaIcon"> 
-                        <span class="one"> <i href="#" class="fa fa-twitter"></i></span><span class="two"> FaceBook</span>
+                        <span class="one"> <i href="#" class="fa fa-twitter"></i></span><span class="two"> Twitter</span>
                     </div>
                     <div class="mediaIcon">
-                        <span class="one"> <i href="#" class="fa fa-linkedin"></i></span><span class="two">FaceBook</span>
+                        <span class="one"> <i href="#" class="fa fa-linkedin"></i></span><span class="two">Linkedin</span>
                     </div>
                     <div class="mediaIcon">
-                        <span class="one"> <i href="#" class="fa fa-instagram"></i></span><span class="two">FaceBook</span>
+                        <span class="one"> <i href="#" class="fa fa-instagram"></i></span><span class="two">Instagram</span>
                     </div>
 
                    </div>
@@ -140,9 +140,51 @@
             </div>
 
         </main>
+        <div id="profileModal" class="modal">
+            <div class="modal-content">
+                <div class="close" onclick="closeProfileModal()">&times;</div>
+                <div>
+                    <label for="">Uploads Image</label>
+                    <input type="file" id="file" placeholder="Username">
+                </div>
+                <div>
+                    <label for="FaceBook">FaceBook Link</label>
+                    <input type="text" id="" placeholder="link/.......">
+                </div>
+                <div>
+                    <label for="Twitter">Twitter</label>
+                    <input type="text" id="" placeholder="Twitter/.....">
+                </div>
+                <div>
+                    <label for="Linkedin">Linkedin</label>
+                    <input type="text" id="" placeholder="Linkedin/......">
+                </div>
+                <div>
+                    <label for="Instagram">Instagram</label>
+                    <input type="text" id="" placeholder="Instagram/......">
+                </div>
+                <div>
+                    <label for="">User Name</label>
+                    <input type="text" id="" placeholder="Username">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="" placeholder="Email">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="" placeholder="Password">
+                </div>
+
+                <div>
+                    <button onclick="updateProfile()">Update Profile</button>
+                    <button onclick="completeProfile()">Complete Profile</button>
+                </div>
+            </div>
+        </div>
         <!-- <footer class="footer"></footer> -->
     </div>
-    <script src="users.js"></script>
+    <script src="personalIfonfmation.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>

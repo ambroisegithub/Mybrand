@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Login Page</title>
 </head>
 <body>
@@ -18,12 +13,12 @@
                 <div class="logo-container">
                     <a href="./index.html">AMB</a>
                 </div>
-    
+
                 <div class="hamburger">
                     <span id="openHam">&#9776;</span>
                     <span id="closeHam">&#x2716;</span>
                 </div>
-    
+
                 <div class="navigation-items" id="navigation-items">
                     <a href="">Home</a>
                     <a href="">About</a>
@@ -34,49 +29,47 @@
                     <a href="">Contact Me</a>
                 </div>
             </nav> 
-        </header> 
+        </header>
 
-<section class="login">
-    <div class="loginContainer">
-        <div class="box1">
-            
-            <div><img src="./images//LoginImage.png" alt=""></div>
-        </div> 
-        <div class="box2">
-            <p class="amb">AMB</p>
-            <h1>Welcome Back👋</h1>
-            <div class="registermainTwo">
-                <div class="registerStyle">
-                    <label for="FullName">Email Address</label>
-                    <div class="regiterInput">
-                        <input type="text"  title="Full Name" placeholder="seambroi4@gmail.com">
-                     
-                    </div>
-                   
+        <section class="login">
+            <div class="loginContainer">
+                <div class="box1">
+                    <div><img src="./images/LoginImage.png" alt=""></div>
                 </div>
-                <div class="registerStyle">
-                    <label for="FullName">Password </label>
-                    <div class="regiterInput">
-                        <input type="password"  title="password" placeholder="............">
-                        
+                <div class="box2">
+                    <p class="amb">AMB</p>
+                    <h1>Welcome Back👋</h1>
+                    <div class="registermainTwo">
+                        <form  id="form">
+                            <div class="Input_control">
+                                <label for="FullName">Email Address</label>
+                                <div class="regiterInput">
+                                    <input type="text" title="Email" placeholder="seambroi4@gmail.com" id="email" name="email">
+                                </div>
+                                <div class="error" id="emailError"></div>
+                            </div>
+                            <div class="Input_control">
+                                <label for="FullName">Password </label>
+                                <div class="regiterInput">
+                                    <input type="password" title="password" placeholder="............" id="password" name="password">
+                                </div>
+                                <div class="error" id="passwordError"></div>
+                            </div>
+                            <div class="signupButtons">
+                                <div class="signupButtonsp">
+                                    <p>Press To Login!!!</p>
+                                    <button type="submit">Login</button>
+                                </div>
+                                <div class="signupButtonsp">
+                                    <p>Or Create your Account.</p>
+                                    <button id="goToSignup">SignUp</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                </div>
-                <div class="signupButtons">
-                    <div class="signupButtonsp">
-                        <p>Press To Login!!!</p>
-                        <button>Login</button>
-                    </div>
-                    <div class="signupButtonsp">
-                        <p>Or Create your Account.</p>
-                        <button id="goToSignup">SignUp</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <section class="sectionSix">
             <div class="Footer">
@@ -89,16 +82,13 @@
                     </div>
                 </div>
             </div>
-        
-            <div class="line">
-        
+            <div class="line"></div>
+            <div class="scriptFooter">
+                <p>© 2024 ambroise M. update kigali Rwanda Latest info.  </p>
+                <h1>AMB</h1>
             </div>
-        <div class="scriptFooter">
-            <p>© 2024 ambroise M. update kigali Rwanda Latest info.  </p>
-            <h1>AMB</h1>
-        </div>
         </section>
     </main>
+    <script src="./login.js"></script>
 </body>
-<script src="./login.js"></script>
 </html>
