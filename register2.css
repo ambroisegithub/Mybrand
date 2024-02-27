@@ -1,0 +1,238 @@
+body{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.ContactUscontainer{
+    background-color: #2A2C39;
+    /* width: 100%; */
+    padding-left: 100px;
+    padding-right: 100px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    border: 1px solid white;
+    grid-gap: 30px;
+    height: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.sectionFiveParent,.contactUsContainer{
+    border: 1px solid white;
+    /* padding: 50px; */
+}
+.registermain{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    
+    /* justify-content: space-between; */
+/*  */
+}
+
+ /* .contactUsContainer{
+padding-left: 60px;
+}  */
+
+.textArea{
+   /* padding-left: 5%; */
+    border: 1px solid white;
+}
+.textArea textarea{
+    width: 97%;
+    outline: none;
+border: 1px solid #858792;
+background-color: #343A40;
+border-radius: 10px;
+padding: 5px;
+height: 111px;
+font-weight: bold;
+padding: 10px;
+font-size: 15px;
+margin-bottom: 30px;
+}
+
+.textArea p{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+    }
+.registerStyle input{
+    
+    width: 338px;
+    padding: 20px;
+    outline: none;
+    border: 1px solid #858792;
+    background-color: #343A40;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+.sendMessage{
+    /* margin-top: 30px; */
+    padding: 15px;
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #5B69E2;
+    border-radius:3px ;
+    font-weight: bold;
+  
+  }
+
+.registerStyle label{
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.registerStyle i{
+    margin-left: -40px;
+    color: #858792;
+    font-size: 20px;
+}
+
+.contactUsContainer .getIttouch p {
+    color: #858792;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 30px;
+    }
+    .contactUsContainer .getIttouch h1{
+    color: white;
+    font-size: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    }
+
+    .contactUsContainer .getIttouch h2{
+        color: #5B69E2;
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        
+        }
+        .contactUsContainer .letmeKnow{
+            margin-bottom: 30px;
+            }
+            .contactUsContainer .letmeKnow p{
+            color:#858792;
+            font-size: 20px;
+            
+            }
+            .check{
+                width: 30px;
+                height: 30px;
+                background-color: #5B69E2;
+                text-align: center;
+                border-radius: 100%;
+                display: flex;
+                
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                
+                }
+                .checkContainer{
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+                /* margin-top: 10px; */
+                /* margin-bottom: 10px; */
+                
+                }
+                .checkContainer p{
+                font-size: 20px;
+                font-weight: bold;
+                color: #858792;
+                
+                }
+@media screen and (max-width:768px) {
+
+.ContactUscontainer{
+    grid-template-columns: repeat(1,1fr);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.registermain{
+    flex-direction: column;
+    gap: 0px;
+}
+.registerStyle input{
+    width: 93%;
+}
+
+.registerStyle i{
+display: none;
+
+    margin-left: -10px;
+    color: #858792;
+    font-size: 20px;
+}
+.textArea{
+    padding-left: 0%;
+ }
+
+  }
+  
+  
+  @media only screen and (min-width: 280px) and (max-width: 540px) {
+    .ContactUscontainer{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .registermain{
+        flex-direction: column;
+        gap:0px;
+    }
+    .registerStyle input{
+        width: 88%;
+    }
+    .textArea{
+        padding-left: 0%;
+     }
+     .textArea textarea{
+        width: 94%;
+             }
+  }
+  
+  
+  @media only screen and (min-width: 10px) and (max-width: 300px) {
+  
+
+  
+  }
+  
+  
+  @media only screen and (min-width: 769px) and (max-width: 1629px) {
+    .container{
+        grid-template-columns: repeat(1,1fr);
+        padding-left: 20px;
+        padding-right: 20px;
+        justify-content: space-between;
+        grid-gap: 20px;
+    }
+    .registermain{
+        justify-content: space-around;
+        flex-direction: column;
+        gap: 0px;
+    }
+    .registerStyle input{
+      width: 90%;
+    }
+    .textArea{
+        padding-left: 0%;
+     }
+     .textArea textarea{
+width: 94%;
+     }
+.registerStyle i{
+display: none;
+}
+  }
+  

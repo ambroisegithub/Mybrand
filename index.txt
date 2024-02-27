@@ -1,27 +1,3 @@
-/* Mobile devices */
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-  /* Your styles for mobile devices go here */
-}
-
-/* iPads, Tablets */
-@media only screen and (min-width: 481px) and (max-width: 768px) {
-  /* Your styles for iPads and Tablets go here */
-}
-
-/* Small screens, laptops */
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-  /* Your styles for small screens and laptops go here */
-}
-
-/* Desktops, large screens */
-@media only screen and (min-width: 1025px) and (max-width: 1200px) {
-  /* Your styles for desktops and large screens go here */
-}
-
-/* Extra large screens, TV */
-@media only screen and (min-width: 1201px) {
-  /* Your styles for extra large screens and TV go here */
-}
 
 
 
