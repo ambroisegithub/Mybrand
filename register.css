@@ -10,6 +10,7 @@
   }
   body{
     background-color: #343A40;
+    overflow-x: hidden;
   }
   /* Navigation */
 /* Navigation */
@@ -84,147 +85,210 @@
     
   }
 
-  .registerSection{
-    background-color: #343A40;
-    width: 100%;
-    height: auto;
-    padding-top: 100px;
+
+  .ContactUscontainer{
+    background-color: #2A2C39;
+    /* width: 100%; */
     padding-left: 100px;
     padding-right: 100px;
-    padding-bottom: 100px;
-  }
-
-  .sectionFivemain{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .registermain{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 40px;
-  }
-
-  .contactUsContainer{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
     /* border: 1px solid white; */
-  }
-  .contactUsContainer .getIttouch p {
-    color: #858792;
-    font-weight: bold;
+    grid-gap: 30px;
+    height: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.sectionFiveParent,.contactUsContainer{
+    /* border: 1px solid white; */
+    /* padding: 50px; */
+}
+.registermain{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    
+}
+
+
+.checkContainer{
+  margin-bottom: 30px;
+}
+.textArea{
+    /* border: 1px solid white; */
+}
+.textArea textarea{
+width: 100%;
+outline: none;
+border: 1px solid #858792;
+background-color: #343A40;
+border-radius: 10px;
+padding: 5px;
+height: 111px;
+font-weight: bold;
+padding: 10px;
+font-size: 15px;
+margin-bottom: 30px;
+}
+.genderOption input{
+width: 20px;
+height: 20px;
+}
+.genderOption p{
+ font-size: 18px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+.genderContiner .gender{
+width: 100%;
+/* border: 1px solid white; */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+margin-bottom: 30px;
+}
+
+.textArea p{
+    color: white;
     font-size: 20px;
     margin-bottom: 20px;
     }
-    .contactUsContainer .getIttouch h1{
-    color: white;
-    font-size: 32px;
-    margin-bottom: 30px;
-    font-weight: bold;
-    }
-    .contactUsContainer .getIttouch h2{
-    color: #5B69E2;
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 30px;
+.registerStyle input{
     
-    }
-    .contactUsContainer .letmeKnow{
-    margin-bottom: 30px;
-    }
-    .contactUsContainer .letmeKnow p{
-    color:#858792;
-    font-size: 20px;
-    
-    }
-    .registerStyle >label{
-    color: white;
-    font-size: 20px;
-    
-    }
-    .registerStyle .regiterInput{
-    margin-top: 10px;
-    }
-    .registerStyle .regiterInput >input{
-    margin-top: 20px;
-    width: 390px;
-    height: 56px;
+    width: 375px;
+    padding: 20px;
     outline: none;
     border: 1px solid #858792;
     background-color: #343A40;
+    font-size: 20px;
     border-radius: 10px;
-    padding-left: 20px;
-    margin-bottom:10px ;
-    }
-    .registerStyle .regiterInput >input::placeholder{
-    font-size: 20px;
-    }
-    .registermain{
-    display: flex;
-    flex-direction: row;
-    gap: 45px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 
-    }
-    .check{
-    width: 30px;
-    height: 30px;
+}
+.sendMessage{
+    /* margin-top: 30px; */
+    padding: 15px;
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
     background-color: #5B69E2;
-    text-align: center;
-    border-radius: 100%;
-    display: flex;
-    
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    
-    }
-    .checkContainer{
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    
-    }
-    .checkContainer p{
-    font-size: 20px;
+    border-radius:3px ;
     font-weight: bold;
-    color: #858792;
-    
-    }
-    /* .sectionFiveParent{
-    
-    display: flex;
-    flex-direction: row;
-    } */
-    
-    .registermain .fa{
-    position: relative;
+  
+  }
+
+.registerStyle label{
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.registerStyle i{
     margin-left: -40px;
     color: #858792;
-    height: 24px;
-    width: 24px;
-    font-size: 25px;
-    
+    font-size: 20px;
+}
+
+.contactUsContainer .getIttouch p {
+    color: #858792;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 30px;
+    }
+    .contactUsContainer .getIttouch h1{
+    color: white;
+    font-size: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
     }
 
-.genderOption>p{
-color: white;
-font-size: 20px;
-font-weight: bold;
-padding-top: 10px;
-padding-bottom: 10px;
-}
-.genderOption >input
-{
-height: 30px;
-width: 20px;
-outline: none;
-border: none;
-cursor: pointer;
-}
+    .contactUsContainer .getIttouch h2{
+        color: #5B69E2;
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        
+        }
+        .contactUsContainer .letmeKnow{
+            margin-bottom: 30px;
+            }
+            .contactUsContainer .letmeKnow p{
+            color:#858792;
+            font-size: 20px;
+            
+            }
+            .check{
+                width: 30px;
+                height: 30px;
+                background-color: #5B69E2;
+                text-align: center;
+                border-radius: 100%;
+                display: flex;
+                
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                
+                }
+                .checkContainer{
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+                /* margin-top: 10px; */
+                /* margin-bottom: 10px; */
+                
+                }
+                .checkContainer p{
+                font-size: 20px;
+                font-weight: bold;
+                color: #858792;
+                
+                }
+                .signupButtonContainer{
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  gap: 10px;
+                  align-items: center;
+                  /* text-align: center; */
+                }
+                .signupButtonContainer button{
+                 
+                }
+@media screen and (max-width:768px) {
+
+
+
+  }
+  
+  
+  @media only screen and (min-width: 280px) and (max-width: 540px) {
+    .ContactUscontainer{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .registermain{
+        flex-direction: column;
+        gap:0px;
+    }
+
+    .textArea{
+        padding-left: 0%;
+     }
+     .fill p{
+      font-size: 17px;
+     }
+
+  }
+  
+  
+  
 
 .Footer{
 width: 100%;
@@ -336,28 +400,34 @@ font-weight: bold;
       padding-bottom: 10px;
       gap: 10vh;
     }
-.sectionFivemain{
-    display: flex;
-    flex-direction: column;
-}
-.registermain{
-    display: flex;
-    flex-direction: column;    
-}
 
-.gender{
-    display: flex;
-    flex-direction: column;
-/* justify-content: start; */
-/* margin-top: 30px; */
-/* gap: 50px; */
-}
-
-.registerStyle .regiterInput >input{
+    .ContactUscontainer{
+      grid-template-columns: repeat(1,1fr);
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+  .registermain{
+      flex-direction: column;
+      gap: 0px;
+  }
+  .registerStyle input{
+      width: 100%;
+  }
   
-    width: 350px;
-
-    }
+  .registerStyle i{
+  display: none;
+  
+      margin-left: -10px;
+      color: #858792;
+      font-size: 20px;
+  }
+  .textArea{
+      padding-left: 0%;
+   }
+  
+.textArea textarea{
+  width: 100%;
+}
     .Footer input{
         width: 350px;
         margin-bottom: 10px;
@@ -365,27 +435,34 @@ font-weight: bold;
   }
 
   @media only screen and (min-width: 280px) and (max-width: 540px) {
-    .sectionFivemain{
-        display: flex;
-        flex-direction: column;
-      
-        }
-        .registermain{
-            display: flex;
-            flex-direction: column;    
-        }
 
-        .registerSection{
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-        .registerStyle .regiterInput >input{
-  
-            width: 345px;
-        
-            }
             
-
+    .ContactUscontainer{
+      grid-template-columns: repeat(1,1fr);
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+  .registermain{
+      flex-direction: column;
+      gap: 0px;
+  }
+  .registerStyle input{
+      width: 100%;
+  }
+  
+  .textArea textarea{
+    width: 100%;
+  }
+  .registerStyle i{
+  display: none;
+  
+      margin-left: -10px;
+      color: #858792;
+      font-size: 20px;
+  }
+  .textArea{
+      padding-left: 0%;
+   }
             .Footer input{
                 width: 350px;
                 margin-bottom: 10px;     
@@ -394,23 +471,39 @@ font-weight: bold;
  
   
   @media only screen and (min-width: 769px) and (max-width: 1629px) {
-    /* .sectionFivemain{
-        display: flex;
-        flex-direction: column;
-      justify-content: space-around;
-        } */
-        .registermain{
-            flex-direction: column;
-        }
+    .container{
+      grid-template-columns: repeat(1,1fr);
+      padding-left: 20px;
+      padding-right: 20px;
+      justify-content: space-between;
+      grid-gap: 20px;
+  }
+  .registermain{
+      /* justify-content: space-around; */
+      flex-direction: column;
+      gap: 0px;
+  }
+  .registerStyle input{
+    width: 100%;
+  }
+  .textArea{
+      padding-left: 0%;
+   }
+   .textArea textarea{
+width: 100%;
+   }
+.registerStyle i{
+display: none;
+}
+.registermain{
+  flex-direction: column;
+  gap: 0px;
+}
   }
   
   
   @media only screen and (min-width: 10px) and (max-width: 300px) {
-    .registerStyle .regiterInput >input{
-  
-        width: 280px;
-    
-        }
+
   }
   
 
