@@ -376,6 +376,13 @@ font-size: 40px;
 color: #858792;
 font-weight: bold;
 }
+
+.error {
+  color: red;
+  font-size: 15px;
+  margin-top: 5px;
+  font-weight: bold;
+}
   @media screen and (max-width:768px) {
 
     .hamburger {

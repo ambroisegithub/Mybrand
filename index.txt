@@ -1224,4 +1224,242 @@ margin-bottom: 10px;
 }
 
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let openHam = document.querySelector("#openHam");
+let closeHam = document.querySelector("#closeHam");
+let asideContainer = document.querySelector("#aside-container");
+
+const hamburgerEvent = (aside, close, open) => {
+  asideContainer.style.display = aside;
+  closeHam.style.display = close;
+  openHam.style.display = open;
+};
+
+openHam.addEventListener("click", () =>
+  hamburgerEvent("block", "block", "none")
+);
+closeHam.addEventListener("click", () =>
+  hamburgerEvent("none", "none", "block")
+);
+
+// Add these functions for modal handling
+function openModal1() {
+  const modal = document.getElementById("searchModal");
+  modal.style.display = "block";
+}
+
+function closeModal1() {
+  const modal = document.getElementById("searchModal");
+  modal.style.display = "none";
+}
+
+function performSearch() {
+  const searchInput = document.getElementById("searchInput").value;
+  // Implement your search logic here
+  console.log("Performing search for:", searchInput);
+  // Close the modal after performing search
+  closeModal1();
+}
+
+// Update the button click event to open the modal
+document
+  .querySelector(".input-Search button")
+  .addEventListener("click", openModal);
+
+// scrolling main Section
+const mainContent = document.querySelector(".main");
+
+mainContent.addEventListener("scroll", function () {
+  const scrollPosition = mainContent.scrollTop;
+
+  // Adjust the styles of header and aside based on the scroll position
+  document.querySelector(".header").style.top = `${scrollPosition}px`;
+  document.querySelector(".aside").style.top = `${scrollPosition}px`;
+});
+
+openHam.addEventListener("click", () =>
+  hamburgerEvent("block", "block", "none")
+);
+closeHam.addEventListener("click", () =>
+  hamburgerEvent("none", "none", "block")
+);
+
+// Add these functions for modal handling
+function openModal() {
+  const modal1 = document.getElementById("searchModal");
+  modal1.style.display = "block";
+}
+
+function closeModal() {
+  const modal1 = document.getElementById("searchModal");
+  modal1.style.display = "none";
+}
+
+// Add a function to open the modal
+function openBlogModal() {
+  const modalContainer = document.getElementById("blogModalContainer");
+  modalContainer.style.display = "flex";
+
+  // Add event listener for form submission
+  const postBlogButton = document.querySelector("#blogModal button");
+  postBlogButton.addEventListener("click", validateBlogForm);
+}
+
+// Update the existing closeModal function
+function closeModal() {
+  const modalContainer = document.getElementById("blogModalContainer");
+  modalContainer.style.display = "none";
+}
+
+// Add an event listener to close the modal when clicking outside the form
+document.addEventListener("click", function (event) {
+  const modalContainer = document.getElementById("blogModalContainer");
+  if (event.target === modalContainer) {
+    closeModal();
+  }
+});
+
+// Add an event listener to the "Post Blog" button to stop event propagation
+const postBlogButton = document.querySelector("#blogModal button");
+postBlogButton.addEventListener("click", function (event) {
+  event.stopPropagation();
+});
+
+function generateUniqueFileName(originalFileName) {
+  var timestamp = new Date().getTime();
+
+  var fileExtensionIndex = originalFileName.lastIndexOf(".");
+  var fileExtension =
+    fileExtensionIndex !== -1 ? originalFileName.slice(fileExtensionIndex) : "";
+
+  var uniqueFileName =
+    originalFileName.slice(0, fileExtensionIndex) +
+    "-" +
+    timestamp +
+    fileExtension;
+  return uniqueFileName;
+}
+
+// Function to validate the blog form
+function validateBlogForm() {
+  const imageInput = document.querySelector("#blogModal input[type='file']");
+  const dateInput = document.querySelector("#blogModal input[type='date']");
+  const blogTitleInput = document.querySelector(
+    "#blogModal input[placeholder='Blog Tile']"
+  );
+  const descriptionTextarea = document.querySelector("#blogModal textarea");
+
+  const imageError = document.getElementById("imageError");
+  const dateError = document.getElementById("dateError");
+  const blogTitleError = document.getElementById("blogTitleError");
+  const descriptionError = document.getElementById("descriptionError");
+
+  imageError.innerText = "";
+  dateError.innerText = "";
+  blogTitleError.innerText = "";
+  descriptionError.innerText = "";
+
+  // Add input event listeners to clear errors when typing starts
+  imageInput.addEventListener("input", () => clearError(imageError));
+  dateInput.addEventListener("input", () => clearError(dateError));
+  blogTitleInput.addEventListener("input", () => clearError(blogTitleError));
+  descriptionTextarea.addEventListener("input", () =>
+    clearError(descriptionError)
+  );
+
+  if (!imageInput.files.length) {
+    imageError.innerText = "Please select an image.";
+  }
+
+  if (!dateInput.value) {
+    dateError.innerText = "Please select a date.";
+  }
+
+  if (!blogTitleInput.value.trim()) {
+    blogTitleError.innerText = "Please enter a blog title.";
+  }
+
+  if (!descriptionTextarea.value.trim()) {
+    descriptionError.innerText = "Please enter a blog description.";
+  }
+
+  if (
+    imageError.innerText ||
+    dateError.innerText ||
+    blogTitleError.innerText ||
+    descriptionError.innerText
+  ) {
+    return;
+  }
+
+  // Retrieve form data
+  const imageFile = imageInput.files[0];
+  const date = dateInput.value;
+  const title = blogTitleInput.value;
+  const description = descriptionTextarea.value;
+
+  // Additional data needed for local storage (you can modify as per your requirements)
+  const timestamp = new Date().getTime();
+  const imageFileName = generateUniqueFileName(imageFile.name);
+
+  // Store blog data in local storage
+  const blogDataArray = JSON.parse(localStorage.getItem("blogDataArray")) || [];
+
+  const newBlogEntry = {
+    image: imageFileName,
+    date: date,
+    title: title,
+    description: description,
+    timestamp: timestamp,
+  };
+
+  blogDataArray.push(newBlogEntry);
+  localStorage.setItem("blogDataArray", JSON.stringify(blogDataArray));
+
+  // Clear form fields
+  imageInput.value = "";
+  dateInput.value = "";
+  blogTitleInput.value = "";
+  descriptionTextarea.value = "";
+
+  // Close the modal after form submission
+  closeModal();
+}
+
+// Function to clear error messages
+function clearError(errorElement) {
+  errorElement.innerText = "";
+}
+
+// Additional event listener for the "Create Blog" button to open the modal
+const createBlogButton = document.querySelector(".createNewBlogBtn");
+createBlogButton.addEventListener("click", openBlogModal);
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Retrieve blog data from local storage
+  const blogDataArray = JSON.parse(localStorage.getItem("blogDataArray")) || [];
+
+  // Get the table body
+  const tableBody = document.getElementById("blogTableBody");
+
+  // Populate the table with blog data
+  blogDataArray.forEach((blog, index) => {
+    const newRow = tableBody.insertRow();
+    newRow.innerHTML = `
+      <td data-table="Blog Id">${index + 1}</td>
+      <td data-table="Image"><img src="./images/${blog.image}" ></td>
+      <td data-table="Blog Title">${blog.title}</td>
+      <td data-table="Description">${blog.description}</td>
+      <td data-table="Date Created">${blog.date}</td>
+      <td>
+          <button class="btn_edit" data-table="Edit">Edit</button>
+          <button class="btn_trash" data-table="Delete">Delete</button>
+      </td>
+  `;
+  });
+});
+
+
   
