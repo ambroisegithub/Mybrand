@@ -214,13 +214,18 @@ font-weight: bold;
   
   /* Style for singleblogOne */
   .singleblogOne {
-    width: 100%; /* Take up full width on small screens */
-    max-width: 600px; /* Limit the width on larger screens */
+    width: 100%; 
+
+    width: 600px; /* Limit the width on larger screens */
     text-align: left; /* Align text to the left */
+    /* background-color: white; */
   }
   
   .singleblogOne img {
-    width: 100%; /* Make the image fill its container */
+    /* max-width:  600px; */
+     /* Limit the width on larger screens */
+object-fit: cover;
+    width: 100%;
     height: auto; /* Maintain aspect ratio */
   }
   
@@ -271,6 +276,8 @@ font-weight: bold;
 }
 
   .form-container {
+    width:78%;
+
     padding: 10px;
     background-color: white;
     border-radius: 10px;
@@ -530,6 +537,14 @@ font-weight: bold;
     }
     .busInfo  {
    gap: 5px;
+    }
+    .sectionSingle{
+      /* flex-direction: column;
+      justify-content: center; */
+    }
+    .AllBlogs >div{
+      /* width: 100%; 
+      max-width: 600px;  */
     }
   }
   

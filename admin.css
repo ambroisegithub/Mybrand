@@ -42,6 +42,8 @@ body{
     /* z-index: 1000; */
   }
   
+
+  
   .amb h1{
     color: #858792;
     /* background-color: white; */
@@ -801,6 +803,33 @@ font-weight: bold;
     /* color: white; */
 
   }
+
+  #updateBlogModalContainer {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#updateBlogModalContainer .modal-content {
+    width: 50%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#updateBlogModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
   
   @media(max-width:768px){
     .tbl thead{

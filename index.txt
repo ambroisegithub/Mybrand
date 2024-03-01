@@ -1462,4 +1462,211 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function openUpdateBlogModal(index) {
+  document.getElementById("updateBlogModalContainer").style.display = "flex";
+  populateUpdateBlogModal(index);
+}
+
+// Function to close the update blog modal
+function closeUpdateModal() {
+  document.getElementById("updateBlogModalContainer").style.display = "none";
+}
+
+function updateBlog(index) {
+  const updateImageInput = document.getElementById("updateImage");
+  const updateDateInput = document.getElementById("updateDate");
+  const updateTitleInput = document.getElementById("updateTitle");
+  const updateDescriptionInput = document.getElementById("updateDescription");
+
+  // Validation logic for update image, date, title, and description
+  // Collect validation messages
+  const updateErrors = [];
+
+  if (!updateImageInput.files || updateImageInput.files.length === 0) {
+    updateErrors.push("Image is required");
+  }
+
+  if (!updateDateInput || updateDateInput.value.trim() === "") {
+    updateErrors.push("Date is required");
+  }
+
+  if (!updateTitleInput || updateTitleInput.value.trim() === "") {
+    updateErrors.push("Title is required");
+  }
+
+  if (!updateDescriptionInput || updateDescriptionInput.value.trim() === "") {
+    updateErrors.push("Description is required");
+  }
+
+  // Display all validation messages at once
+  document.getElementById("updateImageError").textContent =
+    updateErrors.includes("Image is required") ? "Image is required" : "";
+  document.getElementById("updateDateError").textContent =
+    updateErrors.includes("Date is required") ? "Date is required" : "";
+  document.getElementById("updateTitleError").textContent =
+    updateErrors.includes("Title is required") ? "Title is required" : "";
+  document.getElementById("updateDescriptionError").textContent =
+    updateErrors.includes("Description is required")
+      ? "Description is required"
+      : "";
+
+  // If there are any validation errors, return early
+  if (updateErrors.length > 0) {
+    return;
+  }
+
+  // Read the updated image file using FileReader
+  const updateReader = new FileReader();
+  updateReader.onload = function (e) {
+    // e.target.result contains the base64-encoded image data
+    const updatedImageData = e.target.result;
+
+    // If all fields are valid, proceed to update the blog in local storage
+    updateBlogData(
+      index,
+      updatedImageData,
+      updateDateInput.value,
+      updateTitleInput.value,
+      updateDescriptionInput.value
+    );
+
+    // Close the update modal after successful update
+    closeUpdateModal();
+  };
+
+  // Read the updated image file asDataURL
+  updateReader.readAsDataURL(updateImageInput.files[0]);
+}
+
+// Function to update the blog data in local storage
+function updateBlogData(index, image, date, title, description) {
+  // Retrieve existing blog data from local storage
+  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  // Update the blog data in the existing list
+  existingBlogs[index] = {
+    image: image,
+    date: date,
+    title: title,
+    description: description,
+  };
+
+  // Store the updated list back in local storage
+  localStorage.setItem("blogs", JSON.stringify(existingBlogs));
+
+  // Fetch and populate the table with the updated data
+  fetchAndPopulateTable();
+}
+
+// Function to delete a specific blog
+function deleteBlog(index) {
+  // Retrieve existing blog data from local storage
+  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  // Remove the blog at the specified index
+  existingBlogs.splice(index, 1);
+
+  // Store the updated list back in local storage
+  localStorage.setItem("blogs", JSON.stringify(existingBlogs));
+
+  // Fetch and populate the table with the updated data
+  fetchAndPopulateTable();
+}
+
+// Add these functions for modal handling
+function openUpdateBlogModal(index) {
+  document.getElementById("updateBlogModalContainer").style.display = "flex";
+  populateUpdateBlogModal(index);
+}
+
+// Function to populate the update blog modal with existing data
+function populateUpdateBlogModal(index) {
+  // Retrieve existing blog data from local storage
+  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  // Get the blog data at the specified index
+  const blogToUpdate = existingBlogs[index];
+
+  // Populate the update blog modal with existing data
+  document.getElementById("updateImage").value = ""; // Clear the file input for security reasons
+  document.getElementById("updateDate").value = blogToUpdate.date;
+  document.getElementById("updateTitle").value = blogToUpdate.title;
+  document.getElementById("updateDescription").value = blogToUpdate.description;
+
+  // Add input event listeners to clear errors when typing starts
+  document
+    .getElementById("updateImage")
+    .addEventListener("input", () => clearError("updateImageError"));
+  document
+    .getElementById("updateDate")
+    .addEventListener("input", () => clearError("updateDateError"));
+  document
+    .getElementById("updateTitle")
+    .addEventListener("input", () => clearError("updateTitleError"));
+  document
+    .getElementById("updateDescription")
+    .addEventListener("input", () => clearError("updateDescriptionError"));
+}
+
+// Add an event listener to fetch and populate the table on page load
+document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
+
+
+            <div id="updateBlogModalContainer">
+                <div id="updateBlogModal" class="modal1">
+                  <div class="modal-content">
+                    <span class="close" onclick="closeUpdateModal()">&times;</span>
+              
+                    <div class="blog-form">
+                      <label for="updateImage">Image</label>
+                      <input type="file" title="Image" id="updateImage">
+                      <p class="error" id="updateImageError"></p>
+                    </div>
+              
+                    <div class="blog-form">
+                      <label for="updateDate">Date</label>
+                      <input type="date" title="Date" id="updateDate">
+                      <p class="error" id="updateDateError"></p>
+                    </div>
+              
+                    <div class="blog-form">
+                      <label for="updateTitle">Blog Title</label>
+                      <input type="text" title="Blog title" placeholder="Blog Title" id="updateTitle">
+                      <p class="error" id="updateTitleError"></p>
+                    </div>
+              
+                    <div class="blog-form">
+                      <div class="textAreaContainer">
+                        <label for="updateDescription">Blog Description</label>
+                        <textarea cols="30" rows="10" title="Description" id="updateDescription"></textarea>
+                        <div class="error" id="updateDescriptionError"></div>
+                      </div>
+                    </div>
+              
+                    <button onclick="updateBlog(event)">Update Blog</button>
+                  </div>
+                </div>
+              </div>
+
   

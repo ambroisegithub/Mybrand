@@ -16,22 +16,14 @@ closeHam.addEventListener("click", () =>
 );
 
 // Add these functions for modal handling
-function openModal1() {
-  const modal = document.getElementById("searchModal");
-  modal.style.display = "block";
+function openModal() {
+  const modal1 = document.getElementById("searchModal");
+  modal1.style.display = "block";
 }
 
-function closeModal1() {
-  const modal = document.getElementById("searchModal");
-  modal.style.display = "none";
-}
-
-function performSearch() {
-  const searchInput = document.getElementById("searchInput").value;
-  // Implement your search logic here
-  console.log("Performing search for:", searchInput);
-  // Close the modal after performing search
-  closeModal1();
+function closeModal() {
+  const modal1 = document.getElementById("searchModal");
+  modal1.style.display = "none";
 }
 
 // scrolling main Section
@@ -44,13 +36,6 @@ mainContent.addEventListener("scroll", function () {
   document.querySelector(".header").style.top = `${scrollPosition}px`;
   document.querySelector(".aside").style.top = `${scrollPosition}px`;
 });
-
-openHam.addEventListener("click", () =>
-  hamburgerEvent("block", "block", "none")
-);
-closeHam.addEventListener("click", () =>
-  hamburgerEvent("none", "none", "block")
-);
 
 // Add these functions for modal handling
 function openModal() {
@@ -92,6 +77,7 @@ document.addEventListener("click", function (event) {
     closeModal();
   }
 });
+
 function validateBlogForm() {
   const imageInput = document.getElementById("blogimage");
   const dateInput = document.getElementById("blogdate");
@@ -187,13 +173,13 @@ function clearError(errorId) {
 }
 
 // Function to store blog data in local storage
-// Function to store blog data in local storage
 function storeBlogData(image, date, title, description) {
   const blogData = {
     image: image,
     date: date,
     title: title,
     description: description,
+    comments: [], // Initialize comments as an empty array
   };
 
   // Retrieve existing blog data from local storage
@@ -234,17 +220,97 @@ function fetchAndPopulateTable() {
   blogData.forEach((blog, index) => {
     const row = tableBody.insertRow();
     row.innerHTML = `
-      <td data-table="Blog Id">${index + 1}</td>
-      <td data-table="Image"><img src="${blog.image}" alt="blog Image"></td>
-      <td data-table="Blog Title">${blog.title}</td>
-      <td data-table="Description">${blog.description}</td>
-      <td data-table="Date Created">${blog.date}</td>
-      <td>
-        <button class="btn_edit" data-table="Edit">Edit</button>
-        <button class="btn_trash" data-table="Delete">Delete</button>
-      </td>
-    `;
+   <td data-table="Blog Id">${index + 1}</td>
+   <td data-table="Image"><img src="${blog.image}" alt="blog Image"></td>
+   <td data-table="Blog Title">${blog.title}</td>
+   <td data-table="Description">${blog.description}</td>
+   <td data-table="Date Created">${blog.date}</td>
+   <td>
+   <button class="btn_edit" data-table="Edit" onclick="editBlog(${index})">Edit</button>
+    <button class="btn_trash" data-table="Delete" onclick="deleteBlog(${index})">Delete</button>
+   </td>
+  `;
   });
+}
+
+// Add an event listener to fetch and populate the table on page load
+document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
+
+function deleteBlog(index) {
+  // Retrieve existing blog data from local storage
+  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  // Remove the blog at the specified index
+  existingBlogs.splice(index, 1);
+
+  // Store the updated list back in local storage
+  localStorage.setItem("blogs", JSON.stringify(existingBlogs));
+
+  // Fetch and populate the table with the updated data
+  fetchAndPopulateTable();
+}
+
+// Function to edit a blog
+function editBlog(index) {
+  // Retrieve existing blog data from local storage
+  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  // Get the blog data based on the clicked row
+  const blogToEdit = existingBlogs[index];
+
+  // Populate the modal with the data for editing
+  imageInput.value = ""; // Clear the file input to ensure user selects a new image
+  dateInput.value = blogToEdit.date;
+  blogTitleInput.value = blogToEdit.title;
+  descriptionInput.value = blogToEdit.description;
+
+  // Open the modal for editing
+  openBlogModal();
+
+  // Remove existing event listener if any
+  const postBlogButton = document.querySelector("#blogModal button");
+  postBlogButton.removeEventListener("click", validateBlogForm);
+
+  // Add event listener for form submission with updated data
+  postBlogButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    updateBlogData(index);
+  });
+}
+
+// Function to update blog data in local storage
+// Function to update blog data in local storage
+function updateBlogData(index) {
+  // Retrieve existing blog data from local storage
+  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  // Read the image file using FileReader
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    // e.target.result contains the base64-encoded image data
+    const imageData = e.target.result;
+
+    // Update the blog data at the specified index
+    existingBlogs[index] = {
+      image: imageData, // Use the base64-encoded image data
+      date: dateInput.value,
+      title: blogTitleInput.value,
+      description: descriptionInput.value,
+    };
+
+    // Store the updated list back in local storage
+    localStorage.setItem("blogs", JSON.stringify(existingBlogs));
+
+    // Fetch and populate the table with the updated data
+    fetchAndPopulateTable();
+
+    // Close the modal after successful update
+    closeModal();
+  };
+
+  // Read the image file asDataURL
+  reader.readAsDataURL(imageInput.files[0]);
 }
 
 // Add an event listener to fetch and populate the table on page load

@@ -15,10 +15,6 @@ closeHam.addEventListener("click", () =>
   hamburgerEvent("none", "none", "block")
 );
 
-document.getElementById("goToSignup").addEventListener("click", function () {
-  window.location.href = "register.html";
-});
-
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }
@@ -86,4 +82,116 @@ function fileHandle(value) {
   } else if (value === "pdf") {
     html2pdf(content).save(filename.value);
   }
+}
+
+// fetching Single blogs and all blogs
+
+document.addEventListener("DOMContentLoaded", function () {
+  const blogId = getQueryParam("id");
+  if (blogId !== null) {
+    renderSingleBlog(blogId);
+    renderAllOtherBlogs(blogId);
+  }
+});
+
+function renderSingleBlog(blogId) {
+  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+  const singleBlogSection = document.querySelector(".singleblogOne");
+
+  const blog = blogs[blogId];
+  singleBlogSection.innerHTML = `
+      <img src="${blog.image}" alt="">
+      <div class="businessbetween">
+          <h1>${blog.title}</h1>
+          <p>${blog.date}</p>
+      </div>
+      <p>${blog.description}</p>
+  `;
+}
+
+function renderAllOtherBlogs(excludeBlogId) {
+  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+  const allBlogsSection = document.querySelector(".AllBlogs");
+
+  blogs.forEach((blog, index) => {
+    if (index !== excludeBlogId) {
+      const blogDiv = document.createElement("div");
+      blogDiv.classList.add("blogDescription");
+
+      blogDiv.innerHTML = `
+              <img src="${blog.image}" alt="">
+              <div class="busInfo">
+                  <h1>${blog.title}</h1>
+                  <p>${blog.date}</p>
+                  <button class="more" onclick="redirectToSingleBlog(${index})">Read More</button>
+              </div>
+              <p>${blog.description}</p>
+          `;
+
+      allBlogsSection.appendChild(blogDiv);
+    }
+  });
+}
+
+function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+
+function redirectToSingleBlog(blogId) {
+  window.location.href = `singleBlog.html?id=${blogId}`;
+}
+
+
+
+function addComment(event) {
+  event.preventDefault();
+
+  const email = document.querySelector('input[name="email"]').value.trim();
+  const subject = document.querySelector('input[name="subject"]').value.trim();
+  const comment = document.getElementById("content").innerHTML.trim();
+
+  const isValid = validateComment(email, subject, comment);
+
+  if (isValid) {
+      const commentData = {
+          email,
+          subject,
+          comment,
+      };
+
+      // Use the blogId obtained from the URL
+      const blogId = getQueryParam("id");
+      commentData.blogId = blogId;
+
+      // Call the function to save the comment
+      saveComment(commentData);
+
+      // Close the comment form
+      closeForm();
+  }
+}
+
+function validateComment(email, subject, comment) {
+  // Perform validation and display any error messages if needed
+  // Return true if the data is valid, false otherwise
+
+  return true;  // Change this based on your validation logic
+}
+
+function saveComment(commentData) {
+  // Retrieve existing comments from local storage
+  let comments = JSON.parse(localStorage.getItem("UserComments")) || [];
+
+  // Generate a unique commentId
+  commentData.commentId = comments.length > 0 ? Math.max(...comments.map(comment => comment.commentId)) + 1 : 1;
+
+  // Add the new comment to the array
+  comments.push(commentData);
+
+  // Save the updated comments array to local storage
+  localStorage.setItem("UserComments", JSON.stringify(comments));
+
+  // Display a success message or perform any additional actions
+  alert("Comment posted successfully!");
 }
