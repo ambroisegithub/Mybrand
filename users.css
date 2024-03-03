@@ -224,15 +224,33 @@ font-size: 15px;
     display: none;
 }
 
+.createUserConatainer{
+    display: flex;
+    justify-content: center;
+}
+.createUserConatainer button{
+    padding: 20px;
+    width: 30%;
+    margin-top: 0px;
+    background-color: #2A2C39;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+color: white;
+font-weight: bold;
+font-weight: bold;
+font-size:20px ;
+margin-top: 30px;
 
-
+}
+/* 
 .chart-content{
     display: grid;
     grid-template-columns: repeat(1,1fr);
     grid-gap: 24px;
     margin-top: 20px;
 
-}
+} */
 .chart-content  .blogs{
     border-radius: 5px;
     padding: 20px; 
@@ -278,10 +296,19 @@ font-size: 15px;
     font-size: 15px;
     font-weight: bold;
     outline: none;
-    color: #858792;
+    color: black;
     width: 100%;
 
-}
+}  
+.close1 {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    /* margin-right: 10px; */
+  }
+  
 
 .blogs .blog2  input{
     background-color: #343A40;
@@ -324,23 +351,28 @@ font-size: 15px;
     font-size: 15px;
     font-weight: bold;
     outline: none;
-    color: #858792;
+    color: black;
 }
 .blog1 ,.blog2, .blogi label{
-color: white;
+color:  #2A2C39;
 font-weight: bold;
 margin-bottom: 10px;
 margin-top: 10px;
 }
-.chart-content .blogs{
+/* .chart-content .blogs{
     background-color: #2A2C39;
-}
+} */
 .Textarea label{
     color: white;
     font-weight: bold;
     margin-bottom: 10px;
 }
-
+.error {
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 5px;
+}
 .blogpostbutton button{
     width: 100%;
     align-items: center;
@@ -561,14 +593,14 @@ margin-top: 10px;
 
 }
   
-  .modal-content {
-    background-color:white;
+  /* .modal-content {
+    background-color:black;
     margin: 15% auto;
     padding: 20px;
     border-radius: 5px;
 
     width: 80%;
-  }
+  } */
   
   .close {
     color: #aaa;
@@ -601,6 +633,63 @@ margin-top: 10px;
     font-size: 40px;
     /* padding-bottom: 40px; */
 }
+
+
+/* user model */
+
+
+/* Add styles for the modal container */
+#userModalContainer {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+
+  }
+  #userModel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Center the modal */
+  #userModalContainer .modal-content {
+    left: 25%;
+    width: 50%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 15%;
+    /* justify-content: center; */
+    /* align-items: ce; */
+  }
+  
+  /* Style the close icon */
+  .close1 {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    /* margin-right: 10px; */
+  }
+  
+  /* Add styles to make the modal appear centered */
+  #userblogModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
   @media(max-width:768px){
     
     .input-Search input{

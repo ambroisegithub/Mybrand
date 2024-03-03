@@ -39,8 +39,10 @@ const setError = (element, errorElement, message) => {
   const errorDisplay = errorElement;
 
   errorDisplay.innerText = message;
-  inputControl.classList.add("error");
-  inputControl.classList.remove("success");
+  if (inputControl) {
+    inputControl.classList.add("error");
+    inputControl.classList.remove("success");
+  }
 };
 
 const setSuccess = (element, errorElement) => {
@@ -48,8 +50,10 @@ const setSuccess = (element, errorElement) => {
   const errorDisplay = errorElement;
 
   errorDisplay.innerText = "";
-  inputControl.classList.add("success");
-  inputControl.classList.remove("error");
+  if (inputControl) {
+    inputControl.classList.add("success");
+    inputControl.classList.remove("error");
+  }
 };
 
 const isValidEmail = (email) => {
@@ -80,5 +84,30 @@ const validateInputs = () => {
     );
   } else {
     setSuccess(password, passwordError);
+
+    // If all inputs are valid, attempt to log in
+    loginUser(emailValue, passwordValue);
+  }
+};
+const loginUser = (email, password) => {
+  // Retrieve existing users from local storage or initialize an empty array
+  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Check if the user with the provided email exists
+  const user = existingUsers.find((user) => user.email === email);
+
+  if (user && user.password === password) {
+    // Successful login
+    if (email === "admin@gmail.com" && password === "admin1234") {
+      // Redirect to admin.html for admin user
+      window.location.href = "Admin.html";
+    } else {
+      // Redirect to singleBlog.html for other users
+      window.location.href = "index.html";
+    }
+  } else {
+    // Invalid credentials
+    setError(email, emailError, "Invalid email or password");
+    setError(password, passwordError, "Invalid email or password");
   }
 };

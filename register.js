@@ -25,14 +25,6 @@ const phoneNumberError = document.getElementById("phoneNumberError");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
 
-// Add input event listeners to each input field
-fullName.addEventListener("input", () => setSuccess(fullName, fullNameError));
-phoneNumber.addEventListener("input", () =>
-  setSuccess(phoneNumber, phoneNumberError)
-);
-email.addEventListener("input", () => setSuccess(email, emailError));
-password.addEventListener("input", () => setSuccess(password, passwordError));
-
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   validateInputs();
@@ -43,8 +35,10 @@ const setError = (element, errorElement, message) => {
   const errorDisplay = errorElement;
 
   errorDisplay.innerText = message;
-  inputControl.classList.add("error");
-  inputControl.classList.remove("success");
+  if (inputControl) {
+    inputControl.classList.add("error");
+    inputControl.classList.remove("success");
+  }
 };
 
 const setSuccess = (element, errorElement) => {
@@ -52,8 +46,10 @@ const setSuccess = (element, errorElement) => {
   const errorDisplay = errorElement;
 
   errorDisplay.innerText = "";
-  inputControl.classList.add("success");
-  inputControl.classList.remove("error");
+  if (inputControl) {
+    inputControl.classList.add("success");
+    inputControl.classList.remove("error");
+  }
 };
 
 const validateInputs = () => {
@@ -92,6 +88,9 @@ const validateInputs = () => {
     );
   } else {
     setSuccess(password, passwordError);
+
+    // If all inputs are valid, register the user and store in local storage
+    registerUser(fullNameValue, phoneNumberValue, emailValue, passwordValue);
   }
 };
 
@@ -99,4 +98,47 @@ const isValidEmail = (email) => {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+};
+
+const registerUser = (fullName, phoneNumber, email, password) => {
+  // Construct user object
+  const user = {
+    fullName: fullName,
+    phoneNumber: phoneNumber,
+    email: email,
+    password: password,
+  };
+
+  // Retrieve existing users from local storage or initialize an empty array
+  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Check if the user already exists
+  const isDuplicate = existingUsers.some(
+    (existingUser) => existingUser.email === email
+  );
+
+  if (!isDuplicate) {
+    // Add the new user to the existing list
+    existingUsers.push(user);
+
+    // Store the updated list back in local storage
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+    alert("User registered successfully!");
+    // Display a success message or perform any other desired actions
+    console.log("User registered successfully!");
+
+    // Clear input fields after successful registration
+    if (fullName) fullName.value = "";
+    if (phoneNumber) phoneNumber.value = "";
+    if (email) email.value = "";
+    if (password) password.value = "";
+
+    // Clear success states and error messages
+    setSuccess(fullName, fullNameError);
+    setSuccess(phoneNumber, phoneNumberError);
+    setSuccess(email, emailError);
+    setSuccess(password, passwordError);
+  } else {
+    setError(email, emailError, "This email is already registered");
+  }
 };

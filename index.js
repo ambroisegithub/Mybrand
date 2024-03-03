@@ -102,11 +102,11 @@ function renderBlogs() {
   const blogSectionMain = document.querySelector(".blogSectionmain");
 
   blogs.forEach((blog, index) => {
-      const blogDiv = document.createElement("div");
-      blogDiv.classList.add("blogSection");
-      blogDiv.dataset.blogId = index; // Set a data attribute to store the blog id
+    const blogDiv = document.createElement("div");
+    blogDiv.classList.add("blogSection");
+    blogDiv.dataset.blogId = index; // Set a data attribute to store the blog id
 
-      blogDiv.innerHTML = `
+    blogDiv.innerHTML = `
       <div class="blogpartOne">
         <img src="${blog.image}" alt="">
       </div>
@@ -126,7 +126,7 @@ function renderBlogs() {
       </div>
       `;
 
-      blogSectionMain.appendChild(blogDiv);
+    blogSectionMain.appendChild(blogDiv);
   });
 }
 
@@ -134,9 +134,9 @@ function attachClickEventToButtons() {
   const singleBlogButtons = document.querySelectorAll(".singleBlogs");
 
   singleBlogButtons.forEach((button, index) => {
-      button.addEventListener("click", () => {
-          // Redirect to singleBlog.html with the blog id as a parameter
-          window.location.href = `singleBlog.html?id=${index}`;
-      });
+    button.addEventListener("click", () => {
+      // Redirect to singleBlog.html with the blog id as a parameter
+      window.location.href = `singleBlog.html?id=${index}`;
+    });
   });
 }

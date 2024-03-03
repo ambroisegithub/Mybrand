@@ -80,38 +80,51 @@
         </aside>
         <main class="main">
           <div class="chart-content">
-            <div class="blogs">
-                <div>
+            <div id="userModalContainer">
+            <div class="blogs" id="userModal">
+                <div class="modal-content">
+                  <span class="close1" onclick="closeModal()">&times;</span>
                   <div class="crateNewBlog">
-                    <button> + Create New User</button>
+                    <button>  Create New User</button>
                 </div>
                     <div class="blogFlex">
                         <div class="blogi">
                             <label for="Image">User Names</label>
-                            <input type="text" title="User Name" id="" placeholder="User Names" class="username">
+                            <input type="text" title="User Name"  placeholder="User Names" class="username" id="userName">
+                            <p class="error" id="usernameError"></p>
+
+                            
                           </div>
                           <div class="blogi">
                             <label for="Image">User Email Adress</label>
-                            <input type="text" title="email" id="" placeholder="Enter Your Email" class="email">
+                            <input type="text" title="email"  placeholder="Enter Your Email" class="email" id="userEmail">
+                            <p class="error" id="emailError"></p>
+
                           </div>
                     </div>
 
                     <div class="blog2">
                         <label for="Phone Number">Phone Number</label>
-                        <input type="text" title="Phone Number" placeholder="Enter Phone Number">
+                        <input type="text" title="Phone Number" placeholder="Enter Phone Number" id="userPhone">
+                        <p class="error" id="phoneNumberError"></p>
+
                     </div>
                     <div class="blog2">
                         <label for="Blog Title">Password</label>
-                        <input type="password" title="Password" placeholder="........">
+                        <input type="password" title="Password" placeholder="........" id="userPassword">
+                        <p class="error" id="passwordError"></p>
+
                     </div>                    
                     <div class="blogpostbutton">
-                        <button>Press To Create A User</button>
+                        <button onclick="validateUserForm()">Press To Create A User</button>
                     </div>
                 </div>
             </div>
-
+          </div>
         </div>
-
+        <div class="createUserConatainer">
+          <button class="createNewBlogBtn" onclick="openuserModal()">+ Create User</button>
+      </div>
         <div>
             <div class="container_table">
                 <div class="tbl_container">
@@ -123,13 +136,12 @@
                         <th>User Name</th>
                         <th>Email Adress</th>
                         <th>Phone Number</th>
-                        <th>Gender</th>
                         <th colspan="2">Action</th>
                       </tr>
                     </thead>
                     
                     <tbody>
-                      <tr>
+                      <!-- <tr>
                         <td data-table="User Id">001</td>
                         <td data-table="User Name">ambroise Muhayimana</td>
                         <td data-table="User Email">seambroi4@gmail.com</td>
@@ -199,14 +211,14 @@
                           <button class="btn_edit"Edit data-table="Edit">Edit</button>
                           <button class="btn_trash" data-table="Delete">Delete</button>
                         </td> 
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </div>
               </div>  
         </div>
         </main>
-        <footer class="footer"></footer>
+        <!-- <footer class="footer"></footer> -->
     </div>
     <script src="users.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
