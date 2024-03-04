@@ -58,7 +58,7 @@ function openBlogModal() {
   postBlogButton.removeEventListener("click", validateBlogForm);
 
   // Add event listener for form submission
-  postBlogButton.addEventListener("click", function (event) {
+  postBlogButton.addEventListener("click", function (eventstoreBlogData) {
     event.stopPropagation();
     validateBlogForm();
   });

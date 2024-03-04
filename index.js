@@ -140,3 +140,118 @@ function attachClickEventToButtons() {
     });
   });
 }
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   renderContacts();
+
+// });
+// contactus.js
+
+function contactValidation() {
+  const fullName = document.getElementById("fullName");
+  const emailAdress = document.getElementById("emailAdress");
+  const phoneNumber = document.getElementById("phoneNumber");
+  const subject = document.getElementById("subject");
+  const message = document.getElementById("message");
+
+  const errors = [];
+
+  if (!fullName || fullName.value.trim() === "") {
+    errors.push("Full Name is Required");
+  }
+  if (!emailAdress || emailAdress.value.trim() === "") {
+    errors.push("Email Address is Required");
+  }
+  if (!phoneNumber || phoneNumber.value.trim() === "") {
+    errors.push("Phone Number is Required");
+  }
+  if (!subject || subject.value.trim() === "") {
+    errors.push("Subject is Required");
+  }
+  if (!message || message.value.trim() === "") {
+    errors.push("Message is Required");
+  }
+
+  document.getElementById("fullnameError").textContent = errors.includes(
+    "Full Name is Required"
+  )
+    ? "Full Name is Required"
+    : "";
+
+  document.getElementById("emailadressError").textContent = errors.includes(
+    "Email Address is Required"
+  )
+    ? "Email Address is Required"
+    : "";
+
+  document.getElementById("phonenumberError").textContent = errors.includes(
+    "Phone Number is Required"
+  )
+    ? "Phone Number is Required"
+    : "";
+
+  document.getElementById("subjectError").textContent = errors.includes(
+    "Subject is Required"
+  )
+    ? "Subject is Required"
+    : "";
+  document.getElementById("messageError").textContent = errors.includes(
+    "Message is Required"
+  )
+    ? "Message is Required"
+    : "";
+
+  // Check if there are any validation errors and return if true
+  if (errors.length > 0) {
+    return;
+  }
+
+  // Call the correct function to store contact data
+  storeContactUs(
+    fullName.value,
+    phoneNumber.value,
+    emailAdress.value,
+    subject.value,
+    message.value
+  );
+}
+
+// Function to store contact data in local storage
+function storeContactUs(fullName, phoneNumber, emailAdress, subject, message) {
+  const contactData = {
+    fullName: fullName,
+    phoneNumber: phoneNumber,
+    emailAdress: emailAdress,
+    subject: subject,
+    message: message,
+  };
+
+  let existingContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+
+  // Check for duplicates based on your conditions
+  const isDuplicate = existingContacts.some(
+    (contact) =>
+      contact.fullName === fullName &&
+      contact.emailAdress === emailAdress &&
+      contact.phoneNumber === phoneNumber &&
+      contact.subject === subject &&
+      contact.message === message
+  );
+
+  // Only add new contact if it doesn't already exist
+  if (!isDuplicate) {
+    existingContacts.push(contactData);
+
+    // Store the updated contacts back in local storage
+    localStorage.setItem("contacts", JSON.stringify(existingContacts));
+  }
+}
+fullName.addEventListener("input", () => clearError("fullnameError"));
+phoneNumber.addEventListener("input", () => clearError("phonenumberError"));
+emailAdress.addEventListener("input", () => clearError("emailadressError"));
+subject.addEventListener("input", () => clearError("subjectError"));
+message.addEventListener("input", () => clearError("messageError"));
+
+function clearError(errorId) {
+  document.getElementById(errorId).textContent = "";
+}

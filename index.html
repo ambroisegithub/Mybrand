@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -409,53 +408,53 @@
         </div>
         <div class="contactUsContainer">
             <div class="registermain">
-                <div>
-                    <div class="registerStyle">
-                        <label for="FullName">Full Name</label>
-                        <div class="regiterInput">
-                            <input type="text"  title="Full Name" placeholder="Ambroise .M">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </div>
-                       
-                    </div>
-                    <div class="registerStyle">
-                        <label for="FullName">Phone Number</label>
-                        <div class="regiterInput">
-                            <input type="text"  title="Full Name" placeholder="+250 786255860 ">
-                            <i class="fa fa-phone-square" aria-hidden="true"></i>
-                        </div>
-                       
-                    </div>
+              <div>
+                <div class="registerStyle">
+                  <label for="fullName">Full Name</label>
+                  <div class="registerInput">
+                    <input type="text" title="Full Name" placeholder="Ambroise .M" id="fullName">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <p id="fullnameError"></p>
+                  </div>
                 </div>
-    
-                <div>
-                    <div class="registerStyle">
-                        <label for="FullName">Email Adress</label>
-                        <div class="regiterInput">
-                            <input type="text"  title="Full Name" placeholder="seambroi4@gmail.com">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </div>
-                       
-                    </div>
-                    <div class="registerStyle">
-                        <label for="FullName">Subject</label>
-                        <div class="regiterInput">
-                            <input type="text"  title="Full Name" placeholder="reason Tilte">
-                            <i class="fa fa-text-width" aria-hidden="true"></i>
-                        </div>
-                    </div>
+                <div class="registerStyle">
+                  <label for="phoneNumber">Phone Number</label>
+                  <div class="registerInput">
+                    <input type="text" title="Phone Number" placeholder="+250 786255860" id="phoneNumber">
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                    <p id="phonenumberError"></p>
+                  </div>
                 </div>
-    
+              </div>
+              <div>
+                <div class="registerStyle">
+                  <label for="emailAdress">Email Address</label>
+                  <div class="registerInput">
+                    <input type="text" title="Email Address" placeholder="seambroi4@gmail.com" id="emailAdress">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <p id="emailadressError"></p>
+                  </div>
+                </div>
+                <div class="registerStyle">
+                  <label for="subject">Subject</label>
+                  <div class="registerInput">
+                    <input type="text" title="Subject" placeholder="Reason Title" id="subject">
+                    <i class="fa fa-text-width" aria-hidden="true"></i>
+                    <p id="subjectError"></p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="textArea">
-                <p>Message</p>
-                <textarea name="message" id=""  title="text Message"></textarea>
-                <div>
-                    <button class="sendMessage">Send Message</button>
-                </div>
+              <p>Message</p>
+              <textarea name="message" id="message" title="Text Message"></textarea>
+              <p id="messageError"></p>
+              <div>
+                <button class="sendMessage" onclick="contactValidation()">Send Message</button>
+              </div>
             </div>
-
-        </div>
+          </div>
+          
 
     </div>
     </div>

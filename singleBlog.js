@@ -158,6 +158,7 @@ function addComment(event) {
           email,
           subject,
           comment,
+          seen: false, // Set the initial value to false
       };
 
       // Use the blogId obtained from the URL
