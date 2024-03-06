@@ -255,3 +255,63 @@ message.addEventListener("input", () => clearError("messageError"));
 function clearError(errorId) {
   document.getElementById(errorId).textContent = "";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  renderBlogs();
+  attachClickEventToButtons();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  renderBlogs();
+  attachClickEventToButtons();
+
+  // Get the subscription email input element
+  const subscriptionEmailInput = document.getElementById("subscriptionEmail");
+
+  // Add an input event listener to clear the subscription error when typing starts
+  subscriptionEmailInput.addEventListener("input", () =>
+    clearError("subscriptionError")
+  );
+});
+
+function subscribeToNewsletter() {
+  const emailInput = document.getElementById("subscriptionEmail");
+  const subscriptionError = document.getElementById("subscriptionError");
+
+  const email = emailInput.value.trim();
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    if (subscriptionError)
+      subscriptionError.textContent = "Invalid email format";
+    return;
+  }
+
+  // Call the function to subscribe (you can implement this function as needed)
+  subscribe(email);
+
+  // Clear input and errors after successful subscription
+  if (emailInput) emailInput.value = "";
+  if (subscriptionError) subscriptionError.textContent = "";
+}
+
+function subscribe(email) {
+  const subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
+
+  // Check for duplicates based on your conditions
+  const isDuplicate = subscriptions.includes(email);
+
+  // Only add new subscription if it doesn't already exist
+  if (!isDuplicate) {
+    subscriptions.push(email);
+
+    // Store the updated subscriptions back in local storage
+    localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
+    alert("Thank you for Subscribe For Newsletter");
+  }
+}
+
+function clearError(errorId) {
+  document.getElementById(errorId).textContent = "";
+}

@@ -176,20 +176,20 @@ align-items: center;
 
 }
 
-.overview1 .one{
+.overview1 .one,.commentPercentage,.blogPercentage{
 font-size: 18px;
 font-weight: bold;
 color: white;
 margin-right:10px ;
 }
 
-.overview1 .two{
+.overview1 .two,.commentIncrease,.blogIncrease{
     color: white;
     margin-right: 10px;
 
 }
 
-.overview1 .three{
+.overview1 .three,.blogCount,.commentCount{
     font-size: 16px;
     color: #ABABAB;
     font-weight: bold;
@@ -619,7 +619,13 @@ margin-top: 10px;
     border-radius:1px;
     cursor:pointer;
   }
-  
+  .table-button{
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 2px;
+    flex-direction: row;
+    flex-wrap:wrap ;
+  }
   .btn_trash{
     color:white;
     background-color:red;

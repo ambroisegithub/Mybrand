@@ -225,7 +225,7 @@ function fetchAndPopulateTable() {
    <td data-table="Blog Title">${blog.title}</td>
    <td data-table="Description">${blog.description}</td>
    <td data-table="Date Created">${blog.date}</td>
-   <td>
+   <td class="table-button">
    <button class="btn_edit" data-table="Edit" onclick="editBlog(${index})">Edit</button>
     <button class="btn_trash" data-table="Delete" onclick="deleteBlog(${index})">Delete</button>
    </td>
@@ -315,3 +315,83 @@ function updateBlogData(index) {
 
 // Add an event listener to fetch and populate the table on page load
 document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
+
+const getUserCount = () => {
+  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+  return existingUsers.length;
+};
+
+// Function to update the overview card in HTML
+const updateOverviewCard = () => {
+  const totalUsersElement = document.querySelector(".users");
+  const usersPercentageElement = document.querySelector(".one");
+  const usersCountElement = document.querySelector(".three");
+
+  const userCount = getUserCount();
+  const percentage = userCount * 0.001; // Assuming total users can be 100% of the space
+
+  totalUsersElement.textContent = `Total Users ${""}`;
+  usersPercentageElement.textContent = `${percentage}%`;
+  usersCountElement.textContent = `${userCount}`;
+  fetchAndPopulateTable();
+};
+
+// Call the function to update the overview card when the page loads
+document.addEventListener("DOMContentLoaded", updateOverviewCard);
+
+// Function to count comments and update the overview card
+function updateCommentOverview() {
+  // Retrieve existing comments from local storage
+  let comments = JSON.parse(localStorage.getItem("UserComments")) || [];
+
+  // Calculate the percentage and count
+  const commentPercentage = calculatePercentage(comments.length);
+  const commentCount = comments.length;
+
+  // Update the elements in the overview card
+  document.querySelector(".commentPercentage").innerText =
+    commentPercentage + "";
+  document.querySelector(".commentIncrease").innerText = "From Last Week";
+  document.querySelector(".commentCount").innerText = commentCount;
+  fetchAndPopulateTable();
+}
+
+// Function to count blogs and update the overview card
+function updateBlogOverview() {
+  // Retrieve existing blogs from local storage
+  let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  // Calculate the percentage and count
+  const blogPercentage = calculatePercentage(blogs.length);
+  const blogCount = blogs.length;
+
+  // Update the elements in the overview card
+  document.querySelector(".blogPercentage").innerText = blogPercentage + "";
+  document.querySelector(".blogIncrease").innerText = "From Last Week";
+  document.querySelector(".blogCount").innerText = blogCount;
+  fetchAndPopulateTable();
+}
+
+// Helper function to calculate percentage
+function calculatePercentage(count) {
+  // Replace this with your percentage calculation logic
+  return count * 0.001 + "%";
+}
+
+// Call the functions to update the overview cards
+updateCommentOverview();
+updateBlogOverview();
+// Function to count subscribers and update the overview card
+function updateSubscriberOverview() {
+  // Retrieve existing subscriptions from local storage
+  const subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
+
+  // Calculate the percentage and count
+  const subscriberPercentage = calculatePercentage(subscriptions.length);
+  const subscriberCount = subscriptions.length;
+
+  // Update the elements in the overview card
+  document.querySelector(".subscriberPercentage").innerText = subscriberPercentage + '%';
+  document.querySelector(".subscriberIncrease").innerText = 'From Last Week';
+  document.querySelector(".subscriberCount").innerText = subscriberCount;
+}

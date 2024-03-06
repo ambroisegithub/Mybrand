@@ -462,15 +462,22 @@
 
 <section class="sectionSix">
     <div class="Footer">
-        <div class="footerContaine.r">
+        <div class="footerContainer">
             <p>Get Latest Updates</p>
             <h1>Subscribe For Newsletter</h1>
             <div>
-                <input type="text" title="Subscribe" placeholder="seambroi4@gmail.com">
-                <button class="subscribe">Subscribe</button>
+                <input
+                    type="text"
+                    id="subscriptionEmail"
+                    title="Subscribe"
+                    placeholder="Enter your email"
+                />
+                <button class="subscribe" onclick="subscribeToNewsletter()">Subscribe</button>
+                <div id="subscriptionError" class="error"></div>
             </div>
         </div>
     </div>
+    
 
     <div class="line">
 
