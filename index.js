@@ -95,6 +95,14 @@ function closeForm() {
 document.addEventListener("DOMContentLoaded", function () {
   renderBlogs();
   attachClickEventToButtons();
+
+  // Get the subscription email input element
+  const subscriptionEmailInput = document.getElementById("subscriptionEmail");
+
+  // Add an input event listener to clear the subscription error when typing starts
+  subscriptionEmailInput.addEventListener("input", () =>
+    clearError("subscriptionError")
+  );
 });
 
 function renderBlogs() {
@@ -104,7 +112,7 @@ function renderBlogs() {
   blogs.forEach((blog, index) => {
     const blogDiv = document.createElement("div");
     blogDiv.classList.add("blogSection");
-    blogDiv.dataset.blogId = index; // Set a data attribute to store the blog id
+    blogDiv.dataset.blogId = index;
 
     blogDiv.innerHTML = `
       <div class="blogpartOne">
@@ -121,10 +129,10 @@ function renderBlogs() {
       </div>
       <div class="blogpartThree">
         <div>
-        <button class="singleBlogs" type="button">Read More >></button>
+          <button class="singleBlogs" type="button">Read More >></button>
         </div>
       </div>
-      `;
+    `;
 
     blogSectionMain.appendChild(blogDiv);
   });
@@ -135,7 +143,6 @@ function attachClickEventToButtons() {
 
   singleBlogButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
-      // Redirect to singleBlog.html with the blog id as a parameter
       window.location.href = `singleBlog.html?id=${index}`;
     });
   });
@@ -256,13 +263,13 @@ function clearError(errorId) {
   document.getElementById(errorId).textContent = "";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  renderBlogs();
-  attachClickEventToButtons();
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   renderBlogs();
+//   attachClickEventToButtons();
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
-  renderBlogs();
+  // renderBlogs();
   attachClickEventToButtons();
 
   // Get the subscription email input element
@@ -274,6 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 });
 
+
 function subscribeToNewsletter() {
   const emailInput = document.getElementById("subscriptionEmail");
   const subscriptionError = document.getElementById("subscriptionError");
@@ -283,15 +291,14 @@ function subscribeToNewsletter() {
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    if (subscriptionError)
-      subscriptionError.textContent = "Invalid email format";
+    if (subscriptionError) subscriptionError.textContent = "Invalid email format";
     return;
   }
 
   // Call the function to subscribe (you can implement this function as needed)
   subscribe(email);
 
-  // Clear input and errors after successful subscription
+  // Clear input and errors after a successful subscription
   if (emailInput) emailInput.value = "";
   if (subscriptionError) subscriptionError.textContent = "";
 }
@@ -300,15 +307,17 @@ function subscribe(email) {
   const subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
 
   // Check for duplicates based on your conditions
-  const isDuplicate = subscriptions.includes(email);
+  const isDuplicate = subscriptions.some((subscriber) => subscriber.email === email);
 
   // Only add new subscription if it doesn't already exist
   if (!isDuplicate) {
-    subscriptions.push(email);
+    const newSubscriber = { email: email, /* Add any additional information here */ };
+
+    subscriptions.push(newSubscriber);
 
     // Store the updated subscriptions back in local storage
     localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
-    alert("Thank you for Subscribe For Newsletter");
+    alert("Thank you for subscribing to the newsletter!");
   }
 }
 

@@ -49,3 +49,41 @@ mainContent.addEventListener("scroll", function () {
   document.querySelector(".header").style.top = `${scrollPosition}px`;
   document.querySelector(".aside").style.top = `${scrollPosition}px`;
 });
+
+// Add these functions for modal handling
+function openModal() {
+  const modal1 = document.getElementById("searchModal");
+  modal1.style.display = "block";
+}
+
+
+function closeModal() {
+  const modal1 = document.getElementById("searchModal");
+  modal1.style.display = "none";
+}
+
+// Add these functions for modal handling
+function openProjectModal() {
+  const modalContainer = document.getElementById("projectModelContainer");
+  const modal = document.getElementById("projectModal");
+  modalContainer.style.display = "flex";
+  modal.style.display = "block";
+}
+
+function closeProjectModal() {
+  const modalContainer = document.getElementById("projectModelContainer");
+  const modal = document.getElementById("projectModal");
+  modalContainer.style.display = "none";
+  modal.style.display = "none";
+}
+
+// Update the existing closeModal function
+document.addEventListener("click", function (event) {
+  const modalContainer = document.getElementById("projectModelContainer");
+  if (event.target === modalContainer) {
+    closeProjectModal();
+  }
+});
+
+
+

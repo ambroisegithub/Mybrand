@@ -471,7 +471,11 @@ margin-top: 10px;
     outline: none;
 
 }
-
+.percentage{
+    color: white;
+    font-weight: bold;
+    margin-right: 5px;
+}
 .blogButtons .two{
     background-color: red;
     color: white;

@@ -67,8 +67,12 @@
                   <div class="icons">
                     <a href="./project.html"><div><i class="fa fa-briefcase" aria-hidden="true"></i></div><div class="text">Projects</div></a>
                   </div>
+
                   <div class="icons">
                     <a href="./personalIfonfmation.html"><div><i class="fa fa-user" aria-hidden="true"></i></div><div class="text">Personal Information</div></a>
+                  </div>
+                  <div class="icons">
+                    <a href="./login.html"><div><i class="fa fa-sign-out" aria-hidden="true"></i></div><div class="text">Sign Out</div></a>
                   </div>
             </div>
         </aside>
@@ -114,7 +118,7 @@
     <div class="overview1">
         <span>
             <!-- Display blog count in percentage -->
-            <span class="blogPercentage">0</span>
+            <span class="blogPercentage">0</span><span class="percentage">%</span>
             <!-- Display information about the increase from the last week -->
             <span class="blogIncrease">From Last Week</span>
             <!-- Display the number of blogs -->
@@ -123,14 +127,22 @@
     </div>
 </div>
 
-                <div class="overview-card">
-                    <div class="overview" >
-                        <span><i class="fa fa-bell" aria-hidden="true"></i> <span class="users">Total Subscribers</span></span>
-                    </div>
-                    <div class="overview1">
-                        <span><span class="one">8%</span><span class="two">From Last Week</span><span class="three">2568</span></span>
-                    </div>
-                </div>
+<div class="overview-card">
+  <div class="overview">
+      <span><i class="fa fa-bell" aria-hidden="true"></i> <span class="users">Total Subscribers</span></span>
+  </div>
+
+  <div class="overview1">
+      <span>
+          <!-- Display subscriber count in percentage -->
+          <span class="one">0%</span>
+          <!-- Display information about the increase from the last week -->
+          <span class="two">From Last Week</span>
+          <!-- Display the number of subscribers -->
+          <span class="three">0</span>
+      </span>
+  </div>
+</div>
             </div>
 
             <div class="chart-content">
@@ -176,6 +188,7 @@
                   </div>
               </div>
             </div> 
+
             <div class="createUserConatainer">
                 <button class="createNewBlogBtn" onclick="openBlogModal()">+ Create Blog</button>
             </div>

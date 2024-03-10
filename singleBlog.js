@@ -98,15 +98,21 @@ function renderSingleBlog(blogId) {
   const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
   const singleBlogSection = document.querySelector(".singleblogOne");
 
-  const blog = blogs[blogId];
-  singleBlogSection.innerHTML = `
-      <img src="${blog.image}" alt="">
-      <div class="businessbetween">
-          <h1>${blog.title}</h1>
-          <p>${blog.date}</p>
-      </div>
-      <p>${blog.description}</p>
-  `;
+  // Check if blogId is a valid index
+  if (blogId >= 0 && blogId < blogs.length) {
+    const blog = blogs[blogId];
+    singleBlogSection.innerHTML = `
+        <img src="${blog.image}" alt="">
+        <div class="businessbetween">
+            <h1>${blog.title}</h1>
+            <p>${blog.date}</p>
+        </div>
+        <p>${blog.description}</p>
+    `;
+  } else {
+    // Handle the case when the blog is not found
+    singleBlogSection.innerHTML = `<p>Blog not found.</p>`;
+  }
 }
 
 function renderAllOtherBlogs(excludeBlogId) {

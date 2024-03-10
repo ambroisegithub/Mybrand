@@ -224,15 +224,6 @@ font-size: 15px;
     display: none;
 }
 
-
-
-
-
-
-
-
-
-
 .chart-content{
     display: grid;
     grid-template-columns: repeat(1,1fr);
@@ -246,7 +237,7 @@ font-size: 15px;
 }
 
 .blogs{
-    width: 100%;
+    /* width: 100%; */
     
 }
 .blogi{
@@ -549,17 +540,86 @@ margin-top: 10px;
     width: 40px;
     height: 40px;
   }
+  .container_table p{
+    font-size: 20px;
+    font-weight: bold;
+    color: #2A2C39;
+    /* color: white; */
+
+  }
+
+  .createUserConatainer button{
+    padding: 20px;
+    width: 30%;
+    margin-top: 30px;
+    background-color: #2A2C39;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+.createUserConatainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center the modal */
+#projectModelContainer .modalProject {
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
   
+  #projectModelContainer .modal-content {
+    position: relative;
+    top: -100px;
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 60%;
 
-
-
-
-
-
-
-
-
-
+  }
+  
+  /* #projectModelContainer .modal-content input {
+    outline: none;
+    border: 1px solid #343A40;
+    padding: 10px;
+    border-radius: 3px;
+  }
+  
+  #projectModelContainer .modal-content button {
+    color: white;
+    font-weight: bold;
+    background-color: #858792;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+  } */
+  
+  /* Center the modal */
+  #projectModalContainer .modal-content {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
 
   /* Style for the modal */
 .modal {
@@ -576,7 +636,7 @@ margin-top: 10px;
     background-color: rgba(0, 0, 0, 0.4);
 
 }
-  
+
   .modal-content {
     background-color:white;
     margin: 15% auto;
@@ -587,10 +647,12 @@ margin-top: 10px;
   }
   
   .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+    color:black;
+    /* float: inline-start; */
+    font-size: 40px;
     font-weight: bold;
+   /* background-color: rebeccapurple; */
+   padding: 20px;
   }
   .modal-content input{
     outline: none;
