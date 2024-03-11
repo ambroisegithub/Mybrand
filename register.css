@@ -147,7 +147,8 @@ width: 100%;
 /* border: 1px solid white; */
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: space-around;
+gap: 10px;
 
 margin-bottom: 30px;
 }
@@ -254,9 +255,9 @@ margin-bottom: 30px;
                 .signupButtonContainer{
                   display: flex;
                   flex-direction: row;
-                  justify-content: space-between;
+                  justify-content: space-around;
                   gap: 10px;
-                  align-items: center;
+                  /* align-items: center; */
                   /* text-align: center; */
                 }
                 .signupButtonContainer button{

@@ -50,6 +50,7 @@ body{
     font-weight: bold;
     font-size: 40px;
     /* padding-bottom: 40px; */
+    margin-right: 4px;
 }
 .semi-header{
     display: flex;
@@ -121,6 +122,7 @@ margin-bottom: 20px;
        }
        .hamburger{
         display: none;
+        color: white;
        }
 .main{
     grid-area: main;
@@ -206,7 +208,7 @@ margin-right:10px ;
   
   .notification .badge {
     position: absolute;
-    top: -10px;
+    top: -7px;
     right: -10px;
     padding: 5px 10px;
     border-radius: 50%;
@@ -871,7 +873,7 @@ font-weight: bold;
     }
 
     .overview-content{
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .chart-content{
@@ -886,9 +888,7 @@ font-weight: bold;
         color: white;
         display: inline;
     }
-    .aside{
-        display: none;
-    }
+
 
     .aside {
         display: none; 
@@ -897,15 +897,20 @@ font-weight: bold;
         height: 100%;
     }
 
-    #openHam,
+    #openHam{
+        display: block;
+    }
     #closeHam {
-        display: block; 
+        display: none; 
     }
     .hamburger{
         display: inline;
     }
     .SearchIcon button{
-
+        padding: 6px;
+        padding-right: 20px;
+        padding-left: 20px;
+        margin-left: 5px;
         display: block;
     }
     .input-Search{
@@ -920,6 +925,14 @@ font-weight: bold;
     .blogFlex{
         flex-direction: column;
     }
+    .notification-image .notification-image2{
+        width: 30px;
+        height: 40px;
+        padding-right: 5px;
+      }
+      .overview-card{
+        width: 100%;
+      }
   }
 
 
@@ -947,6 +960,20 @@ font-weight: bold;
     .input-Search{
         display: none;
     }
+    .notification {
+        background-color: #555;
+        color: white;
+        text-decoration: none;
+        padding: 6px 16px;
+    }
+    .SearchIcon button{
+
+        padding: 6px;
+        padding-right: 20px;
+        padding-left: 20px;
+        margin-left: 5px;
+
+    }
 }
 
 @media only screen and (min-width: 280px) and (max-width: 540px) {
@@ -972,9 +999,11 @@ font-weight: bold;
     .aside h1{
      font-size: 20px;   
     }
-    #openHam,
+    #openHam{
+        display: block;
+    }
     #closeHam {
-        display: block; 
+        display: none; 
     }
     .hamburger{
         display: block;
@@ -993,6 +1022,15 @@ font-weight: bold;
     .blogFlex{
         flex-direction: column;
     }
+    .amb h1{
+        font-size: 20px;
+    }
+
+    .notification-image .notification-image2{
+        width: 30px;
+        height: 50px;
+        padding-right: 5px;
+      }
 }
 @media only screen and (min-width: 769px) and (max-width: 1305px) {
     .overview-content{
@@ -1007,6 +1045,9 @@ font-weight: bold;
     
     .input-Search input{
         width: 300px;
+    }
+    .main{
+        width: 100%;
     }
 }
 

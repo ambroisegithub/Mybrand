@@ -407,7 +407,7 @@ function calculatePercentage(count) {
 // Call the functions to update the overview cards
 updateCommentOverview();
 updateBlogOverview();
-
+updateSubscriberOverview();
 // Function to count Total subscribers and update the overview card
 function updateSubscriberOverview() {
   // Retrieve existing subscribers from local storage
@@ -429,4 +429,18 @@ function calculatePercentage(count) {
   return count; // Change this logic based on your requirements
 }
 
+
 updateSubscriberOverview();
+
+function updateContactusOverview() {
+  // Get the table body
+  const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  const mailBadge = document.getElementById("mailBadge");
+
+  // Count the number of unseen contacts
+  const unseenContacts = contacts.filter((contact) => !contact.seen);
+
+  // Update the mail badge with the count
+  mailBadge.textContent = unseenContacts.length;
+  0;
+}
