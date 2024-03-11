@@ -77,7 +77,7 @@
     color: white;
   }
   main{
-    background-color:#343A40;
+    background-color:#3b3f58;
     margin-top: 100px;
     overflow-x: hidden;
     width: 100%;
@@ -104,19 +104,27 @@
     display: flex;
     flex-direction: column;
     background-color: #2A2C39;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 0px 0px 0px 0px;
+    justify-content: center;
+    /* border: 1px solid white; */
+    align-items: center;
 
 }
+
 .box2{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /*border: 1px solid white;
-    */padding-top: 20px;
+    /* border: 1px solid white; */
+    padding-top: 20px;
     padding-bottom: 20px;
     background-color: #2A2C39;
-    border-radius: 0px 10px 10px 0px;
-    padding-right: 50px;
+    border-radius: 0px 0px 0px 0px;
+    padding-right: 25px;
+
+    padding-left: 25px;
+
+    align-items: center;
 }
 .box2 >p{
     color: #858792;
@@ -151,9 +159,11 @@
     border-radius: 10px;
     padding-left: 20px;
     margin-bottom:10px ;
+    font-size:16px ;
+    font-weight: bold;
     }
     .Input_control .regiterInput >input::placeholder{
-    font-size: 20px;
+    font-size: 16px;
     }
 
     .error {
@@ -318,8 +328,20 @@ font-weight: bold;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 0px 0px 0px 0px;
+}.box1{
+  padding-left: 1px;
+  padding-right: 1px;
+  border-radius: 0px 0px 0px 0px;
 }
-  }
+  
+
+.Input_control .regiterInput >input{
+  margin-top: 20px;
+  width: 420px;
+  /* height: 56px; */
+}
+}
 
   @media only screen and (min-width: 280px) and (max-width: 540px) {
             .Footer input{
@@ -328,15 +350,33 @@ font-weight: bold;
               }
               .box2{
                 order: 2;
+
+    border-radius: 0px 0px 0px 0px;
+
+              }
+              .box1{
+                padding-left: 1px;
+                padding-right: 1px;
+    border-radius: 0px 0px 0px 0px;
+
               }
               .loginContainer{
                 flex-direction: column;
                }
+               .Input_control .regiterInput >input{
+                margin-top: 20px;
+                width: 100%;
+                /* height: 56px; */
+              }
   }
  
   
   @media only screen and (min-width: 769px) and (max-width: 1629px) {
-
+.loginContainer{
+  width: 80%;
+  justify-content: center;
+  margin-left: 80px;
+}
   }
   
   

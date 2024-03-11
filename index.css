@@ -32,7 +32,14 @@ body{
   padding-bottom: 20px;
   align-items: center;
   z-index: 1000; 
+  border-bottom: 1px solid gray;
   /* Set a high z-index to ensure the navigation bar stays on top */
+}
+.active{
+  border-bottom: white;
+}
+.active:hover{
+  border-bottom: #343A40;
 }
 main {
   background-color: #343A40;
@@ -80,9 +87,23 @@ nav {
   font-weight: 500;
   font-size: 16px;
   transition: .4s ease-in-out;
+  transition-timing-function: ease-in-out;
 }
-.navigation-items > a:hover {
+#active{
+border-bottom: white;
+color: white;
+box-shadow: 0px 1px white;
+font-weight: bold;
+font-size: 18px;
+}
+#active:hover{
+  box-shadow: 0px 1px #343A40;
+}
+.link:hover {
   color: white;
+  border-bottom: 1px solid white;
+  font-weight: bold;
+font-size: 18px;
 }
 .hamburger {
   display: none;
@@ -141,9 +162,17 @@ text-align: center;
   margin-bottom: 30px;
   padding: 10px;
   padding-bottom: 10px;
+  cursor: pointer;
+  transition-timing-function: ease-in-out;
+  box-shadow: 1px 1px 3px 4px gray;
  
   
 
+}
+
+.mainone .hithere:hover{
+  padding: 11px;
+  box-shadow: 1px 1px 3px 3px white;
 }
 .mainconatiner .mainone .descriptionone > p{
 
@@ -163,7 +192,7 @@ font-size: 25px;
 font-weight: bold;
 }
 .buttoncontainer{
-margin-top: 30px;
+margin-top: 40px;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -178,6 +207,12 @@ outline: none;
 justify-content: center;
 align-items: center;
 border-radius:5px;
+transition-timing-function: ease-in-out;
+box-shadow: 1px 1px 1px 1px white;
+
+}
+.buttoncontainer .buttonone:hover{
+  padding: 16px;
 
 }
 .buttoncontainer .buttonone .one{
@@ -185,7 +220,7 @@ color: white;
 font-weight: bold;
 margin-right: 5px;
 font-weight: bold;
-font-size: 12px;
+font-size: 15px;
 
 }
 
@@ -206,15 +241,20 @@ margin-top: 3px;
   justify-content: center;
   align-items: center;
   border-radius:5px;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px 3px #8888;
  
 }
 
+.buttoncontainer .buttonones:hover{
+padding: 16px;
+}
 .buttoncontainer .buttonones .ones{
   color: #5B69E2;
   font-weight: bold;
   margin-right: 5px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 15px;
     
   }
   
@@ -229,19 +269,37 @@ margin-top: 3px;
       flex-direction: row;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 30px;
+      margin-top: 40px;
+      margin-bottom: 20px;
     }
     .socialMedia .twitter > a{
       text-decoration: none;
       cursor: pointer;
+      transition-timing-function: ease;
+    }
+
+    .socialMedia .twitter > a:hover{
+font-size: 20px;
+background-color: #5B69E2;
     }
     .socialMedia .twitter  a>p{
       color: white;
       margin-bottom: 30px;
+      font-size: 15px;
+      font-weight: bold;
+      transition-timing-function: ease;
+
+    }
+
+.twitter a>p:hover{
+/* background-color: #5B69E2; */
+border-bottom: 2px solid white;
+font-size: 16px;
+
     }
    .fa-twitter,.fa-linkedin,.fa-github,.fa-facebook{
       padding: 10px;
-      font-size: 40px;
+      font-size: 50px;
       width: 40px;
       text-align: center;
       text-decoration: none;
@@ -268,6 +326,7 @@ margin-top: 3px;
     .maintwo .ambroiseImage {
       /* width: 100%; */
       /* height: 100%; */
+      cursor: pointer;
     }
     
     .maincontainersectionTwo{
@@ -278,25 +337,29 @@ margin-top: 3px;
       width: 100%;
       padding-top: 30px;
       padding-bottom: 30px;
-      /* margin-bottom: 20px; */
-      /* background-color: skyblue; */
       background-image: linear-gradient(to top, #1F2937, #4F46E5);
       padding-left: 100px;
       padding-right: 100px;
       /* border: 1px solid white; */
       height: auto;
+      cursor: pointer;
+
     }
     
     .maincontainersectionTwo .aboutMeImagecontainer{
       flex:1;
       /* border: 1px solid white; */
       margin-bottom: 20px;
-      height: 517px;
+      height: 600pxpx;
+      cursor: pointer;
+
 
     }
     .maincontainersectionTwo .aboutMeImagecontainer .imageWeb{
      width: 100%;
      height: 100%;
+     cursor: pointer;
+
 
     }
   
@@ -310,11 +373,15 @@ margin-top: 3px;
       /* padding-bottom: 10px; */
       margin-bottom: 20px;
       height: auto;
+      cursor: pointer;
+
     }
 
-    img
+img
 .aboutmeContainer{
 height: auto;
+cursor: pointer;
+
 }
     .aboutmeContainer .aboutme{
       color: #858792;
@@ -372,14 +439,14 @@ height: auto;
      .design .mediaConatiner{
       display: flex;
       flex-direction: row;
-      /* flex-wrap: wrap; */
-      /* gap: 5px; */
-      width: 100%;
+      /*flex-wrap: wrap;
+      *//*gap: 5px;
+      */width: 100%;
       max-width: 420px;
       background-color: #343A40;
-      border-radius: 50px;
+      border-radius:  3px;
       height: auto;
-  
+
 }
 
 .mediaconatinerContent{
@@ -391,7 +458,7 @@ align-items: center;
 text-align: center;
 
 }
-/* .mediaconatinerContent .mediaConatainermail{
+.mediaconatinerContent .mediaConatainermail{
 display: flex;
 align-items: center;
 text-align: center;
@@ -403,7 +470,7 @@ background-color: #5B69E2;
 color: white;
 margin-right: 5px;
 
-} */
+}
 
 
 .mediaContainerp >p{
@@ -524,17 +591,26 @@ margin-bottom: 30px;
 }
 .exploreMoreSkilss button{
 
-  padding-left: 5px;
+  padding-left: 10px;
   padding-right:10px;
   padding-bottom: 10px;
-  padding-top: 15px;
+  padding-top: 10px;
   margin-bottom: 30px;
   color: #5B69E2;
   border-radius: 5px;
   border: none;
   outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition-timing-function: ease-in-out;
+  box-shadow: 1px 1px 3px 3px gray;
 }
 
+.exploreMoreSkilss button:hover{
+  padding: 11px;
+
+}
 .exploreMoreSkilss button >.skillexploreMore{
 margin-right: 5px;
 }
@@ -577,8 +653,17 @@ font-weight: bold;
 color: white;
 margin-top: 10px;
 width: 113px;
+cursor: pointer;
+box-shadow: 1px 1px 3px 3px #8888;
+transition-timing-function: ease-in-out;
+
 
 }
+
+.skill1 button:hover{
+  padding: 12px;
+}
+
 .projectSection{
 
 width: 100%;
@@ -632,9 +717,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 flex-wrap: wrap;
-/* background-color: white; */
-padding-left: 50px;
-padding-right: 50px;
+
 margin-top: 30px;
 }
 .projectOne .bbhcs p{
@@ -653,6 +736,8 @@ border: none;
 outline: none; 
 border-radius: 5px; 
 width: 120px;
+cursor: pointer;
+box-shadow: 1px 1px 3px 3px gray;
 }
 .blogSection,#blogSection{
 display: flex;
@@ -752,8 +837,19 @@ height: 56px;
 border: none;
 outline: none;
 border: 1px solid #858792;
+font-size: 15px;
+font-weight: bold;
+
+cursor: pointer;
+transition-timing-function: ease-in-out;
 
 }
+
+.blogpartThree button:hover{
+
+  width: 165px;
+  box-shadow: 1px 1px 3px 3px gray;
+  }
 .latestTips p{
 color: #858792;
 margin-bottom: 30px;
@@ -781,10 +877,6 @@ margin-bottom:30px;
   padding-bottom: 50px;
 }
 
-.sectionFiveParent,.contactUsContainer{
-  /* border: 1px solid white; */
-  /* padding: 50px; */
-}
 .registermain{
   display: flex;
   flex-direction: row;
@@ -798,10 +890,6 @@ margin-bottom:30px;
   margin-bottom: 30px;
 }
 
-.textArea{
- /* padding-left: 5%; */
-  /* border: 1px solid white; */
-}
 .textArea textarea{
   width: 100%;
   outline: none;
@@ -844,8 +932,12 @@ margin-bottom: 30px;
   background-color: #5B69E2;
   border-radius:3px ;
   font-weight: bold;
-
+  box-shadow: 0px 0px 3px 3px white;
+transition-timing-function: ease-in-out;
 }
+.sendMessage:hover{
+  padding: 17px;
+  }
 
 .registerStyle label{
   color: white;
@@ -948,16 +1040,11 @@ padding-bottom: 30px;
 
 
 }
-.Footer button{
-width: 185px;
-height: 72px;
-border-radius: 20px;
-background-color: #858792;
-border: none;
-outline: none;
-color: white;
-font-size: 20px;
-cursor: pointer;
+.Footer button{ width: 185px; height: 72px; border-radius: 20px; background-color: #858792; border: none; outline: none; color: white; font-size: 20px; cursor: pointer; box-shadow: 1px 1px 3px 4px white; 
+  transition-timing-function: ease-in-out;
+}
+.Footer button:hover{
+  width: 190px;
 }
 .Footer input::placeholder{
 color: #858792;
@@ -1298,6 +1385,10 @@ display: none;
               padding-left: 10px;
               padding-right: 10px;
             }
+            .mediaConatiner{
+              width: 100%;
+              max-width:100%;
+            }
 }
 
 
@@ -1351,6 +1442,8 @@ display: none;
     height: auto;
     justify-content: space-between;
     padding-bottom: 20px;
+    width: 100%;
+    max-width: 100%;
 
   }
   .mediaconatinerContent{
@@ -1515,5 +1608,9 @@ width: 99%;
  }
 .registerStyle i{
 display: none;
+}
+.mediaConatiner{
+  width: 100%;
+  max-width:100%;
 }
 }
