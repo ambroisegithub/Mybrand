@@ -1,24 +1,3 @@
-let openHam = document.querySelector("#openHam");
-let closeHam = document.querySelector("#closeHam");
-let navigationItems = document.querySelector("#navigation-items");
-
-const hamburgerEvent = (navigation, close, open) => {
-  navigationItems.style.display = navigation;
-  closeHam.style.display = close;
-  openHam.style.display = open;
-};
-
-openHam.addEventListener("click", () =>
-  hamburgerEvent("flex", "block", "none")
-);
-closeHam.addEventListener("click", () =>
-  hamburgerEvent("none", "none", "block")
-);
-
-document.getElementById("goToSignup").addEventListener("click", function () {
-  window.location.href = "register.html";
-});
-
 const form = document.getElementById("form");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -89,25 +68,51 @@ const validateInputs = () => {
     loginUser(emailValue, passwordValue);
   }
 };
-const loginUser = (email, password) => {
-  // Retrieve existing users from local storage or initialize an empty array
-  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-  // Check if the user with the provided email exists
-  const user = existingUsers.find((user) => user.email === email);
+const loginUser = async (email, password) => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/user/login",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
 
-  if (user && user.password === password) {
-    // Successful login
-    if (email === "admin@gmail.com" && password === "admin1234") {
-      // Redirect to admin.html for admin user
-      window.location.href = "Admin.html";
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userLoggedIn", data.fullName);
+      
+      if (data.userRole === "user") {
+        localStorage.setItem("userRole", "user");
+        window.location.href = "./index.html";
+      } else if (data.userRole === "admin") {
+        localStorage.setItem("userRole", "admin");
+        window.location.href = "./Admin.html";
+      }
     } else {
-      // Redirect to singleBlog.html for other users
-      window.location.href = "index.html";
+      setError(email, emailError, "Invalid email or password");
+      setError(password, passwordError, "Invalid email or password");
     }
-  } else {
-    // Invalid credentials
-    setError(email, emailError, "Invalid email or password");
-    setError(password, passwordError, "Invalid email or password");
+  } catch (error) {
+    console.error("Error:", error);
+    setError(email, emailError, "Something went wrong");
+    setError(password, passwordError, "Something went wrong");
   }
+};
+
+// Logout functionality
+const logout = () => {
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("userRole");
+  localStorage.removeItem("userLoggedIn");
+  localStorage.removeItem("token");
+  window.location.href = "./index.html";
 };

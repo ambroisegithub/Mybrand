@@ -429,7 +429,6 @@ function calculatePercentage(count) {
   return count; // Change this logic based on your requirements
 }
 
-
 updateSubscriberOverview();
 
 function updateContactusOverview() {
@@ -444,3 +443,19 @@ function updateContactusOverview() {
   mailBadge.textContent = unseenContacts.length;
   0;
 }
+
+document
+  .getElementById("logoutButton")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    logout();
+  });
+
+// Logout functionality
+const logout = () => {
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("userRole");
+  localStorage.removeItem("userLoggedIn");
+  localStorage.removeItem("token");
+  window.location.href = "./login.html";
+};
