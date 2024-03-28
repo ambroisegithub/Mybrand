@@ -158,19 +158,41 @@ margin-bottom: 30px;
     font-size: 20px;
     margin-bottom: 20px;
     }
+
 .registerStyle input{
     
-    width: 375px;
-    padding: 20px;
-    outline: none;
-    border: 1px solid #858792;
-    background-color: #343A40;
-    font-size: 20px;
-    border-radius: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+  width: 385px;
+  padding: 20px;
+  outline: none;
+  border: 1px solid #858792;
+  background-color: #343A40;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 
 }
+
+.registerStyle select{
+    
+  width: 380px;
+  padding: 20px;
+  outline: none;
+  border: 1px solid #858792;
+  background-color: #343A40;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+
+}
+.registerStyle select>option{
+  color: #858792;
+font-weight: bold;
+cursor: pointer;
+}
+
 .sendMessage{
     /* margin-top: 30px; */
     padding: 15px;
@@ -418,7 +440,7 @@ font-weight: bold;
       flex-direction: column;
       gap: 0px;
   }
-  .registerStyle input{
+  .registerStyle input,select{
       width: 100%;
   }
   
@@ -454,7 +476,7 @@ font-weight: bold;
       flex-direction: column;
       gap: 0px;
   }
-  .registerStyle input{
+  .registerStyle input,select{
       width: 100%;
   }
   
@@ -491,7 +513,7 @@ font-weight: bold;
       flex-direction: column;
       gap: 0px;
   }
-  .registerStyle input{
+  .registerStyle input,select{
     width: 100%;
   }
   .textArea{
