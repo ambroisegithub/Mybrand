@@ -15,7 +15,6 @@ closeHam.addEventListener("click", () =>
   hamburgerEvent("none", "none", "block")
 );
 
-// Add these functions for modal handling
 function openModal() {
   const modal1 = document.getElementById("searchModal");
   modal1.style.display = "block";
@@ -26,51 +25,39 @@ function closeModal() {
   modal1.style.display = "none";
 }
 
-// scrolling main Section
 const mainContent = document.querySelector(".main");
 
 mainContent.addEventListener("scroll", function () {
   const scrollPosition = mainContent.scrollTop;
 
-  // Adjust the styles of header and aside based on the scroll position
   document.querySelector(".header").style.top = `${scrollPosition}px`;
   document.querySelector(".aside").style.top = `${scrollPosition}px`;
 });
 
-// Add these functions for modal handling
-function openModal() {
-  const modal1 = document.getElementById("searchModal");
-  modal1.style.display = "block";
+// Define a named function for the event listener
+function handlePostBlogClick(event) {
+  event.stopPropagation();
+  validateBlogForm();
 }
 
-function closeModal() {
-  const modal1 = document.getElementById("searchModal");
-  modal1.style.display = "none";
-}
+let isPostBlogListenerAdded = false; // Flag to track if the event listener has been added
 
-// Add a function to open the modal
-function openBlogModal() {
-  const modalContainer = document.getElementById("blogModalContainer");
-  modalContainer.style.display = "flex";
-
-  // Remove existing event listener if any
-  const postBlogButton = document.querySelector("#blogModal button");
-  postBlogButton.removeEventListener("click", validateBlogForm);
-
-  // Add event listener for form submission
-  postBlogButton.addEventListener("click", function (eventstoreBlogData) {
-    event.stopPropagation();
-    validateBlogForm();
-  });
-}
-
-// Update the existing closeModal function
 function closeModal() {
   const modalContainer = document.getElementById("blogModalContainer");
   modalContainer.style.display = "none";
+
+  // Always remove the event listener when the modal is closed
+  const postBlogButton = document.querySelector("#blogModal button");
+  postBlogButton.removeEventListener("click", handlePostBlogClick);
 }
 
-// Add an event listener to close the modal when clicking outside the form
+function closeModal() {
+  const modalContainer = document.getElementById("blogModalContainer");
+  modalContainer.style.display = "none";
+  // Reset the flag when the modal is closed
+  isPostBlogListenerAdded = false;
+}
+
 document.addEventListener("click", function (event) {
   const modalContainer = document.getElementById("blogModalContainer");
   if (event.target === modalContainer) {
@@ -78,33 +65,67 @@ document.addEventListener("click", function (event) {
   }
 });
 
-function validateBlogForm() {
-  const imageInput = document.getElementById("blogimage");
-  const dateInput = document.getElementById("blogdate");
-  const titleInput = document.getElementById("blogtitle");
-  const descriptionInput = document.getElementById("blogdescription");
+document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
 
-  // Validation logic for image, date, title, and description
-  // Collect validation messages
+function openBlogModal() {
+  const modalContainer = document.getElementById("blogModalContainer");
+  modalContainer.style.display = "flex";
+
+  // Clear previous data in input fields
+  imageInput.value = "";
+  dateInput.value = "";
+  blogTitleInput.value = "";
+  descriptionInput.value = "";
+
+  // Reset error messages
+  clearError("imageError");
+  clearError("dateError");
+  clearError("blogTitleError");
+  clearError("descriptionError");
+}
+
+// Function to validate and submit the blog form
+function handlePostBlogClick(event) {
+  event.stopPropagation();
+  validateBlogForm();
+}
+
+// Add event listener to open blog modal
+document
+  .getElementById("openBlogModal")
+  .addEventListener("click", openBlogModal);
+
+// Add event listener to post blog button
+document
+  .getElementById("postBlogButton")
+  .addEventListener("click", handlePostBlogClick);
+
+// Function to validate the blog form
+function validateBlogForm() {
+  const imageInput = document.getElementById("blogImage").files[0];
+  const dateInput = document.getElementById("blogDate").value;
+  const titleInput = document.getElementById("blogTitle").value;
+  const descriptionInput = document.getElementById("blogDescription").value;
+
   const errors = [];
 
-  if (!imageInput || imageInput.files.length === 0) {
+  if (!imageInput) {
     errors.push("Image is required");
   }
 
-  if (!dateInput || dateInput.value.trim() === "") {
+  if (!dateInput || dateInput.trim() === "") {
     errors.push("Date is required");
   }
 
-  if (!titleInput || titleInput.value.trim() === "") {
+  if (!titleInput || titleInput.trim() === "") {
     errors.push("Title is required");
   }
 
-  if (!descriptionInput || descriptionInput.value.trim() === "") {
+  if (!descriptionInput || descriptionInput.trim() === "") {
     errors.push("Description is required");
   }
 
-  // Display all validation messages at once
+  // Display error messages
   document.getElementById("imageError").textContent = errors.includes(
     "Image is required"
   )
@@ -126,38 +147,49 @@ function validateBlogForm() {
     ? "Description is required"
     : "";
 
-  // If there are any validation errors, return early
-  if (errors.length > 0) {
-    return;
+  // If no errors, submit the form
+  if (errors.length === 0) {
+    postBlogData(imageInput, dateInput, titleInput, descriptionInput);
   }
+}
 
-  // Read the image file using FileReader
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    // e.target.result contains the base64-encoded image data
-    const imageData = e.target.result;
+// Function to submit blog data
+function postBlogData(blogImage, blogDate, blogTitle, blogDescription) {
+  const formData = new FormData();
+  formData.append("blogImage", blogImage);
+  formData.append("blogDate", blogDate);
+  formData.append("blogTitle", blogTitle);
+  formData.append("blogDescription", blogDescription);
+  const token = localStorage.getItem("token");
 
-    // If all fields are valid, proceed to store data in local storage
-    storeBlogData(
-      imageData,
-      dateInput.value,
-      titleInput.value,
-      descriptionInput.value
-    );
-
-    // Close the modal after successful validation and storage
-    closeModal();
-  };
-
-  // Read the image file asDataURL
-  reader.readAsDataURL(imageInput.files[0]);
+  fetch("http://localhost:3000/api/blog/post-blog", {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      closeModal(); // Close modal after successful posting
+      fetchAndPopulateTable(); // Update table with new data
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to post blog. Please try again later.");
+    });
 }
 
 // Declare imageInput, dateInput, blogTitleInput, and descriptionInput globally
-const imageInput = document.getElementById("blogimage");
-const dateInput = document.getElementById("blogdate");
-const blogTitleInput = document.getElementById("blogtitle");
-const descriptionInput = document.getElementById("blogdescription");
+const imageInput = document.getElementById("blogImage");
+const dateInput = document.getElementById("blogDate");
+const blogTitleInput = document.getElementById("blogTitle");
+const descriptionInput = document.getElementById("blogDescription");
 
 // Add input event listeners to clear errors when typing starts
 imageInput.addEventListener("input", () => clearError("imageError"));
@@ -170,39 +202,6 @@ descriptionInput.addEventListener("input", () =>
 // Function to clear errors
 function clearError(errorId) {
   document.getElementById(errorId).textContent = "";
-}
-
-// Function to store blog data in local storage
-function storeBlogData(image, date, title, description) {
-  const blogData = {
-    image: image,
-    date: date,
-    title: title,
-    description: description,
-    comments: [], // Initialize comments as an empty array
-  };
-
-  // Retrieve existing blog data from local storage
-  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  // Add new blog data to the existing list only if it doesn't already exist
-  const isDuplicate = existingBlogs.some(
-    (blog) =>
-      blog.image === image &&
-      blog.date === date &&
-      blog.title === title &&
-      blog.description === description
-  );
-
-  if (!isDuplicate) {
-    existingBlogs.push(blogData);
-
-    // Store the updated list back in local storage
-    localStorage.setItem("blogs", JSON.stringify(existingBlogs));
-
-    // Fetch and populate the table with the updated data
-    fetchAndPopulateTable();
-  }
 }
 
 // Function to fetch and populate the table with blog data
@@ -269,7 +268,6 @@ function editBlog(index) {
 
   // Remove existing event listener if any
   const postBlogButton = document.querySelector("#blogModal button");
-  postBlogButton.removeEventListener("click", validateBlogForm);
 
   // Add event listener for form submission with updated data
   postBlogButton.addEventListener("click", function (event) {
@@ -278,7 +276,6 @@ function editBlog(index) {
   });
 }
 
-// Function to update blog data in local storage
 // Function to update blog data in local storage
 function updateBlogData(index) {
   // Retrieve existing blog data from local storage
@@ -312,32 +309,6 @@ function updateBlogData(index) {
   // Read the image file asDataURL
   reader.readAsDataURL(imageInput.files[0]);
 }
-
-// Add an event listener to fetch and populate the table on page load
-document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
-
-const getUserCount = () => {
-  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-  return existingUsers.length;
-};
-
-// Function to update the overview card in HTML
-const updateOverviewCard = () => {
-  const totalUsersElement = document.querySelector(".users");
-  const usersPercentageElement = document.querySelector(".one");
-  const usersCountElement = document.querySelector(".three");
-
-  const userCount = getUserCount();
-  const percentage = userCount * 0.001; // Assuming total users can be 100% of the space
-
-  totalUsersElement.textContent = `Total Users ${""}`;
-  usersPercentageElement.textContent = `${percentage}%`;
-  usersCountElement.textContent = `${userCount}`;
-  fetchAndPopulateTable();
-};
-
-// Call the function to update the overview card when the page loads
-document.addEventListener("DOMContentLoaded", updateOverviewCard);
 
 // Function to count comments and update the overview card
 function updateCommentOverview() {
@@ -373,41 +344,6 @@ function updateBlogOverview() {
   fetchAndPopulateTable();
 }
 
-// Helper function to calculate percentage
-function calculatePercentage(count) {
-  // Replace this with your percentage calculation logic
-  return count * 0.001 + "%";
-}
-
-// Call the functions to update the overview cards
-updateCommentOverview();
-
-// Function to count Total subscribers and update the overview card
-function updateSubscriberOverview() {
-  // Retrieve existing blogs from local storage
-  let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  // Calculate the percentage and count
-  const blogPercentage = calculatePercentage(blogs.length);
-  const blogCount = blogs.length;
-
-  // Update the elements in the overview card
-  document.querySelector(".blogPercentage").innerText = blogPercentage + "";
-  document.querySelector(".blogIncrease").innerText = "From Last Week";
-  document.querySelector(".blogCount").innerText = blogCount;
-  fetchAndPopulateTable();
-}
-
-// Helper function to calculate percentage
-function calculatePercentage(count) {
-  // Replace this with your percentage calculation logic
-  return count * 0.001 + "%";
-}
-
-// Call the functions to update the overview cards
-updateCommentOverview();
-updateBlogOverview();
-updateSubscriberOverview();
 // Function to count Total subscribers and update the overview card
 function updateSubscriberOverview() {
   // Retrieve existing subscribers from local storage
@@ -422,14 +358,6 @@ function updateSubscriberOverview() {
   document.querySelector(".three").innerText = subscriberCount;
   fetchAndPopulateTable();
 }
-
-// Helper function to calculate percentage
-function calculatePercentage(count) {
-  // Replace this with your percentage calculation logic
-  return count; // Change this logic based on your requirements
-}
-
-updateSubscriberOverview();
 
 function updateContactusOverview() {
   // Get the table body
@@ -459,3 +387,15 @@ const logout = () => {
   localStorage.removeItem("token");
   window.location.href = "./login.html";
 };
+
+// Helper function to calculate percentage
+function calculatePercentage(count) {
+  // Replace this with your percentage calculation logic
+  return count * 0.001 + "%";
+}
+
+// Call the functions to update the overview cards
+updateCommentOverview();
+updateBlogOverview();
+updateSubscriberOverview();
+updateContactusOverview();
