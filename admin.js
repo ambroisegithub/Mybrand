@@ -65,17 +65,11 @@ document.addEventListener("click", function (event) {
   }
 });
 
-document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
+// document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
 
 function openBlogModal() {
   const modalContainer = document.getElementById("blogModalContainer");
   modalContainer.style.display = "flex";
-
-  // Clear previous data in input fields
-  imageInput.value = "";
-  dateInput.value = "";
-  blogTitleInput.value = "";
-  descriptionInput.value = "";
 
   // Reset error messages
   clearError("imageError");
@@ -91,14 +85,12 @@ function handlePostBlogClick(event) {
 }
 
 // Add event listener to open blog modal
-document
-  .getElementById("openBlogModal")
-  .addEventListener("click", openBlogModal);
+document.getElementById("openBlogModal");
+// .addEventListener("click", openBlogModal);
 
 // Add event listener to post blog button
-document
-  .getElementById("postBlogButton")
-  .addEventListener("click", handlePostBlogClick);
+document.getElementById("postBlogButton");
+// .addEventListener("click", handlePostBlogClick);
 
 // Function to validate the blog form
 function validateBlogForm() {
@@ -204,174 +196,6 @@ function clearError(errorId) {
   document.getElementById(errorId).textContent = "";
 }
 
-// Function to fetch and populate the table with blog data
-function fetchAndPopulateTable() {
-  // Retrieve blog data from local storage
-  const blogData = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  // Get the table body
-  const tableBody = document.querySelector(".tbl tbody");
-
-  // Clear existing rows in the table
-  tableBody.innerHTML = "";
-
-  // Iterate through blog data and append rows to the table
-  blogData.forEach((blog, index) => {
-    const row = tableBody.insertRow();
-    row.innerHTML = `
-   <td data-table="Blog Id">${index + 1}</td>
-   <td data-table="Image"><img src="${blog.image}" alt="blog Image"></td>
-   <td data-table="Blog Title">${blog.title}</td>
-   <td data-table="Description">${blog.description}</td>
-   <td data-table="Date Created">${blog.date}</td>
-   <td class="table-button">
-   <button class="btn_edit" data-table="Edit" onclick="editBlog(${index})">Edit</button>
-    <button class="btn_trash" data-table="Delete" onclick="deleteBlog(${index})">Delete</button>
-   </td>
-  `;
-  });
-}
-
-// Add an event listener to fetch and populate the table on page load
-document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
-
-function deleteBlog(index) {
-  // Retrieve existing blog data from local storage
-  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  // Remove the blog at the specified index
-  existingBlogs.splice(index, 1);
-
-  // Store the updated list back in local storage
-  localStorage.setItem("blogs", JSON.stringify(existingBlogs));
-
-  // Fetch and populate the table with the updated data
-  fetchAndPopulateTable();
-}
-
-// Function to edit a blog
-function editBlog(index) {
-  // Retrieve existing blog data from local storage
-  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  // Get the blog data based on the clicked row
-  const blogToEdit = existingBlogs[index];
-
-  // Populate the modal with the data for editing
-  imageInput.value = ""; // Clear the file input to ensure user selects a new image
-  dateInput.value = blogToEdit.date;
-  blogTitleInput.value = blogToEdit.title;
-  descriptionInput.value = blogToEdit.description;
-
-  // Open the modal for editing
-  openBlogModal();
-
-  // Remove existing event listener if any
-  const postBlogButton = document.querySelector("#blogModal button");
-
-  // Add event listener for form submission with updated data
-  postBlogButton.addEventListener("click", function (event) {
-    event.stopPropagation();
-    updateBlogData(index);
-  });
-}
-
-// Function to update blog data in local storage
-function updateBlogData(index) {
-  // Retrieve existing blog data from local storage
-  let existingBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  // Read the image file using FileReader
-  const reader = new FileReader();
-
-  reader.onload = function (e) {
-    // e.target.result contains the base64-encoded image data
-    const imageData = e.target.result;
-
-    // Update the blog data at the specified index
-    existingBlogs[index] = {
-      image: imageData, // Use the base64-encoded image data
-      date: dateInput.value,
-      title: blogTitleInput.value,
-      description: descriptionInput.value,
-    };
-
-    // Store the updated list back in local storage
-    localStorage.setItem("blogs", JSON.stringify(existingBlogs));
-
-    // Fetch and populate the table with the updated data
-    fetchAndPopulateTable();
-
-    // Close the modal after successful update
-    closeModal();
-  };
-
-  // Read the image file asDataURL
-  reader.readAsDataURL(imageInput.files[0]);
-}
-
-// Function to count comments and update the overview card
-function updateCommentOverview() {
-  // Retrieve existing comments from local storage
-  let comments = JSON.parse(localStorage.getItem("UserComments")) || [];
-
-  // Calculate the percentage and count
-  const commentPercentage = calculatePercentage(comments.length);
-  const commentCount = comments.length;
-
-  // Update the elements in the overview card
-  document.querySelector(".commentPercentage").innerText =
-    commentPercentage * 0.001 + "" + "%";
-  document.querySelector(".commentIncrease").innerText = "From Last Week";
-  document.querySelector(".commentCount").innerText = commentCount;
-  fetchAndPopulateTable();
-}
-
-// Function to count blogs and update the overview card
-function updateBlogOverview() {
-  // Retrieve existing blogs from local storage
-  let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  // Calculate the percentage and count
-  const blogPercentage = calculatePercentage(blogs.length);
-  const blogCount = blogs.length;
-
-  // Update the elements in the overview card
-  document.querySelector(".blogPercentage").innerText =
-    blogPercentage * 0.001 + "";
-  document.querySelector(".blogIncrease").innerText = "From Last Week";
-  document.querySelector(".blogCount").innerText = blogCount;
-  fetchAndPopulateTable();
-}
-
-// Function to count Total subscribers and update the overview card
-function updateSubscriberOverview() {
-  // Retrieve existing subscribers from local storage
-  let subscribers = JSON.parse(localStorage.getItem("subscriptions")) || [];
-
-  // Calculate the percentage and count
-  const subscriberPercentage = calculatePercentage(subscribers.length);
-  const subscriberCount = subscribers.length;
-
-  // Update the elements in the overview card
-  document.querySelector(".one").innerText = `${subscriberPercentage}%`;
-  document.querySelector(".three").innerText = subscriberCount;
-  fetchAndPopulateTable();
-}
-
-function updateContactusOverview() {
-  // Get the table body
-  const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  const mailBadge = document.getElementById("mailBadge");
-
-  // Count the number of unseen contacts
-  const unseenContacts = contacts.filter((contact) => !contact.seen);
-
-  // Update the mail badge with the count
-  mailBadge.textContent = unseenContacts.length;
-  0;
-}
-
 document
   .getElementById("logoutButton")
   .addEventListener("click", function (event) {
@@ -394,8 +218,85 @@ function calculatePercentage(count) {
   return count * 0.001 + "%";
 }
 
-// Call the functions to update the overview cards
-updateCommentOverview();
-updateBlogOverview();
-updateSubscriberOverview();
-updateContactusOverview();
+// Function to fetch all blogs from the server
+function fetchAndPopulateTable() {
+  fetch("http://localhost:3000/api/blog/getall-blog")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      populateTable(data.data); // Assuming the response has a 'data' property containing the blog data
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to fetch blogs. Please try again later.");
+    });
+}
+
+// Function to populate the table with blog data
+function populateTable(blogs) {
+  const tbody = document.querySelector(".tbl tbody");
+
+  tbody.innerHTML = ""; // Clear existing table data
+
+  blogs.forEach((blog, index) => {
+    const row = document.createElement("tr");
+    const formattedDate = new Date(blog.blogDate).toISOString().split("T")[0];
+    row.innerHTML = `
+      <td data-table="Blog Id">${index + 1}</td>
+      <td data-table="Image"><img src="${blog.blogImage}" alt="blog Image"></td>
+      <td data-table="Blog Title">${blog.blogTitle}</td>
+      <td data-table="Description">${blog.blogDescription}</td>
+      <td data-table="Date Created">${formattedDate}</td>
+      <td>
+        <button class="btn_edit" data-table="Edit">Edit</button>
+        <button class="btn_trash" data-table="Delete" data-blog-id="${
+          blog._id
+        }">Delete</button>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  // Add event listeners to delete buttons
+  const deleteButtons = document.querySelectorAll(".btn_trash");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", handleDeleteBlog);
+  });
+}
+
+// Function to handle delete blog button click
+function handleDeleteBlog(event) {
+  const blogId = event.target.dataset.blogId;
+  if (confirm("Are you sure you want to delete this blog?")) {
+    deleteBlog(blogId);
+  }
+}
+
+// Function to delete a blog
+function deleteBlog(blogId) {
+  const token = localStorage.getItem("token");
+  fetch(`http://localhost:3000/api/blog/delete-blog/${blogId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        alert("Blog Deleted Successfully!!!");
+      }
+    })
+    .then((data) => {
+      // Blog deleted successfully, update UI
+      fetchAndPopulateTable();
+    });
+}
+
+// Call fetchAndPopulateTable on DOMContentLoaded event
+document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
