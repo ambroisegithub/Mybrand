@@ -23,75 +23,6 @@ function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 
-// function formatDoc(cmd, value = null) {
-//   if (value) {
-//     document.execCommand(cmd, false, value);
-//   } else {
-//     document.execCommand(cmd);
-//   }
-// }
-
-// function addLink() {
-//   const url = prompt("Insert url");
-//   formatDoc("createLink", url);
-// }
-
-// const content = document.getElementById("content");
-
-// content.addEventListener("mouseenter", function () {
-//   const a = content.querySelectorAll("a");
-//   a.forEach((item) => {
-//     item.addEventListener("mouseenter", function () {
-//       content.setAttribute("contenteditable", false);
-//       item.target = "_blank";
-//     });
-//     item.addEventListener("mouseleave", function () {
-//       content.setAttribute("contenteditable", true);
-//     });
-//   });
-// });
-
-// const showCode = document.getElementById("show-code");
-// let active = false;
-
-// showCode.addEventListener("click", function () {
-//   showCode.dataset.active = !active;
-//   active = !active;
-//   if (active) {
-//     content.textContent = content.innerHTML;
-//     content.setAttribute("contenteditable", false);
-//   } else {
-//     content.innerHTML = content.textContent;
-//     content.setAttribute("contenteditable", true);
-//   }
-// });
-
-// const filename = document.getElementById("filename");
-
-// function fileHandle(value) {
-//   if (value === "new") {
-//     content.innerHTML = "";
-//     filename.value = "untitled";
-//   } else if (value === "txt") {
-//     const blob = new Blob([content.innerText]);
-//     const url = URL.createObjectURL(blob);
-//     const link = document.createElement("a");
-//     link.href = url;
-//     link.download = `${filename.value}.txt`;
-//     link.click();
-//   } else if (value === "pdf") {
-//     html2pdf(content).save(filename.value);
-//   }
-// }
-
-// document.getElementById("singleBlogs").addEventListener("click", function () {
-//   window.location.href = "singleBlog.html";
-// });
-
-// document.getElementById("goToSignup").addEventListener("click", function () {
-// 	window.location.href = "register.html";
-//   });
-
 document.addEventListener("DOMContentLoaded", function () {
   renderBlogs();
   attachClickEventToButtons();
@@ -104,37 +35,67 @@ document.addEventListener("DOMContentLoaded", function () {
     clearError("subscriptionError")
   );
 });
+document.addEventListener("DOMContentLoaded", function () {
+  fetchAndRenderBlogs();
+  attachClickEventToButtons();
 
-function renderBlogs() {
-  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-  const blogSectionMain = document.querySelector(".blogSectionmain");
+  // Get the subscription email input element
+  const subscriptionEmailInput = document.getElementById("subscriptionEmail");
+
+  // Add an input event listener to clear the subscription error when typing starts
+  subscriptionEmailInput.addEventListener("input", () =>
+      clearError("subscriptionError")
+  );
+});
+
+
+function fetchAndRenderBlogs() {
+  fetch("http://localhost:3000/api/blog/getall-blog")
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error("Network response was not ok");
+          }
+          return response.json();
+      })
+      .then((data) => {
+          renderFetchedBlogs(data.data); // Assuming the response has a 'data' property containing the blog data
+      })
+      .catch((error) => {
+          console.error("Error:", error.message);
+          alert("Failed to fetch blogs. Please try again later.");
+      });
+}
+
+function renderFetchedBlogs(blogs) {
+  const fetchedBlogsContainer = document.querySelector(".fetchedBlogs");
 
   blogs.forEach((blog, index) => {
-    const blogDiv = document.createElement("div");
-    blogDiv.classList.add("blogSection");
-    blogDiv.dataset.blogId = index;
+      const blogDiv = document.createElement("div");
+      blogDiv.classList.add("blogSection");
+      blogDiv.dataset.blogId = index;
+      const formattedDate = new Date(blog.blogDate).toISOString().split("T")[0];
 
-    blogDiv.innerHTML = `
-      <div class="blogpartOne">
-        <img src="${blog.image}" alt="">
-      </div>
-      <div class="blogpartTwo">
-        <p class="blogP">
-          <span class="businessspanone">${blog.title}</span>
-          <span class="businessspantwo">${blog.date}</span>
-        </p>
-        <p class="waitUntill">
-          <p class="until">${blog.description}</p>
-        </p>
-      </div>
-      <div class="blogpartThree">
-        <div>
-          <button class="singleBlogs" type="button">Read More >></button>
-        </div>
-      </div>
-    `;
+      blogDiv.innerHTML = `
+          <div class="blogpartOne">
+              <img src="${blog.blogImage}" alt="">
+          </div>
+          <div class="blogpartTwo">
+              <p class="blogP">
+                  <span class="businessspanone">${blog.blogTitle}</span>
+                  <span class="businessspantwo">${formattedDate}</span>
+              </p>
+              <p class="waitUntill">
+                  <p class="until">${blog.blogDescription}</p>
+              </p>
+          </div>
+          <div class="blogpartThree">
+              <div>
+                  <button class="singleBlogs" type="button">Read More >></button>
+              </div>
+          </div>
+      `;
 
-    blogSectionMain.appendChild(blogDiv);
+      fetchedBlogsContainer.appendChild(blogDiv);
   });
 }
 

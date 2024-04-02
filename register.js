@@ -95,6 +95,8 @@ function save(userData) {
         throw new Error("Email already exists");
       } else if (response.status === 400) {
         throw new Error('"email" must be a valid email');
+      } else if (response.status === 409) {
+        throw new Error("An admin user already exists");
       } else {
         throw new Error("Failed to register");
       }
@@ -119,14 +121,20 @@ function save(userData) {
       if (error.message === "Email already exists") {
         displayErrorMessage(
           "emailError",
-          "Email address is already registered"
+          "Email address is already registered or Try to change User Role"
         );
-      } else if (error.message === '"email" must be a valid email') {
-        displayErrorMessage("emailError", "Please enter a valid email address");
-      } else {
+      } else if (
+        error.message === '"email" must be a valid email' ||
+        error.message === "Failed to register"
+      ) {
         displayErrorMessage(
           "signupError",
           "Failed to register. Please try again later."
+        );
+      } else if (error.message === "An admin user already exists") {
+        displayErrorMessage(
+          "signupError",
+          "An admin user already exists. Only one admin user allowed."
         );
       }
     });
