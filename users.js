@@ -15,7 +15,6 @@ closeHam.addEventListener("click", () =>
   hamburgerEvent("none", "none", "block")
 );
 
-// Add these functions for modal handling
 function openModal() {
   const modal = document.getElementById("searchModal");
   modal.style.display = "block";
@@ -28,70 +27,108 @@ function closeModal() {
 
 function performSearch() {
   const searchInput = document.getElementById("searchInput").value;
-  // Implement your search logic here
   console.log("Performing search for:", searchInput);
-  // Close the modal after performing search
   closeModal();
 }
 
-// Update the button click event to open the modal
-document
-  .querySelector(".input-Search button")
-  .addEventListener("click", openModal);
-
-// scrolling main Section
 const mainContent = document.querySelector(".main");
 
 mainContent.addEventListener("scroll", function () {
   const scrollPosition = mainContent.scrollTop;
-
-  // Adjust the styles of header and aside based on the scroll position
   document.querySelector(".header").style.top = `${scrollPosition}px`;
   document.querySelector(".aside").style.top = `${scrollPosition}px`;
 });
 
-// open and close model
-function openuserModal() {
+function openUserModal(purpose = "create", user = null) {
   const modalContainer = document.getElementById("userModalContainer");
   modalContainer.style.display = "flex";
+  resetModalForm();
+  modalContainer.dataset.purpose = purpose;
+  if (purpose === "edit" && user) {
+    // Populate form fields if editing an existing user
+    document.getElementById("fullName").value = user.fullName;
+    document.getElementById("email").value = user.email;
+    document.getElementById("userRole").value = user.userRole;
+    document.getElementById("phoneNumber").value = user.phoneNumber;
+    document.getElementById("password").value = user.password;
+    document.getElementById("confirmPassword").value = user.confirmPassword;
+    modalContainer.dataset.userId = user._id;
+  }
 }
 
-// Update the existing closeModal function
+function handlePostUserClick(event) {
+  event.stopPropagation();
+  const modalContainer = document.getElementById("userModalContainer");
+  const purpose = modalContainer.dataset.purpose;
+  if (purpose === "create") {
+    validateUserForm();
+  } else if (purpose === "edit") {
+    updateUser();
+  }
+}
+
 function closeModal() {
   const modalContainer = document.getElementById("userModalContainer");
   modalContainer.style.display = "none";
+  resetModalForm();
 }
 
-// Function to validate the user creation form
-function validateUserForm() {
-  const usernameInput = document.querySelector(".username");
-  const emailInput = document.querySelector(".email");
-  const phoneNumberInput = document.querySelector(
-    "input[title='Phone Number']"
-  );
-  const passwordInput = document.querySelector("input[title='Password']");
+function resetModalForm() {
+  document.getElementById("fullName").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("userRole").value = "";
+  document.getElementById("phoneNumber").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("confirmPassword").value = "";
+  clearError("usernameError");
+  clearError("emailError");
+  clearError("passwordError");
+  clearError("phoneNumberError");
+  clearError("confirmPasswordError");
+  clearError("signupError");
+}
 
-  // Validation logic for username, email, phone number, and password
-  // Collect validation messages
+function validateUserForm() {
+  const usernameInput = document.getElementById("fullName");
+  const emailInput = document.getElementById("email");
+  const userRoleInput = document.getElementById("userRole");
+  const phoneNumberInput = document.getElementById("phoneNumber");
+  const passwordInput = document.getElementById("password");
+  const confirmPasswordInput = document.getElementById("confirmPassword");
+
+  const fullNameValue = usernameInput.value.trim();
+  const phoneNumberValue = phoneNumberInput.value.trim();
+  const emailValue = emailInput.value.trim();
+  const passwordValue = passwordInput.value.trim();
+  const confirmPasswordValue = confirmPasswordInput.value.trim();
+  const userRoleValue = userRoleInput.value;
+
   const errors = [];
 
-  if (!usernameInput || usernameInput.value.trim() === "") {
+  if (!fullNameValue) {
     errors.push("User Name is required");
   }
 
-  if (!emailInput || emailInput.value.trim() === "") {
+  if (!emailValue) {
     errors.push("Email is required");
   }
 
-  if (!phoneNumberInput || phoneNumberInput.value.trim() === "") {
+  if (!phoneNumberValue) {
     errors.push("Phone Number is required");
   }
 
-  if (!passwordInput || passwordInput.value.trim() === "") {
+  if (!passwordValue) {
     errors.push("Password is required");
   }
 
-  // Display all validation messages at once
+  if (!confirmPasswordValue) {
+    errors.push("Confirm Password is required");
+  }
+
+  if (confirmPasswordValue !== passwordValue) {
+    errors.push("Passwords do not match");
+  }
+
   document.getElementById("usernameError").textContent = errors.includes(
     "User Name is required"
   )
@@ -112,132 +149,219 @@ function validateUserForm() {
   )
     ? "Password is required"
     : "";
+  document.getElementById("confirmPasswordError").textContent = errors.includes(
+    "Passwords do not match"
+  )
+    ? "Passwords do not match"
+    : "";
 
-  // If there are any validation errors, return early
-  if (errors.length > 0) {
-    return;
+  if (errors.length === 0) {
+    const userData = {
+      fullName: fullNameValue,
+      phoneNumber: phoneNumberValue,
+      email: emailValue,
+      password: passwordValue,
+      confirmPassword: confirmPasswordValue,
+      userRole: userRoleValue,
+    };
+    save(userData);
   }
-
-  // If all fields are valid, proceed to store data in local storage
-  storeUserData(
-    usernameInput.value,
-    emailInput.value,
-    phoneNumberInput.value,
-    passwordInput.value
-  );
-
-  // Close the modal after successful validation and storage
-  closeModal();
 }
 
-// Declare imageInput, dateInput, blogTitleInput, and descriptionInput globally
-const userName = document.getElementById("userName");
-const userEmail = document.getElementById("userEmail");
-const userPassword = document.getElementById("userPassword");
-const userPhone = document.getElementById("userPhone");
+function save(userData) {
+  const modalContainer = document.getElementById("userModalContainer");
+  const purpose = modalContainer.dataset.purpose;
 
+  let url = "";
+  let method = "";
 
-// Add input event listeners to clear errors when typing starts
-userName.addEventListener("input", () => clearError("usernameError"));
-userEmail.addEventListener("input", () => clearError("emailError"));
-userPassword.addEventListener("input", () => clearError("passwordError"));
-userPhone.addEventListener("input", () => clearError("phoneNumberError"));
+  if (purpose === "create") {
+    url = "http://localhost:3000/api/user/signup";
+    method = "POST";
+  } else if (purpose === "edit") {
+    const userId = modalContaine3000r.dataset.userId;
+    url = `http://localhost:3000/api/user/${userId}`;
+    method = "PUT";
+  }
 
-// Function to clear errors
+  fetch(url, {
+    method: method,
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else if (response.status === 409) {
+        throw new Error("Email already exists");
+      } else if (response.status === 400) {
+        throw new Error('"email" must be a valid email');
+      } else {
+        throw new Error("Failed to register");
+      }
+    })
+    .then((user) => {
+      alert(
+        purpose === "create"
+          ? "User registered successfully!"
+          : "User updated successfully!"
+      );
+      closeModal();
+      fetchAndPopulateTable();
+      console.log(
+        purpose === "create"
+          ? "User registered successfully:"
+          : "User updated successfully:",
+        user
+      );
+      resetModalForm();
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      if (error.message === "Email already exists") {
+        displayErrorMessage(
+          "emailError",
+          "Email address is already registered"
+        );
+      } else {
+        displayErrorMessage(
+          "signupError",
+          `Failed to ${
+            purpose === "create" ? "register" : "update"
+          } user. Please try again later.`
+        );
+      }
+    });
+}
+
+function resetErrorMessage(id) {
+  document.getElementById(id).textContent = "";
+}
+
+function displayErrorMessage(id, message) {
+  const errorMessageElement = document.getElementById(id);
+  errorMessageElement.textContent = message;
+  errorMessageElement.style.color = "red";
+}
+
+const fullNameInput = document.getElementById("fullName");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const phoneNumberInput = document.getElementById("phoneNumber");
+
+fullNameInput.addEventListener("input", () => clearError("usernameError"));
+emailInput.addEventListener("input", () => clearError("emailError"));
+passwordInput.addEventListener("input", () => clearError("passwordError"));
+phoneNumberInput.addEventListener("input", () =>
+  clearError("phoneNumberError")
+);
+
 function clearError(errorId) {
-  document.getElementById(errorId).textContent = "";
-}
-
-// Function to store user data in local storage
-function storeUserData(username, email, phoneNumber, password) {
-  const userData = {
-    username: username,
-    email: email,
-    phoneNumber: phoneNumber,
-    password: password,
-  };
-
-  // Retrieve existing user data from local storage
-  let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-  // Add new user data to the existing list only if it doesn't already exist
-  const isDuplicate = existingUsers.some(
-    (user) =>
-      user.username === username &&
-      user.email === email &&
-      user.phoneNumber === phoneNumber &&
-      user.password === password
-  );
-
-  if (!isDuplicate) {
-    existingUsers.push(userData);
-
-    // Store the updated list back in local storage
-    localStorage.setItem("users", JSON.stringify(existingUsers));
-
-    // Fetch and populate the table with the updated data
-    fetchAndPopulateTable();
+  const errorElement = document.getElementById(errorId);
+  if (errorElement) {
+    errorElement.textContent = "";
+  } else {
+    console.warn(`Element with ID '${errorId}' not found.`);
   }
 }
 
-// Function to fetch and populate the user table with user data
 function fetchAndPopulateTable() {
-  // Retrieve user data from local storage
-  const userData = JSON.parse(localStorage.getItem("users")) || [];
+  fetch("http://localhost:3000/api/user/all")
+    .then((response) => {
+      if (!response) {
+        throw new Error("Network response Was not Work");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      populateTable(data.data);
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to fetch the users. Please try again");
+    });
+}
 
-  // Get the table body
+function populateTable(userData) {
   const tableBody = document.querySelector(".tbl tbody");
-
-  // Clear existing rows in the table
   tableBody.innerHTML = "";
-
-  // Iterate through user data and append rows to the table
   userData.forEach((user, index) => {
     const row = tableBody.insertRow();
     row.innerHTML = `
-      <td data-table="User Id">${index + 1}</td>
-      <td data-table="User Name">${user.username}</td>
-      <td data-table="Email">${user.email}</td>
-      <td data-table="Phone Number">${user.phoneNumber}</td>
-      <td>
-        <button class="btn_edit" data-table="Edit" onclick="editUserModal(${index})">Edit</button>
-        <button class="btn_trash" data-table="Delete" onclick="deleteUser(${index})">Delete</button>
-      </td>
-    `;
+    <td data-table="User Id">${index + 1}</td>
+    <td data-table="User Name">${user.fullName}</td>
+    <td data-table="Phone Number">${user.phoneNumber}</td>
+    <td data-table="Email">${user.email}</td>
+    <td data-table="user Role">${user.userRole}</td>
+    <td>
+      <button class="btn_edit" data-table="Edit" data-user-id="${
+        user._id
+      }">Edit</button>
+      <button class="btn_trash" data-user-id="${
+        user._id
+      }" data-table="Delete" onclick="deleteUser('${user._id}')">Delete</button>
+    </td>
+ `;
+    const editButton = row.querySelector(".btn_edit");
+    editButton.addEventListener("click", () => openUserModalForEdit(user));
   });
 }
 
-// Function to delete a user
-function deleteUser(index) {
-  // Retrieve existing user data from local storage
-  let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-  // Remove the user at the specified index
-  existingUsers.splice(index, 1);
-
-  // Store the updated list back in local storage
-  localStorage.setItem("users", JSON.stringify(existingUsers));
-
-  // Fetch and populate the table with the updated data
-  fetchAndPopulateTable();
+function openUserModalForEdit(user) {
+  openUserModal("edit", user);
 }
 
-function editUserModal(index) {
-  // Retrieve existing user data from local storage
-  const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+function updateUser() {
+  const userId = document.getElementById("userModalContainer").dataset.userId;
+  const fullName = document.getElementById("fullName").value;
+  const email = document.getElementById("email").value;
+  const userRole = document.getElementById("userRole").value;
+  const phoneNumber = document.getElementById("phoneNumber").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-  // Get the user data based on the clicked row
-  const userToEdit = existingUsers[index];
+  const userData = {
+    fullName: fullName,
+    phoneNumber: phoneNumber,
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword,
+    userRole: userRole,
+  };
 
-  // Populate the modal with the data for editing
-  userName.value = userToEdit.username;
-  userEmail.value = userToEdit.email;
-  userPhone.value = userToEdit.phoneNumber;
-  userPassword.value = userToEdit.password;
-
-  // Open the modal for editing
-  openuserModal();
+  save(userData);
 }
 
+const deleteButtons = document.querySelectorAll(".btn_trash");
+deleteButtons.forEach((button) => {
+  button.addEventListener("click", handleDeleteUser);
+});
+
+function deleteUser(userId) {
+  const token = localStorage.getItem("token");
+  const isConfirmed = confirm("Are you sure you want to delete this user?");
+  if (isConfirmed) {
+    fetch(`http://localhost:3000/api/user/${userId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        } else {
+          alert("User deleted successfully!");
+        }
+      })
+      .then((data) => {
+        fetchAndPopulateTable();
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+        alert("Failed to delete the user. Please try again");
+      });
+  }
+}
 
 document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);

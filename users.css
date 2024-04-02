@@ -288,7 +288,7 @@ margin-top: 30px;
     width: 100%;
 }
 
-.blogi  .username {
+.blogi  .fullName {
     background-color: #343A40;
     padding: 20px;
     border: 1px solid #858792;
@@ -352,6 +352,19 @@ margin-top: 30px;
     font-weight: bold;
     outline: none;
     color: black;
+}
+.blogi .userPhone,.userRole{
+  background-color: #343A40;
+  padding: 20px;
+  border: 1px solid #858792;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  outline: none;
+  color:black;
+  width: 100%;
+  margin-bottom: 20px;
+
 }
 .blog1 ,.blog2, .blogi label{
 color:  #2A2C39;

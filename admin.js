@@ -46,6 +46,16 @@ function closeModal() {
   const modalContainer = document.getElementById("blogModalContainer");
   modalContainer.style.display = "none";
 
+  // Clear the input fields
+  document.getElementById("blogImage").value = ""; // Clear the image input
+  document.getElementById("blogDate").value = ""; // Clear the date input
+  document.getElementById("blogTitle").value = ""; // Clear the title input
+  document.getElementById("blogDescription").value = ""; // Clear the description input
+
+  // Reset the modal's purpose to ensure it's ready for a new post or edit
+  modalContainer.dataset.purpose = "";
+  modalContainer.dataset.blogId = "";
+
   // Always remove the event listener when the modal is closed
   const postBlogButton = document.querySelector("#blogModal button");
   postBlogButton.removeEventListener("click", handlePostBlogClick);
@@ -55,8 +65,22 @@ function closeModal() {
   const modalContainer = document.getElementById("blogModalContainer");
   modalContainer.style.display = "none";
   // Reset the flag when the modal is closed
-  isPostBlogListenerAdded = false;
+
+    // Clear the input fields
+    document.getElementById("blogImage").value = ""; // Clear the image input
+    document.getElementById("blogDate").value = ""; // Clear the date input
+    document.getElementById("blogTitle").value = ""; // Clear the title input
+    document.getElementById("blogDescription").value = ""; // Clear the description input
+      // Reset the modal's purpose to ensure it's ready for a new post or edit
+    modalContainer.dataset.purpose = "";
+    modalContainer.dataset.blogId = "";
+
+    // Always remove the event listener when the modal is closed
+   const postBlogButton = document.querySelector("#blogModal button");
+   postBlogButton.removeEventListener("click", handlePostBlogClick);
+   isPostBlogListenerAdded = false;
 }
+
 
 document.addEventListener("click", function (event) {
   const modalContainer = document.getElementById("blogModalContainer");
@@ -76,6 +100,8 @@ function openBlogModal() {
   clearError("dateError");
   clearError("blogTitleError");
   clearError("descriptionError");
+
+  fetchAndPopulateTable();
 }
 
 // Function to validate and submit the blog form
@@ -101,18 +127,22 @@ function validateBlogForm() {
 
   const errors = [];
 
+  // Validation for image
   if (!imageInput) {
     errors.push("Image is required");
   }
 
+  // Validation for date
   if (!dateInput || dateInput.trim() === "") {
     errors.push("Date is required");
   }
 
+  // Validation for title
   if (!titleInput || titleInput.trim() === "") {
     errors.push("Title is required");
   }
 
+  // Validation for description
   if (!descriptionInput || descriptionInput.trim() === "") {
     errors.push("Description is required");
   }
@@ -141,7 +171,12 @@ function validateBlogForm() {
 
   // If no errors, submit the form
   if (errors.length === 0) {
-    postBlogData(imageInput, dateInput, titleInput, descriptionInput);
+    const modalContainer = document.getElementById("blogModalContainer");
+    if (modalContainer.dataset.purpose === "edit") {
+      updateBlogData();
+    } else {
+      postBlogData(imageInput, dateInput, titleInput, descriptionInput);
+    }
   }
 }
 
@@ -164,8 +199,9 @@ function postBlogData(blogImage, blogDate, blogTitle, blogDescription) {
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
+      } else {
+        alert("Blog Added Successfully");
       }
-      return response.json();
     })
     .then((data) => {
       closeModal(); // Close modal after successful posting
@@ -246,19 +282,27 @@ function populateTable(blogs) {
     const row = document.createElement("tr");
     const formattedDate = new Date(blog.blogDate).toISOString().split("T")[0];
     row.innerHTML = `
-      <td data-table="Blog Id">${index + 1}</td>
-      <td data-table="Image"><img src="${blog.blogImage}" alt="blog Image"></td>
-      <td data-table="Blog Title">${blog.blogTitle}</td>
-      <td data-table="Description">${blog.blogDescription}</td>
-      <td data-table="Date Created">${formattedDate}</td>
-      <td>
-        <button class="btn_edit" data-table="Edit">Edit</button>
-        <button class="btn_trash" data-table="Delete" data-blog-id="${
-          blog._id
-        }">Delete</button>
-      </td>
-    `;
+       <td data-table="Blog Id">${index + 1}</td>
+       <td data-table="Image"><img src="${
+         blog.blogImage
+       }" alt="blog Image"></td>
+       <td data-table="Blog Title">${blog.blogTitle}</td>
+       <td data-table="Description">${blog.blogDescription}</td>
+       <td data-table="Date Created">${formattedDate}</td>
+       <td>
+         <button class="btn_edit" data-table="Edit" data-blog-id="${
+           blog._id
+         }">Edit</button>
+         <button class="btn_trash" data-table="Delete" data-blog-id="${
+           blog._id
+         }">Delete</button>
+       </td>
+     `;
     tbody.appendChild(row);
+
+    // Add event listener to the "Edit" button
+    const editButton = row.querySelector(".btn_edit");
+    editButton.addEventListener("click", () => openBlogModalForEdit(blog));
   });
 
   // Add event listeners to delete buttons
@@ -295,6 +339,60 @@ function deleteBlog(blogId) {
     .then((data) => {
       // Blog deleted successfully, update UI
       fetchAndPopulateTable();
+    });
+}
+
+function openBlogModalForEdit(blog) {
+  const modalContainer = document.getElementById("blogModalContainer");
+  modalContainer.style.display = "flex";
+
+  // Populate the modal with the blog's current data
+  document.getElementById("blogImage").src = blog.blogImage;
+  document.getElementById("blogDate").value = blog.blogDate;
+  document.getElementById("blogTitle").value = blog.blogTitle;
+  document.getElementById("blogDescription").value = blog.blogDescription;
+
+  // Set the modal's purpose to "edit"
+  modalContainer.dataset.purpose = "edit";
+  modalContainer.dataset.blogId = blog._id;
+}
+
+function updateBlogData() {
+  const modalContainer = document.getElementById("blogModalContainer");
+  const blogId = modalContainer.dataset.blogId;
+  const imageInput = document.getElementById("blogImage").files[0];
+  const dateInput = document.getElementById("blogDate").value;
+  const titleInput = document.getElementById("blogTitle").value;
+  const descriptionInput = document.getElementById("blogDescription").value;
+
+  const formData = new FormData();
+  formData.append("blogImage", imageInput);
+  formData.append("blogDate", dateInput);
+  formData.append("blogTitle", titleInput);
+  formData.append("blogDescription", descriptionInput);
+  const token = localStorage.getItem("token");
+
+  fetch(`http://localhost:3000/api/blog/update-blog/${blogId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: token,
+    },
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        alert("Blog Updated Successfully");
+      }
+    })
+    .then(() => {
+      closeModal();
+      fetchAndPopulateTable(); 
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to update blog. Please try again later.");
     });
 }
 

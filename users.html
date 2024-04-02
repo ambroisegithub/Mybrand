@@ -87,32 +87,47 @@
                 </div>
                     <div class="blogFlex">
                         <div class="blogi">
-                            <label for="Image">User Names</label>
-                            <input type="text" title="User Name"  placeholder="User Names" class="username" id="userName">
+                            <label for="Full Names">Full Names</label>
+                            <input type="text" title="Full Names"  placeholder="Full Names" class="fullName" id="fullName">
                             <p class="error" id="usernameError"></p>
-
-                            
                           </div>
                           <div class="blogi">
-                            <label for="Image">User Email Adress</label>
-                            <input type="text" title="email"  placeholder="Enter Your Email" class="email" id="userEmail">
+                            <label for="Email">User Email Adress</label>
+                            <input type="text" title="email"  placeholder="Enter Your Email" class="email" id="email">
                             <p class="error" id="emailError"></p>
-
                           </div>
                     </div>
 
-                    <div class="blog2">
-                        <label for="Phone Number">Phone Number</label>
-                        <input type="text" title="Phone Number" placeholder="Enter Phone Number" id="userPhone">
-                        <p class="error" id="phoneNumberError"></p>
+                    <div class="blogFlex">
+                      <div class="blogi">
+                          <label for="Phone Number">Phone Number</label>
+                          <input type="text" title="Phone Number"  placeholder="Phone Number" class="userPhone" id="phoneNumber">
+                          <p class="error" id="phoneNumberError"></p>
+                        </div>
+                        <div class="blogi">
+                          <label for="Email">User Role</label>
+                          <select name="userRole" title="user Role" id="userRole" class="userRole">
+                            <option value="user" name="userRole">user</option>
+                            <option value="admin" name="userRole">admin</option>
+                            
+                          </select>
+                          <!-- <p class="error" id="emailError"></p> -->
+                        </div>
+                   </div>
 
-                    </div>
                     <div class="blog2">
-                        <label for="Blog Title">Password</label>
-                        <input type="password" title="Password" placeholder="........" id="userPassword">
-                        <p class="error" id="passwordError"></p>
+                       <label for="Blog Title">Password</label>
+                       <input type="password" title="Password" placeholder="........" id="password">
+                      <p class="error" id="passwordError"></p>
 
-                    </div>                    
+                    </div> 
+
+                    <div class="blog2">
+                        <label for="Blog Title">Confirm Password</label>
+                        <input type="password" title="Confirm Password" placeholder="........" class="userconfirmPassword" id="confirmPassword">
+                        <p class="error" id="confirmPasswordError"></p>
+                    </div>   
+
                     <div class="blogpostbutton">
                         <button onclick="validateUserForm()">Press To Create A User</button>
                     </div>
@@ -120,8 +135,11 @@
             </div>
           </div>
         </div>
+        <div id="errorId" ></div>
+        <div id="signupError"></div>
+
         <div class="createUserConatainer">
-          <button class="createNewBlogBtn" onclick="openuserModal()">+ Create User</button>
+          <button class="createNewBlogBtn" onclick="openUserModal()">+ Create User</button>
       </div>
         <div>
             <div class="container_table">
@@ -132,8 +150,10 @@
                       <tr>
                         <th>User Id</th>
                         <th>User Name</th>
-                        <th>Email Adress</th>
                         <th>Phone Number</th>
+                        <th>Email Adress</th>
+                        <th>User role</th>
+
                         <th colspan="2">Action</th>
                       </tr>
                     </thead>

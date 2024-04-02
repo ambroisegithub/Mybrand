@@ -22,7 +22,6 @@ function validateInputs() {
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("confirmPassword");
-  const gender = document.querySelector('input[name="gender"]:checked');
   const userRole = document.getElementById("userRole");
 
   const fullNameValue = fullName.value.trim();
@@ -30,7 +29,6 @@ function validateInputs() {
   const emailValue = email.value.trim();
   const passwordValue = password.value.trim();
   const confirmPasswordValue = confirmPassword.value.trim();
-  const genderValue = gender ? gender.value : "";
   const userRoleValue = userRole.value;
 
   if (!fullNameValue) {
@@ -75,7 +73,6 @@ function validateInputs() {
     email: emailValue,
     password: passwordValue,
     confirmPassword: confirmPasswordValue,
-    gender: genderValue,
     userRole: userRoleValue,
   };
 
