@@ -90,65 +90,84 @@ document.addEventListener("DOMContentLoaded", function () {
   const blogId = getQueryParam("id");
   if (blogId !== null) {
     renderSingleBlog(blogId);
-    renderAllOtherBlogs(blogId);
+    fetchAndRenderAllBlogs();
   }
 });
 
 function renderSingleBlog(blogId) {
-  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-  const singleBlogSection = document.querySelector(".singleblogOne");
+  fetch(`http://localhost:3000/api/blog/getone-blog/${blogId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const formattedDate = new Date(data.data.blogDate)
+        .toISOString()
+        .split("T")[0];
 
-  // Check if blogId is a valid index
-  if (blogId >= 0 && blogId < blogs.length) {
-    const blog = blogs[blogId];
-    singleBlogSection.innerHTML = `
-        <img src="${blog.image}" alt="">
-        <div class="businessbetween">
-            <h1>${blog.title}</h1>
-            <p>${blog.date}</p>
-        </div>
-        <p>${blog.description}</p>
-    `;
-  } else {
-    // Handle the case when the blog is not found
-    singleBlogSection.innerHTML = `<p>Blog not found.</p>`;
-  }
+      const singleBlogSection = document.querySelector(".singleblogOne");
+      singleBlogSection.innerHTML = `
+           <img src="${data.data.blogImage}" alt="">
+           <div class="businessbetween">
+               <p>${data.data.blogTitle}</p>
+               <p>${formattedDate}</p>
+           </div>
+           <p>${data.data.blogDescription}</p>
+       `;
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to fetch blog. Please try again later.");
+    });
 }
 
-function renderAllOtherBlogs(excludeBlogId) {
-  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+function fetchAndRenderAllBlogs() {
+  fetch("http://localhost:3000/api/blog/getall-blog")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      renderAllOtherBlogs(data.data);
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to fetch blogs. Please try again later.");
+    });
+}
+
+function renderAllOtherBlogs(blogs) {
   const allBlogsSection = document.querySelector(".AllBlogs");
+  blogs.forEach((blog) => {
+    const blogDiv = document.createElement("div");
+    blogDiv.classList.add("blogDescription");
+    const formattedDate = new Date(blog.blogDate).toISOString().split("T")[0];
 
-  blogs.forEach((blog, index) => {
-    if (index !== excludeBlogId) {
-      const blogDiv = document.createElement("div");
-      blogDiv.classList.add("blogDescription");
-
-      blogDiv.innerHTML = `
-              <img src="${blog.image}" alt="">
-              <div class="busInfo">
-                  <h1>${blog.title}</h1>
-                  <p>${blog.date}</p>
-                  <button class="more" onclick="redirectToSingleBlog(${index})">Read More</button>
-              </div>
-              <p>${blog.description}</p>
-          `;
-
-      allBlogsSection.appendChild(blogDiv);
-    }
+    blogDiv.innerHTML = `
+             <img src="${blog.blogImage}" alt="">
+             <div class="busInfo">
+                 <p>${blog.blogTitle}</p>
+                 <p>${formattedDate}</p>
+                 <button class="more" onclick="redirectToSingleBlog('${blog._id}')">Read More</button>
+             </div>
+             <p>${blog.blogDescription}</p>
+         `;
+    allBlogsSection.appendChild(blogDiv);
   });
-}
-
-function getQueryParam(name) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(name);
 }
 
 function redirectToSingleBlog(blogId) {
   window.location.href = `singleBlog.html?id=${blogId}`;
 }
 
-
+function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
 
 function addComment(event) {
   event.preventDefault();
@@ -160,22 +179,22 @@ function addComment(event) {
   const isValid = validateComment(email, subject, comment);
 
   if (isValid) {
-      const commentData = {
-          email,
-          subject,
-          comment,
-          seen: false, // Set the initial value to false
-      };
+    const commentData = {
+      email,
+      subject,
+      comment,
+      seen: false, // Set the initial value to false
+    };
 
-      // Use the blogId obtained from the URL
-      const blogId = getQueryParam("id");
-      commentData.blogId = blogId;
+    // Use the blogId obtained from the URL
+    const blogId = getQueryParam("id");
+    commentData.blogId = blogId;
 
-      // Call the function to save the comment
-      saveComment(commentData);
+    // Call the function to save the comment
+    saveComment(commentData);
 
-      // Close the comment form
-      closeForm();
+    // Close the comment form
+    closeForm();
   }
 }
 
@@ -183,7 +202,7 @@ function validateComment(email, subject, comment) {
   // Perform validation and display any error messages if needed
   // Return true if the data is valid, false otherwise
 
-  return true;  // Change this based on your validation logic
+  return true; // Change this based on your validation logic
 }
 
 function saveComment(commentData) {
@@ -191,7 +210,10 @@ function saveComment(commentData) {
   let comments = JSON.parse(localStorage.getItem("UserComments")) || [];
 
   // Generate a unique commentId
-  commentData.commentId = comments.length > 0 ? Math.max(...comments.map(comment => comment.commentId)) + 1 : 1;
+  commentData.commentId =
+    comments.length > 0
+      ? Math.max(...comments.map((comment) => comment.commentId)) + 1
+      : 1;
 
   // Add the new comment to the array
   comments.push(commentData);

@@ -24,8 +24,7 @@ function closeForm() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  renderBlogs();
-  attachClickEventToButtons();
+  // attachClickEventToButtons();
 
   // Get the subscription email input element
   const subscriptionEmailInput = document.getElementById("subscriptionEmail");
@@ -37,82 +36,77 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 document.addEventListener("DOMContentLoaded", function () {
   fetchAndRenderBlogs();
-  attachClickEventToButtons();
+  // attachClickEventToButtons();
 
   // Get the subscription email input element
   const subscriptionEmailInput = document.getElementById("subscriptionEmail");
 
   // Add an input event listener to clear the subscription error when typing starts
   subscriptionEmailInput.addEventListener("input", () =>
-      clearError("subscriptionError")
+    clearError("subscriptionError")
   );
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  // fetchAndRenderBlogs();
+  // attachClickEventToButtons();
+});
 
 function fetchAndRenderBlogs() {
   fetch("http://localhost:3000/api/blog/getall-blog")
-      .then((response) => {
-          if (!response.ok) {
-              throw new Error("Network response was not ok");
-          }
-          return response.json();
-      })
-      .then((data) => {
-          renderFetchedBlogs(data.data); // Assuming the response has a 'data' property containing the blog data
-      })
-      .catch((error) => {
-          console.error("Error:", error.message);
-          alert("Failed to fetch blogs. Please try again later.");
-      });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      renderFetchedBlogs(data.data); // Assuming the response has a 'data' property containing the blog data
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to fetch blogs. Please try again later.");
+    });
 }
 
 function renderFetchedBlogs(blogs) {
   const fetchedBlogsContainer = document.querySelector(".fetchedBlogs");
 
   blogs.forEach((blog, index) => {
-      const blogDiv = document.createElement("div");
-      blogDiv.classList.add("blogSection");
-      blogDiv.dataset.blogId = index;
-      const formattedDate = new Date(blog.blogDate).toISOString().split("T")[0];
+    const blogDiv = document.createElement("div");
+    blogDiv.classList.add("blogSection");
+    blogDiv.dataset.blogId = blog._id; // Use actual blog ID from the database
 
-      blogDiv.innerHTML = `
-          <div class="blogpartOne">
-              <img src="${blog.blogImage}" alt="">
-          </div>
-          <div class="blogpartTwo">
-              <p class="blogP">
-                  <span class="businessspanone">${blog.blogTitle}</span>
-                  <span class="businessspantwo">${formattedDate}</span>
-              </p>
-              <p class="waitUntill">
-                  <p class="until">${blog.blogDescription}</p>
-              </p>
-          </div>
-          <div class="blogpartThree">
-              <div>
-                  <button class="singleBlogs" type="button">Read More >></button>
-              </div>
-          </div>
-      `;
+    const formattedDate = new Date(blog.blogDate).toISOString().split("T")[0];
 
-      fetchedBlogsContainer.appendChild(blogDiv);
+    blogDiv.innerHTML = `
+        <div class="blogpartOne">
+            <img src="${blog.blogImage}" alt="">
+        </div>
+        <div class="blogpartTwo">
+            <p class="blogP">
+                <span class="businessspanone">${blog.blogTitle}</span>
+                <span class="businessspantwo">${formattedDate}</span>
+            </p>
+            <p class="waitUntill">
+                <p class="until">${blog.blogDescription}</p>
+            </p>
+        </div>
+        <div class="blogpartThree">
+            <div>
+                <button class="singleBlogs" type="button" onclick="redirectToSingleBlog('${blog._id}')">Read More >></button>
+            </div>
+        </div>
+    `;
+
+    fetchedBlogsContainer.appendChild(blogDiv);
   });
 }
 
-function attachClickEventToButtons() {
-  const singleBlogButtons = document.querySelectorAll(".singleBlogs");
-
-  singleBlogButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      window.location.href = `singleBlog.html?id=${index}`;
-    });
-  });
+function redirectToSingleBlog(blogId) {
+  window.location.href = `singleBlog.html?id=${blogId}`;
 }
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   renderContacts();
-
-// });
 // contactus.js
 
 function contactValidation() {
@@ -231,7 +225,7 @@ function clearError(errorId) {
 
 document.addEventListener("DOMContentLoaded", function () {
   // renderBlogs();
-  attachClickEventToButtons();
+  // attachClickEventToButtons();
 
   // Get the subscription email input element
   const subscriptionEmailInput = document.getElementById("subscriptionEmail");
@@ -242,7 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 });
 
-
 function subscribeToNewsletter() {
   const emailInput = document.getElementById("subscriptionEmail");
   const subscriptionError = document.getElementById("subscriptionError");
@@ -252,7 +245,8 @@ function subscribeToNewsletter() {
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    if (subscriptionError) subscriptionError.textContent = "Invalid email format";
+    if (subscriptionError)
+      subscriptionError.textContent = "Invalid email format";
     return;
   }
 
@@ -268,11 +262,15 @@ function subscribe(email) {
   const subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
 
   // Check for duplicates based on your conditions
-  const isDuplicate = subscriptions.some((subscriber) => subscriber.email === email);
+  const isDuplicate = subscriptions.some(
+    (subscriber) => subscriber.email === email
+  );
 
   // Only add new subscription if it doesn't already exist
   if (!isDuplicate) {
-    const newSubscriber = { email: email, /* Add any additional information here */ };
+    const newSubscriber = {
+      email: email /* Add any additional information here */,
+    };
 
     subscriptions.push(newSubscriber);
 
