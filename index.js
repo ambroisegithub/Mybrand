@@ -1,3 +1,4 @@
+// Frontend JavaScript code
 let openHam = document.querySelector("#openHam");
 let closeHam = document.querySelector("#closeHam");
 let navigationItems = document.querySelector("#navigation-items");
@@ -24,32 +25,12 @@ function closeForm() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // attachClickEventToButtons();
-
-  // Get the subscription email input element
-  const subscriptionEmailInput = document.getElementById("subscriptionEmail");
-
-  // Add an input event listener to clear the subscription error when typing starts
-  subscriptionEmailInput.addEventListener("input", () =>
-    clearError("subscriptionError")
-  );
-});
-document.addEventListener("DOMContentLoaded", function () {
   fetchAndRenderBlogs();
-  // attachClickEventToButtons();
 
   // Get the subscription email input element
   const subscriptionEmailInput = document.getElementById("subscriptionEmail");
 
-  // Add an input event listener to clear the subscription error when typing starts
-  subscriptionEmailInput.addEventListener("input", () =>
-    clearError("subscriptionError")
-  );
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-  // fetchAndRenderBlogs();
-  // attachClickEventToButtons();
 });
 
 function fetchAndRenderBlogs() {
@@ -107,7 +88,7 @@ function redirectToSingleBlog(blogId) {
   window.location.href = `singleBlog.html?id=${blogId}`;
 }
 
-// contactus.js
+
 
 function contactValidation() {
   const fullName = document.getElementById("fullName");
@@ -168,7 +149,7 @@ function contactValidation() {
     return;
   }
 
-  // Call the correct function to store contact data
+  // Call the function to store contact data
   storeContactUs(
     fullName.value,
     phoneNumber.value,
@@ -178,36 +159,54 @@ function contactValidation() {
   );
 }
 
-// Function to store contact data in local storage
-function storeContactUs(fullName, phoneNumber, emailAdress, subject, message) {
-  const contactData = {
-    fullName: fullName,
-    phoneNumber: phoneNumber,
-    emailAdress: emailAdress,
-    subject: subject,
-    message: message,
-  };
+async function storeContactUs(
+  fullName,
+  phoneNumber,
+  emailAdress,
+  subject,
+  message
+) {
 
-  let existingContacts = JSON.parse(localStorage.getItem("contacts")) || [];
+    const response = await fetch(
+      "http://localhost:3000/api/contactus/post-contact-us",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: fullName,
+          phoneNumber: phoneNumber,
+          emailAddress: emailAdress,
+          subject: subject,
+          message: message,
+        }),
+      }
+    );
 
-  // Check for duplicates based on your conditions
-  const isDuplicate = existingContacts.some(
-    (contact) =>
-      contact.fullName === fullName &&
-      contact.emailAdress === emailAdress &&
-      contact.phoneNumber === phoneNumber &&
-      contact.subject === subject &&
-      contact.message === message
-  );
+    const responseData = await response.json();
 
-  // Only add new contact if it doesn't already exist
-  if (!isDuplicate) {
-    existingContacts.push(contactData);
+    if (!response.ok) {
+      throw new Error(
+        responseData.error || "Failed to save contact information"
+      );
+    }
+  
+    alert("Contact information saved successfully!");
+    resetModalForm();
 
-    // Store the updated contacts back in local storage
-    localStorage.setItem("contacts", JSON.stringify(existingContacts));
-  }
 }
+
+
+function resetModalForm() {
+  document.getElementById("fullName").value = "";
+  document.getElementById("emailAdress").value = "";
+  document.getElementById("phoneNumber").value = "";
+  document.getElementById("subject").value = "";
+  document.getElementById("message").value = "";
+ 
+}
+
 fullName.addEventListener("input", () => clearError("fullnameError"));
 phoneNumber.addEventListener("input", () => clearError("phonenumberError"));
 emailAdress.addEventListener("input", () => clearError("emailadressError"));
@@ -217,24 +216,6 @@ message.addEventListener("input", () => clearError("messageError"));
 function clearError(errorId) {
   document.getElementById(errorId).textContent = "";
 }
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   renderBlogs();
-//   attachClickEventToButtons();
-// });
-
-document.addEventListener("DOMContentLoaded", function () {
-  // renderBlogs();
-  // attachClickEventToButtons();
-
-  // Get the subscription email input element
-  const subscriptionEmailInput = document.getElementById("subscriptionEmail");
-
-  // Add an input event listener to clear the subscription error when typing starts
-  subscriptionEmailInput.addEventListener("input", () =>
-    clearError("subscriptionError")
-  );
-});
 
 function subscribeToNewsletter() {
   const emailInput = document.getElementById("subscriptionEmail");
@@ -278,8 +259,4 @@ function subscribe(email) {
     localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
     alert("Thank you for subscribing to the newsletter!");
   }
-}
-
-function clearError(errorId) {
-  document.getElementById(errorId).textContent = "";
 }

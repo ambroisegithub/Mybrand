@@ -63,117 +63,84 @@ function closeModal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Fetch and populate contacts table on page load
-    fetchAndPopulateContactsTable();
-  });
-  
-  function fetchAndPopulateContactsTable() {
-    // Retrieve contact data from local storage
-    const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  
-    // Get the table body
-    const tableBody = document.getElementById("contactTableBody");
-  
-    // Clear existing rows in the table
-    tableBody.innerHTML = "";
-  
-    // Iterate through contact data and append rows to the table
-    contacts.forEach((contact, index) => {
-      const row = tableBody.insertRow();
-      row.innerHTML = `
+  // Fetch and populate contacts table on page load
+  fetchAndPopulateContactsTable();
+});
+
+function fetchAndPopulateContactsTable() {
+  fetch("http://localhost:3000/api/contactus/getall-contact-us/")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      populateTable(data.data); // Assuming the response has a 'data' property containing the blog data
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to fetch users. Please try again later.");
+    });
+}
+
+function populateTable(contacts) {
+  const tableBody = document.getElementById("contactTableBody");
+
+  // Clear existing rows in the table
+  tableBody.innerHTML = "";
+
+  // Iterate through contact data and append rows to the table
+  contacts.forEach((contact, index) => {
+    const row = tableBody.insertRow();
+    row.innerHTML = `
         <td data-table="Contact Id">${index + 1}</td>
         <td data-table="Full Name">${contact.fullName}</td>
-        <td data-table="Email Address">${contact.emailAdress}</td>
+        <td data-table="Email Address">${contact.emailAddress}</td>
         <td data-table="Phone Number">${contact.phoneNumber}</td>
         <td data-table="Subject">${contact.subject}</td>
         <td data-table="Message">${contact.message}</td>
         <td>
-          <button class="btn_seen" onclick="markAsSeen(${index})">
-            ${contact.seen ? "Seen" : "Mark as Seen"}
-          </button>
         </td>
         <td>
-          <button class="btn_trash" onclick="deleteContact(${index})">Delete</button>
+          <button class="btn_trash"  data-table="Delete" data-contact-id="${
+            contact._id
+          }">Delete</button>
         </td>
       `;
-    });
-  }
-  
-  function storeContactUs(fullName, phoneNumber, emailAdress, subject, message) {
-    const contactData = {
-      fullName: fullName,
-      phoneNumber: phoneNumber,
-      emailAdress: emailAdress,
-      subject: subject,
-      message: message,
-      seen: false, // Initially set as unseen
-    };
-  
-    let existingContacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  
-    // Check for duplicates based on your conditions
-    const isDuplicate = existingContacts.some(
-      (contact) =>
-        contact.fullName === fullName &&
-        contact.emailAdress === emailAdress &&
-        contact.phoneNumber === phoneNumber &&
-        contact.subject === subject &&
-        contact.message === message
-    );
-  
-    // Only add new contact if it doesn't already exist
-    if (!isDuplicate) {
-      existingContacts.push(contactData);
-  
-      // Store the updated contacts back in local storage
-      localStorage.setItem("contacts", JSON.stringify(existingContacts));
-  
-      // Fetch and populate the contacts table with the updated data
-      fetchAndPopulateContactsTable();
-    }
-  }
-  
-  function deleteContact(index) {
-    // Retrieve existing contacts from local storage
-    let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  
-    // Remove the contact at the specified index
-    contacts.splice(index, 1);
-  
-    // Save the updated contacts array to local storage
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  
-    // Fetch and populate the contacts table with the updated data
-    fetchAndPopulateContactsTable();
-  }
-  
-  function markAsSeen(index) {
-    // Retrieve existing contacts from local storage
-    let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
-  
-    // Find the contact at the specified index
-    const contactToUpdate = contacts[index];
-  
-    if (contactToUpdate) {
-      // Check if the contact is already marked as seen
-      if (!contactToUpdate.seen) {
-        // Update the seen property to true
-        contactToUpdate.seen = true;
-  
-        // Save the updated contacts array to local storage
-        localStorage.setItem("contacts", JSON.stringify(contacts));
-  
-        // Fetch and populate the contacts table with the updated data
-        fetchAndPopulateContactsTable();
-  
-        alert(`Contact ${index + 1} marked as seen`);
-      } else {
-        alert(`Contact ${index + 1} is already marked as seen`);
-      }
-    } else {
-      alert(`Contact ${index + 1} not found`);
-    }
-  }
+  });
+  const deleteButtons = document.querySelectorAll(".btn_trash");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", handleDeleteContact);
+  });
+}
 
-  // Fetch and populate the contacts table on page load
+// Function to handle delete blog button click
+function handleDeleteContact(event) {
+  const contactId = event.target.dataset.contactId;
+  if (confirm("Are you sure you want to delete this user?")) {
+    deletecontact(contactId);
+  }
+}
+
+// Function to delete a blog
+function deletecontact(contactId) {
+  const token = localStorage.getItem("token");
+  fetch(`http://localhost:3000/api/contactus/delete-contact-us/${contactId}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        alert("User Deleted Successfully!!!");
+      }
+    })
+    .then((data) => {
+      // user deleted successfully, update UI
+      fetchAndPopulateContactsTable();
+    });
+}
+
+// Fetch and populate the contacts table on page load
 document.addEventListener("DOMContentLoaded", fetchAndPopulateContactsTable);

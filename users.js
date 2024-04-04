@@ -179,7 +179,7 @@ function save(userData) {
     url = "http://localhost:3000/api/user/signup";
     method = "POST";
   } else if (purpose === "edit") {
-    const userId = modalContaine3000r.dataset.userId;
+    const userId = modalContainer.dataset.userId;
     url = `http://localhost:3000/api/user/${userId}`;
     method = "PUT";
   }
