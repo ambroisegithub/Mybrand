@@ -36,7 +36,7 @@ function addLink() {
   formatDoc("createLink", url);
 }
 
-const content = document.getElementById("content");
+const content = document.getElementById("comment");
 
 content.addEventListener("mouseenter", function () {
   const a = content.querySelectorAll("a");
@@ -159,11 +159,9 @@ function renderAllOtherBlogs(blogs) {
     allBlogsSection.appendChild(blogDiv);
   });
 }
-
 function redirectToSingleBlog(blogId) {
   window.location.href = `singleBlog.html?id=${blogId}`;
 }
-
 function getQueryParam(name) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(name);
@@ -172,55 +170,62 @@ function getQueryParam(name) {
 function addComment(event) {
   event.preventDefault();
 
-  const email = document.querySelector('input[name="email"]').value.trim();
-  const subject = document.querySelector('input[name="subject"]').value.trim();
-  const comment = document.getElementById("content").innerHTML.trim();
+  const blogSubject = document
+    .querySelector('input[name="blogSubject"]')
+    .value.trim();
+  const comment = document.getElementById("comment").innerHTML.trim();
+  const commentData = {
+    blogSubject,
+    comment,
+  };
 
-  const isValid = validateComment(email, subject, comment);
-
-  if (isValid) {
-    const commentData = {
-      email,
-      subject,
-      comment,
-      seen: false, // Set the initial value to false
-    };
-
-    // Use the blogId obtained from the URL
-    const blogId = getQueryParam("id");
-    commentData.blogId = blogId;
-
-    // Call the function to save the comment
-    saveComment(commentData);
-
-    // Close the comment form
-    closeForm();
-  }
+  const blogId = getQueryParam("id");
+  var token = localStorage.getItem("token");
+  fetch(`http://localhost:3000/api/comlike/comments/${blogId}`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commentData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to add comment");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert(data.message);
+      closeForm();
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to add comment. Please try again later.");
+    });
 }
 
-function validateComment(email, subject, comment) {
-  // Perform validation and display any error messages if needed
-  // Return true if the data is valid, false otherwise
-
-  return true; // Change this based on your validation logic
-}
-
-function saveComment(commentData) {
-  // Retrieve existing comments from local storage
-  let comments = JSON.parse(localStorage.getItem("UserComments")) || [];
-
-  // Generate a unique commentId
-  commentData.commentId =
-    comments.length > 0
-      ? Math.max(...comments.map((comment) => comment.commentId)) + 1
-      : 1;
-
-  // Add the new comment to the array
-  comments.push(commentData);
-
-  // Save the updated comments array to local storage
-  localStorage.setItem("UserComments", JSON.stringify(comments));
-
-  // Display a success message or perform any additional actions
-  alert("Comment posted successfully!");
+function likeBlog() {
+  const blogId = getQueryParam("id");
+  var token = localStorage.getItem("token");
+  fetch(`http://localhost:3000/api/comlike/${blogId}/like`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to like the blog");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert(data.message);
+      // You may want to update the UI to reflect the new like count
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to like the blog. Please try again later.");
+    });
 }

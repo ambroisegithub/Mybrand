@@ -67,80 +67,62 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchAndPopulateCommentsTable() {
-  // Retrieve comment data from local storage
-  const comments = JSON.parse(localStorage.getItem("UserComments")) || [];
+  fetch("http://localhost:3000/api/comlike/comments/")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const comments = data.comments;
+      const tableBody = document.querySelector(".tbl tbody");
+      tableBody.innerHTML = "";
 
-  // Get the table body
-  const tableBody = document.querySelector(".tbl tbody");
-
-  // Clear existing rows in the table
-  tableBody.innerHTML = "";
-
-  // Iterate through comment data and append rows to the table
-  comments.forEach((comment) => {
-    const row = tableBody.insertRow();
-    row.innerHTML = `
-        <td data-table="Comment Id">${comment.commentId}</td>
-        <td data-table="User Email">${comment.email}</td>
-        <td data-table="Subject">${comment.subject}</td>
-        <td data-table="Comment Description">${comment.comment}</td>
-        <td>
-          <button class="btn_mark" data-comment-id="${
-            comment.commentId
-          }" onclick="markAsSeen(${comment.commentId})">
-            ${comment.seen ? "Seen" : "Mark as Seen"}
-          </button>
-          <button class="btn_trash" data-table="Delete" onclick="deleteComment(${
-            comment.commentId
-          })">Delete</button>
-        </td>
-      `;
-  });
+      comments.forEach((blog, index) => {
+        blog.comments.forEach((comment) => {
+          const row = tableBody.insertRow();
+          row.innerHTML = `
+            <td data-table="Blog Id">${index + 1}</td>
+            <td data-table="Subject">${comment.blogSubject}</td>
+            <td data-table="Comment Description">${comment.comment}</td>
+            <td>
+              <button class="btn_trash" data-blog-id="${
+                blog._id
+              }" data-comment-id="${
+            comment._id
+          }" onclick="deleteComment(event)">Delete</button>
+            </td>
+          `;
+        });
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to fetch comments. Please try again later.");
+    });
 }
 
-// Function to mark a comment as seen
-function markAsSeen(commentId) {
-  // Retrieve existing comments from local storage
-  let comments = JSON.parse(localStorage.getItem("UserComments")) || [];
+function deleteComment(event) {
+  const button = event.target;
+  const blogId = button.getAttribute("data-blog-id");
+  const commentId = button.getAttribute("data-comment-id");
 
-  // Find the comment with the specified commentId
-  const commentToUpdate = comments.find(
-    (comment) => comment.commentId === commentId
-  );
-
-  if (commentToUpdate) {
-    // Check if the comment is already marked as seen
-    if (!commentToUpdate.seen) {
-      // Update the seen property to true
-      commentToUpdate.seen = true;
-
-      // Save the updated comments array to local storage
-      localStorage.setItem("UserComments", JSON.stringify(comments));
-
-      // Fetch and populate the comments table with the updated data
-      fetchAndPopulateCommentsTable();
-
-      alert(`Comment ${commentId} marked as seen`);
-    } else {
-      alert(`Comment ${commentId} is already marked as seen`);
-    }
-  } else {
-    alert(`Comment ${commentId} not found`);
-  }
-}
-
-function deleteComment(commentId) {
-  // Retrieve existing comments from local storage
-  let comments = JSON.parse(localStorage.getItem("UserComments")) || [];
-
-  // Remove the comment with the specified commentId
-  comments = comments.filter((comment) => comment.commentId !== commentId);
-
-  // Save the updated comments array to local storage
-  localStorage.setItem("UserComments", JSON.stringify(comments));
-
-  // Fetch and populate the comments table with the updated data
-  fetchAndPopulateCommentsTable();
+  fetch(`http://localhost:3000/api/comlike/comments/${blogId}/${commentId}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const row = button.closest("tr");
+      row.remove();
+      alert("Comment deleted successfully!");
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("Failed to delete comment. Please try again later.");
+    });
 }
 
 document.addEventListener("DOMContentLoaded", fetchAndPopulateCommentsTable);

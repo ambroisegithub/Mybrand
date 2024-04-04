@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="./singleBlog.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Single Blog</title>
@@ -35,6 +34,7 @@
                 </div>
             </nav> 
         </header> 
+
 <div class="sectionSingle">
     <div>
 
@@ -59,15 +59,16 @@
 
 
         <div class="Comment-form">
-            <button class="open-button" onclick="openForm()">Add Comment</button>
+            <div class="button_comment">
+                <button class="open-button" onclick="openForm()">Add Comment</button>
+                <button class="like-blog" title="like" onclick="likeBlog()"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+            </div>
+
             <div class="form-popup" id="myForm">
                 <form class="form-container" onsubmit="addComment(event)">
-                    <label for="email"><b>Email</b></label>
-                    <button type="button" onclick="closeForm()" class="close">X</button>
-                    <input type="text" class="commentInput" placeholder="Enter Email" name="email" required>
-        
+
                     <label for="subject"><b>Subject</b></label>
-                    <input type="text" class="commentInput" placeholder="Enter subject" name="subject" required>
+                    <input type="text" class="commentInput" placeholder="Enter subject" name="blogSubject" required>
         
                     <label for="comment"><b>Enter Text Comments</b></label>
                     <div class="container_textEditor">
@@ -128,12 +129,13 @@
                             
                         </div>
                     </div>
-                    <div id="content" contenteditable="true" spellcheck="false">
+                    <div id="comment" contenteditable="true" spellcheck="false">
                         Start, Texting.
                     </div>
                 </div>
                 
-                <button type="submit" class="btn">Post Your Comments</button>
+                <button type="submit" class="btn" onclick="addComment(event)">Post Your Comments</button>
+
                 </form>
               </div>
           </div>
@@ -173,6 +175,7 @@
 </div> -->
 
     </div>
+
 </div>
 
 

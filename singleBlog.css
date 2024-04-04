@@ -431,7 +431,7 @@ object-fit: cover;
 .toolbar .btn-toolbar button:hover {
 	background: #f3f3f3;
 }
-#content {
+#comment {
 	padding: 16px;
 	outline: none;
 	max-height: 50vh;
@@ -477,6 +477,28 @@ object-fit: cover;
   color: #858792;
   font-size: 17px;
   font-weight: bold;
+}
+.like-blog{
+  color: white;
+  font-weight:bold;
+  padding: 10px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  margin-top: 20px;
+  /* height: 10px; */
+  cursor: pointer;
+
+}
+.like-blog i{
+  /* font-size: 15px; */
+}
+.button_comment{
+  display: flex;
+  gap: 10px;
+  /* justify-content: center; */
+  text-align: center;
+  align-items: center;
 }
   @media screen and (max-width:768px) {
 
