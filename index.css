@@ -779,11 +779,16 @@ padding: 10px;
 .blogpartOne ,.blogpartThree{
   flex: 1;
 }
-.error {
+.error,#subscriptionError {
   color: red;
-  font-size: 15px;
+  font-size: 20px;
   margin-top: 5px;
   font-weight: bold;
+}
+#subscriptionEmail{
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
 }
 .blogpartTwo p >.businessspanone{
 color: white;

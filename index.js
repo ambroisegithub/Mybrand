@@ -204,6 +204,7 @@ function clearError(errorId) {
   document.getElementById(errorId).textContent = "";
 }
 
+// Function to subscribe to newsletter
 function subscribeToNewsletter() {
   const emailInput = document.getElementById("subscriptionEmail");
   const subscriptionError = document.getElementById("subscriptionError");
@@ -218,34 +219,45 @@ function subscribeToNewsletter() {
     return;
   }
 
-  
-
-  // Call the function to subscribe (you can implement this function as needed)
+  // Call the subscribe function with the email
   subscribe(email);
-
-  // Clear input and errors after a successful subscription
-  if (emailInput) emailInput.value = "";
-  if (subscriptionError) subscriptionError.textContent = "";
 }
 
+// Function to handle subscription
 function subscribe(email) {
-  const subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [];
-
-  // Check for duplicates based on your conditions
-  const isDuplicate = subscriptions.some(
-    (subscriber) => subscriber.email === email
-  );
-
-  // Only add new subscription if it doesn't already exist
-  if (!isDuplicate) {
-    const newSubscriber = {
-      email: email /* Add any additional information here */,
-    };
-
-    subscriptions.push(newSubscriber);
-
-    // Store the updated subscriptions back in local storage
-    localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
-    alert("Thank you for subscribing to the newsletter!");
-  }
+  fetch("http://localhost:3000/api/subscribe/post-subscribe", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to subscribe");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.success) {
+        // Clear input field and display success message
+        const emailInput = document.getElementById("subscriptionEmail");
+        if (emailInput) emailInput.value = "";
+        alert("Thank you for subscribing to the newsletter!");
+      
+      } else {
+        // Check if subscription failed due to email already being subscribed
+        if (data.error === "Email already subscribed") {
+          // Display appropriate error message
+          alert("This email is already subscribed!");
+        } else {
+          // Display generic error message for other errors
+          alert(data.message || "This email is already subscribed!");
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      alert("This email is already subscribed!");
+    });
 }
