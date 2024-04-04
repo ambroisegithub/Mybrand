@@ -100,8 +100,7 @@ function populateTable(contacts) {
         <td data-table="Phone Number">${contact.phoneNumber}</td>
         <td data-table="Subject">${contact.subject}</td>
         <td data-table="Message">${contact.message}</td>
-        <td>
-        </td>
+
         <td>
           <button class="btn_trash"  data-table="Delete" data-contact-id="${
             contact._id

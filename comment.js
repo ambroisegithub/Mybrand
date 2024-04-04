@@ -67,7 +67,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchAndPopulateCommentsTable() {
-  fetch("http://localhost:3000/api/comlike/comments/")
+  let token = localStorage.getItem("token");
+  if (!token) {
+    // Handle case where token is missing
+    console.error("Token is missing");
+    return;
+  }
+
+  fetch("http://localhost:3000/api/comlike/comments/", {
+    headers: {
+      Authorization: token,
+    },
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

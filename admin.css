@@ -196,6 +196,13 @@ margin-right:10px ;
     color: #ABABAB;
     font-weight: bold;
 }
+.sub,.blo,.com,.us{
+    font-size: 50px;
+    color: #ABABAB;
+
+    font-weight: bold;
+
+}
 .notification {
     background-color: #555;
     color: white;

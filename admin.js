@@ -66,21 +66,20 @@ function closeModal() {
   modalContainer.style.display = "none";
   // Reset the flag when the modal is closed
 
-    // Clear the input fields
-    document.getElementById("blogImage").value = ""; // Clear the image input
-    document.getElementById("blogDate").value = ""; // Clear the date input
-    document.getElementById("blogTitle").value = ""; // Clear the title input
-    document.getElementById("blogDescription").value = ""; // Clear the description input
-      // Reset the modal's purpose to ensure it's ready for a new post or edit
-    modalContainer.dataset.purpose = "";
-    modalContainer.dataset.blogId = "";
+  // Clear the input fields
+  document.getElementById("blogImage").value = ""; // Clear the image input
+  document.getElementById("blogDate").value = ""; // Clear the date input
+  document.getElementById("blogTitle").value = ""; // Clear the title input
+  document.getElementById("blogDescription").value = ""; // Clear the description input
+  // Reset the modal's purpose to ensure it's ready for a new post or edit
+  modalContainer.dataset.purpose = "";
+  modalContainer.dataset.blogId = "";
 
-    // Always remove the event listener when the modal is closed
-   const postBlogButton = document.querySelector("#blogModal button");
-   postBlogButton.removeEventListener("click", handlePostBlogClick);
-   isPostBlogListenerAdded = false;
+  // Always remove the event listener when the modal is closed
+  const postBlogButton = document.querySelector("#blogModal button");
+  postBlogButton.removeEventListener("click", handlePostBlogClick);
+  isPostBlogListenerAdded = false;
 }
-
 
 document.addEventListener("click", function (event) {
   const modalContainer = document.getElementById("blogModalContainer");
@@ -388,11 +387,95 @@ function updateBlogData() {
     })
     .then(() => {
       closeModal();
-      fetchAndPopulateTable(); 
+      fetchAndPopulateTable();
     })
     .catch((error) => {
       console.error("Error:", error.message);
       alert("Failed to update blog. Please try again later.");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetchTotalUsers();
+  fetchTotalBlogs();
+  fetchTotalComments();
+  fetchTotalSubscribers();
+});
+
+// Function to fetch total number of users
+function fetchTotalUsers() {
+  fetch("http://localhost:3000/api/user/numberofuser")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const totalUsers = data.totalUsers;
+      document.querySelector(".us").textContent = totalUsers;
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      // Handle error if needed
+    });
+}
+
+// Function to fetch total number of blogs
+function fetchTotalBlogs() {
+  fetch("http://localhost:3000/api/blog/numberofblogs")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const totalBlogs = data.totalBlogs;
+      document.querySelector(".blo").textContent = totalBlogs;
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      // Handle error if needed
+    });
+}
+
+// Function to fetch total number of comments
+function fetchTotalComments() {
+  fetch("http://localhost:3000/api/comlike/get-total-comment")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const totalComments = data.totalComments;
+      document.querySelector(".com").textContent = totalComments;
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      // Handle error if needed
+    });
+}
+
+// fetch total number of subscribes
+// Function to fetch total number of subscribers
+function fetchTotalSubscribers() {
+  fetch("http://localhost:3000/api/subscribe/count-total-subscribe")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const totalSubscribers = data.totalSubscribes;
+      document.querySelector(".sub").textContent = totalSubscribers;
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      // Handle error if needed
     });
 }
 

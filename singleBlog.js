@@ -191,7 +191,7 @@ function addComment(event) {
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Failed to add comment");
+        throw new Error("Please Login As user Before add comments To Blog.");
       }
       return response.json();
     })
@@ -201,7 +201,8 @@ function addComment(event) {
     })
     .catch((error) => {
       console.error("Error:", error.message);
-      alert("Failed to add comment. Please try again later.");
+      alert("Please Login As user Before add comments To Blog.");
+      window.location.href = "login.html";
     });
 }
 
@@ -226,6 +227,7 @@ function likeBlog() {
     })
     .catch((error) => {
       console.error("Error:", error.message);
-      alert("Failed to like the blog. Please try again later.");
+      alert("Please Login As user Before add Likes To Blog.");
+      window.location.href = "login.html";
     });
 }

@@ -29,8 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Get the subscription email input element
   const subscriptionEmailInput = document.getElementById("subscriptionEmail");
-
-
 });
 
 function fetchAndRenderBlogs() {
@@ -52,14 +50,12 @@ function fetchAndRenderBlogs() {
 
 function renderFetchedBlogs(blogs) {
   const fetchedBlogsContainer = document.querySelector(".fetchedBlogs");
-
   blogs.forEach((blog, index) => {
     const blogDiv = document.createElement("div");
     blogDiv.classList.add("blogSection");
     blogDiv.dataset.blogId = blog._id; // Use actual blog ID from the database
 
     const formattedDate = new Date(blog.blogDate).toISOString().split("T")[0];
-
     blogDiv.innerHTML = `
         <div class="blogpartOne">
             <img src="${blog.blogImage}" alt="">
@@ -88,8 +84,6 @@ function redirectToSingleBlog(blogId) {
   window.location.href = `singleBlog.html?id=${blogId}`;
 }
 
-
-
 function contactValidation() {
   const fullName = document.getElementById("fullName");
   const emailAdress = document.getElementById("emailAdress");
@@ -98,7 +92,6 @@ function contactValidation() {
   const message = document.getElementById("message");
 
   const errors = [];
-
   if (!fullName || fullName.value.trim() === "") {
     errors.push("Full Name is Required");
   }
@@ -166,37 +159,32 @@ async function storeContactUs(
   subject,
   message
 ) {
-
-    const response = await fetch(
-      "http://localhost:3000/api/contactus/post-contact-us",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName: fullName,
-          phoneNumber: phoneNumber,
-          emailAddress: emailAdress,
-          subject: subject,
-          message: message,
-        }),
-      }
-    );
-
-    const responseData = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        responseData.error || "Failed to save contact information"
-      );
+  const response = await fetch(
+    "http://localhost:3000/api/contactus/post-contact-us",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        emailAddress: emailAdress,
+        subject: subject,
+        message: message,
+      }),
     }
-  
-    alert("Contact information saved successfully!");
-    resetModalForm();
+  );
 
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseData.error || "Failed to save contact information");
+  }
+
+  alert("Contact information saved successfully!");
+  resetModalForm();
 }
-
 
 function resetModalForm() {
   document.getElementById("fullName").value = "";
@@ -204,7 +192,6 @@ function resetModalForm() {
   document.getElementById("phoneNumber").value = "";
   document.getElementById("subject").value = "";
   document.getElementById("message").value = "";
- 
 }
 
 fullName.addEventListener("input", () => clearError("fullnameError"));
@@ -230,6 +217,8 @@ function subscribeToNewsletter() {
       subscriptionError.textContent = "Invalid email format";
     return;
   }
+
+  
 
   // Call the function to subscribe (you can implement this function as needed)
   subscribe(email);
