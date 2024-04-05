@@ -479,5 +479,28 @@ function fetchTotalSubscribers() {
     });
 }
 
+// Function to fetch total number of contacts
+function fetchTotalContacts() {
+  fetch("https://mybackendblandts.onrender.com/api/contactus/count-Total-Contact/")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const totalContacts = data.totalContact;
+      document.getElementById("mailBadge").textContent = totalContacts;
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+      // Handle error if needed
+    });
+}
+
+// Call fetchTotalContacts on DOMContentLoaded event
+document.addEventListener("DOMContentLoaded", fetchTotalContacts);
+
+
 // Call fetchAndPopulateTable on DOMContentLoaded event
 document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);
