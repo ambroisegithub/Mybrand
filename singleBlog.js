@@ -181,7 +181,7 @@ function addComment(event) {
 
   const blogId = getQueryParam("id");
   var token = localStorage.getItem("token");
-  fetch(`http://localhost:3000/api/comlike/comments/${blogId}`, {
+  fetch(`https://mybackendblandts.onrender.com/api/comlike/comments/${blogId}`, {
     method: "POST",
     headers: {
       Authorization: token,
@@ -209,7 +209,7 @@ function addComment(event) {
 function likeBlog() {
   const blogId = getQueryParam("id");
   var token = localStorage.getItem("token");
-  fetch(`http://localhost:3000/api/comlike/${blogId}/like`, {
+  fetch(`https://mybackendblandts.onrender.com/api/comlike/${blogId}/like`, {
     method: "POST",
     headers: {
       Authorization: token,

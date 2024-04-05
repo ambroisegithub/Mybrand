@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchAndRenderBlogs() {
-  fetch("http://localhost:3000/api/blog/getall-blog")
+  fetch("https://mybackendblandts.onrender.com/api/blog/getall-blog")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -160,7 +160,7 @@ async function storeContactUs(
   message
 ) {
   const response = await fetch(
-    "http://localhost:3000/api/contactus/post-contact-us",
+    "https://mybackendblandts.onrender.com/api/contactus/post-contact-us",
     {
       method: "POST",
       headers: {
@@ -225,7 +225,7 @@ function subscribeToNewsletter() {
 
 // Function to handle subscription
 function subscribe(email) {
-  fetch("http://localhost:3000/api/subscribe/post-subscribe", {
+  fetch("https://mybackendblandts.onrender.com/api/subscribe/post-subscribe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -244,7 +244,6 @@ function subscribe(email) {
         const emailInput = document.getElementById("subscriptionEmail");
         if (emailInput) emailInput.value = "";
         alert("Thank you for subscribing to the newsletter!");
-      
       } else {
         // Check if subscription failed due to email already being subscribed
         if (data.error === "Email already subscribed") {

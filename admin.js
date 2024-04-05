@@ -188,7 +188,7 @@ function postBlogData(blogImage, blogDate, blogTitle, blogDescription) {
   formData.append("blogDescription", blogDescription);
   const token = localStorage.getItem("token");
 
-  fetch("http://localhost:3000/api/blog/post-blog", {
+  fetch("https://mybackendblandts.onrender.com/api/blog/post-blog", {
     method: "POST",
     headers: {
       Authorization: token,
@@ -255,7 +255,7 @@ function calculatePercentage(count) {
 
 // Function to fetch all blogs from the server
 function fetchAndPopulateTable() {
-  fetch("http://localhost:3000/api/blog/getall-blog")
+  fetch("https://mybackendblandts.onrender.com/api/blog/getall-blog")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -322,7 +322,7 @@ function handleDeleteBlog(event) {
 // Function to delete a blog
 function deleteBlog(blogId) {
   const token = localStorage.getItem("token");
-  fetch(`http://localhost:3000/api/blog/delete-blog/${blogId}`, {
+  fetch(`https://mybackendblandts.onrender.com/api/blog/delete-blog/${blogId}`, {
     method: "DELETE",
     headers: {
       Authorization: token,
@@ -371,7 +371,7 @@ function updateBlogData() {
   formData.append("blogDescription", descriptionInput);
   const token = localStorage.getItem("token");
 
-  fetch(`http://localhost:3000/api/blog/update-blog/${blogId}`, {
+  fetch(`https://mybackendblandts.onrender.com/update-blog/${blogId}`, {
     method: "PUT",
     headers: {
       Authorization: token,
@@ -404,7 +404,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to fetch total number of users
 function fetchTotalUsers() {
-  fetch("http://localhost:3000/api/user/numberofuser")
+  fetch("https://mybackendblandts.onrender.com/api/user/numberofuser")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -423,7 +423,7 @@ function fetchTotalUsers() {
 
 // Function to fetch total number of blogs
 function fetchTotalBlogs() {
-  fetch("http://localhost:3000/api/blog/numberofblogs")
+  fetch("https://mybackendblandts.onrender.com/api/blog/numberofblogs")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -442,7 +442,7 @@ function fetchTotalBlogs() {
 
 // Function to fetch total number of comments
 function fetchTotalComments() {
-  fetch("http://localhost:3000/api/comlike/get-total-comment")
+  fetch("https://mybackendblandts.onrender.com/api/comlike/get-total-comment")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -462,7 +462,7 @@ function fetchTotalComments() {
 // fetch total number of subscribes
 // Function to fetch total number of subscribers
 function fetchTotalSubscribers() {
-  fetch("http://localhost:3000/api/subscribe/count-total-subscribe")
+  fetch("https://mybackendblandts.onrender.com/api/subscribe/count-total-subscribe")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

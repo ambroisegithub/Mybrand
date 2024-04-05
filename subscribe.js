@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchAndPopulateSubscribeTable() {
-  fetch("http://localhost:3000/api/subscribe/getall-subscribe/")
+  fetch("https://mybackendblandts.onrender.com/api/subscribe/getall-subscribe/")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -123,7 +123,7 @@ function handleDeleteSubscribe(event) {
 // Function to delete a blog
 function deleteSubscribe(subscibeId) {
   const token = localStorage.getItem("token");
-  fetch(`http://localhost:3000/api/subscribe/delete-subscribe/${subscibeId}`, {
+  fetch(`https://mybackendblandts.onrender.com/api/subscribe/delete-subscribe/${subscibeId}`, {
     method: "DELETE",
   })
     .then((response) => {

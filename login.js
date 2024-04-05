@@ -72,7 +72,7 @@ const validateInputs = () => {
 const loginUser = async (email, password) => {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/user/login",
+      "https://mybackendblandts.onrender.com/api/user/login",
       {
         method: "POST",
         headers: {

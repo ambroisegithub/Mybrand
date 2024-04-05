@@ -80,7 +80,7 @@ function validateInputs() {
 }
 
 function save(userData) {
-  fetch("http://localhost:3000/api/user/signup", {
+  fetch("https://mybackendblandts.onrender.com/api/user/signup", {
     method: "POST",
     headers: {
       Accept: "application/json, text/plain, */*",

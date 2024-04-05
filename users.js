@@ -176,11 +176,11 @@ function save(userData) {
   let method = "";
 
   if (purpose === "create") {
-    url = "http://localhost:3000/api/user/signup";
+    url = "https://mybackendblandts.onrender.com/api/user/signup";
     method = "POST";
   } else if (purpose === "edit") {
     const userId = modalContainer.dataset.userId;
-    url = `http://localhost:3000/api/user/${userId}`;
+    url = `https://mybackendblandts.onrender.com/api/user/${userId}`;
     method = "PUT";
   }
 
@@ -269,7 +269,7 @@ function clearError(errorId) {
 }
 
 function fetchAndPopulateTable() {
-  fetch("http://localhost:3000/api/user/all")
+  fetch("https://mybackendblandts.onrender.com/api/user/all")
     .then((response) => {
       if (!response) {
         throw new Error("Network response Was not Work");
@@ -344,7 +344,7 @@ function deleteUser(userId) {
   const token = localStorage.getItem("token");
   const isConfirmed = confirm("Are you sure you want to delete this user?");
   if (isConfirmed) {
-    fetch(`http://localhost:3000/api/user/${userId}`, {
+    fetch(`https://mybackendblandts.onrender.com/api/user/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {

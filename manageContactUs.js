@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchAndPopulateContactsTable() {
-  fetch("http://localhost:3000/api/contactus/getall-contact-us/")
+  fetch("https://mybackendblandts.onrender.com/api/contactus/getall-contact-us/")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -125,7 +125,7 @@ function handleDeleteContact(event) {
 // Function to delete a blog
 function deletecontact(contactId) {
   const token = localStorage.getItem("token");
-  fetch(`http://localhost:3000/api/contactus/delete-contact-us/${contactId}`, {
+  fetch(`https://mybackendblandts.onrender.com/api/contactus/delete-contact-us/${contactId}`, {
     method: "DELETE",
   })
     .then((response) => {
