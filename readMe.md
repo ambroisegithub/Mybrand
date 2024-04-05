@@ -3,11 +3,11 @@ Ambroise M. Shakur - Developer Extraordinaire
 Hi There! 👋
 Welcome to my GitHub profile! I'm Ambroise M. Shakur, a passionate and dedicated developer based in Rwanda, specifically in Nyarugenge. I have a profound love for web development, and my journey extends far beyond the countries of Rwanda and Nyarugenge.
 
-CAPSTONE
+CAPSTONE PROJECT
 
 This is my brand fabrice which helps people to reach out me.
 
-. Pages
+PAGES AND SECTION
 
 . home page
 
@@ -43,7 +43,7 @@ Features
 
 . only admin can edit blog
 
-Tools and Langwages
+Tools and Languages
 
 Vs code
 
