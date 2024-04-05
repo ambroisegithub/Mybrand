@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function renderSingleBlog(blogId) {
   showLoader();
 
-  fetch(`http://localhost:3000/api/blog/getone-blog/${blogId}`)
+  fetch(`https://mybackendblandts.onrender.com/api/blog/getone-blog/${blogId}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -158,7 +158,7 @@ function renderSingleBlog(blogId) {
            <img src="${data.data.blogImage}" alt="">
            <div class="businessbetween">
                <p>${data.data.blogTitle}</p>
-               <p>${formattedDate}</p>
+               <p class="formartDate">${formattedDate}</p>
            </div>
            <p>${data.data.blogDescription}</p>
        `;
@@ -173,7 +173,7 @@ function renderSingleBlog(blogId) {
 }
 
 function fetchAndRenderAllBlogs() {
-  fetch("http://localhost:3000/api/blog/getall-blog")
+  fetch("https://mybackendblandts.onrender.com/api/blog/getall-blog")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -203,7 +203,7 @@ function renderAllOtherBlogs(blogs) {
                  <p>${formattedDate}</p>
                  <button class="more" onclick="redirectToSingleBlog('${blog._id}')">Read More</button>
              </div>
-             <p>${blog.blogDescription}</p>
+           
          `;
     allBlogsSection.appendChild(blogDiv);
   });
