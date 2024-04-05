@@ -66,7 +66,7 @@ function renderFetchedBlogs(blogs) {
                 <span class="businessspantwo">${formattedDate}</span>
             </p>
             <p class="waitUntill">
-                <p class="until">${blog.blogDescription}</p>
+                <p class="until">${blog.blogDescription.substring(0, 410) + '...'}</p>
             </p>
         </div>
         <div class="blogpartThree">

@@ -88,7 +88,7 @@ let loadingAnimationHTML = `
 <style>
 .loader {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 8px solid #f3f3f3;
