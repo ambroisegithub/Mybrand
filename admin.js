@@ -424,7 +424,7 @@ function updateBlogData() {
   formData.append("blogDescription", descriptionInput);
   const token = localStorage.getItem("token");
 
-  fetch(`https://mybackendblandts.onrender.com/update-blog/${blogId}`, {
+  fetch(`https://mybackendblandts.onrender.com/api/blog/update-blog/${blogId}`, {
     method: "PUT",
     headers: {
       Authorization: token,
