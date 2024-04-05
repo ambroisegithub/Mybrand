@@ -3,82 +3,72 @@ Ambroise M. Shakur - Developer Extraordinaire
 Hi There! 👋
 Welcome to my GitHub profile! I'm Ambroise M. Shakur, a passionate and dedicated developer based in Rwanda, specifically in Nyarugenge. I have a profound love for web development, and my journey extends far beyond the countries of Rwanda and Nyarugenge.
 
-I. About Me
+CAPSTONE
 
-I thrive in the world of development, where creativity meets functionality. My skills and expertise include:
+This is my brand fabrice which helps people to reach out me.
 
-Web Design & Development: Crafting visually appealing and user-friendly websites.
+. Pages
 
-Digital Marketing: Driving online presence through SEO, social media, and more.
+. home page
 
-UI/UX Design: Creating seamless and engaging user experiences.
+. about Section
 
-Illustration: Bringing ideas to life through captivating visuals.
+. portfolio Section
 
-Problem Solving: Providing effective solutions for digital products.
+. blog Section
 
-II .Services
+. contact Section
 
-I offer a range of services to cater to my clients' needs:
+. login page
 
-UI/UX Design: From landing pages to user flow and wireframing.
+. signup page
 
-Illustration: Character design, icon sets, and motion graphics.
+. dasbhoard
 
-Development: SEO, digital marketing, animation, and web development.
+. single blog page
 
-Digital Marketing: Mobilizing markets, website enterprise, and more.
+. all blogs Section
 
-III . My Skills
+Features
 
-Let's explore some of the skills that set me apart:
+. user can sent a contact or message to me
 
-Figma: Excellent
-Vite Js: Good
-Node Js: Excellent
-TailWind: Tailwind
-Django & Laravel: Good
-PHP & React Native: Excellent
-Awesome Projects
-Check out some of the awesome projects I've worked on:
+. user can create an acount
 
-Baby Bloom Health Care System
+. user can add a comment to any blog if he/she logged in
 
-Visit Project
-Project 2
+. only admin can access dashboard
 
-Visit Project
-Project 3
+. only admin can add delete user, message and blog
 
-Visit Project
+. only admin can edit blog
 
-Latest Tips & Tricks - My Blogs
-Stay updated with my latest blogs, offering valuable insights and tips:
+Tools and Langwages
 
-Don't Wait Until You Officially Start Business
+Vs code
 
-Read More
-Blog Title 2
+NodeJs with Typescript
 
-Read More
-Blog Title 3
+Html
 
-Read More
+Javascript
 
-IV .Get In Touch
+Css
 
-Let's talk about your next project! Here are a few reasons why you should consider working with me:
+Ho to run it
 
-5+ Years of Experience
-Professional Web Designer
-Mobile Apps Design
-Custom Design Support
-Feel free to email me or give me a call at +25 0786255860.
+flow this link https://ambroisegithub.github.io/Mybrand/
 
-Subscribe for Newsletter
-Stay connected and receive the latest updates by subscribing to my newsletter. Just enter your email and hit subscribe!
+Environments
 
-Footer
-© 2024 Ambroise M. - Bringing the latest info from Kigali, Rwanda. Keep updated with my projects and achievements.
+Render
 
-AMB - Ambroise M. Brand
+github pages
+
+Owner
+
+Ambroise Ambroise
+
+Auther
+
+Ambroise M. Shakur
