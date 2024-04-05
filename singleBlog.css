@@ -490,6 +490,16 @@ object-fit: cover;
   cursor: pointer;
 
 }
+.loginBefore{
+  margin-top: 30px;
+}
+.loginBefore a{
+  /* text-decoration: none; */
+ 
+  color: white;
+  font-weight: bold;
+
+}
 .like-blog i{
   /* font-size: 15px; */
 }

@@ -88,6 +88,52 @@ function resetModalForm() {
   clearError("signupError");
 }
 
+let loadingAnimationHTML = `
+<style>
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid black;
+  border-bottom: 8px solid #2A2C39;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  
+ @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+ }
+  
+
+</style>
+<div class="loader" ></div>
+`;
+
+function showLoader() {
+  const loaderContainer = document.createElement("div");
+  loaderContainer.innerHTML = loadingAnimationHTML;
+  loaderContainer.classList.add("loader-container"); 
+  document.body.appendChild(loaderContainer);
+}
+
+function hideLoader() {
+  const loaderContainer = document.querySelector(".loader-container");
+  if (loaderContainer) {
+    document.body.removeChild(loaderContainer);
+  }
+}
+
 function validateUserForm() {
   const usernameInput = document.getElementById("fullName");
   const emailInput = document.getElementById("email");
@@ -269,6 +315,7 @@ function clearError(errorId) {
 }
 
 function fetchAndPopulateTable() {
+  showLoader();
   fetch("https://mybackendblandts.onrender.com/api/user/all")
     .then((response) => {
       if (!response) {
@@ -282,6 +329,9 @@ function fetchAndPopulateTable() {
     .catch((error) => {
       console.error("Error:", error.message);
       alert("Failed to fetch the users. Please try again");
+    })
+    .finally(() => {
+      hideLoader();
     });
 }
 

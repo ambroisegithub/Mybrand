@@ -34,6 +34,52 @@ mainContent.addEventListener("scroll", function () {
   document.querySelector(".aside").style.top = `${scrollPosition}px`;
 });
 
+let loadingAnimationHTML = `
+<style>
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid black;
+  border-bottom: 8px solid #2A2C39;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  
+ @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+ }
+  
+
+</style>
+<div class="loader" ></div>
+`;
+
+function showLoader() {
+  const loaderContainer = document.createElement("div");
+  loaderContainer.innerHTML = loadingAnimationHTML;
+  loaderContainer.classList.add("loader-container");
+  document.body.appendChild(loaderContainer);
+}
+
+function hideLoader() {
+  const loaderContainer = document.querySelector(".loader-container");
+  if (loaderContainer) {
+    document.body.removeChild(loaderContainer);
+  }
+}
+
 // Define a named function for the event listener
 function handlePostBlogClick(event) {
   event.stopPropagation();
@@ -255,6 +301,7 @@ function calculatePercentage(count) {
 
 // Function to fetch all blogs from the server
 function fetchAndPopulateTable() {
+  showLoader();
   fetch("https://mybackendblandts.onrender.com/api/blog/getall-blog")
     .then((response) => {
       if (!response.ok) {
@@ -268,6 +315,9 @@ function fetchAndPopulateTable() {
     .catch((error) => {
       console.error("Error:", error.message);
       alert("Failed to fetch blogs. Please try again later.");
+    })
+    .finally(() => {
+      hideLoader();
     });
 }
 
@@ -322,12 +372,15 @@ function handleDeleteBlog(event) {
 // Function to delete a blog
 function deleteBlog(blogId) {
   const token = localStorage.getItem("token");
-  fetch(`https://mybackendblandts.onrender.com/api/blog/delete-blog/${blogId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: token,
-    },
-  })
+  fetch(
+    `https://mybackendblandts.onrender.com/api/blog/delete-blog/${blogId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -462,7 +515,9 @@ function fetchTotalComments() {
 // fetch total number of subscribes
 // Function to fetch total number of subscribers
 function fetchTotalSubscribers() {
-  fetch("https://mybackendblandts.onrender.com/api/subscribe/count-total-subscribe")
+  fetch(
+    "https://mybackendblandts.onrender.com/api/subscribe/count-total-subscribe"
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -481,7 +536,9 @@ function fetchTotalSubscribers() {
 
 // Function to fetch total number of contacts
 function fetchTotalContacts() {
-  fetch("https://mybackendblandts.onrender.com/api/contactus/count-Total-Contact/")
+  fetch(
+    "https://mybackendblandts.onrender.com/api/contactus/count-Total-Contact/"
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -500,7 +557,6 @@ function fetchTotalContacts() {
 
 // Call fetchTotalContacts on DOMContentLoaded event
 document.addEventListener("DOMContentLoaded", fetchTotalContacts);
-
 
 // Call fetchAndPopulateTable on DOMContentLoaded event
 document.addEventListener("DOMContentLoaded", fetchAndPopulateTable);

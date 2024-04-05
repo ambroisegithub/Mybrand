@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/kanit-2" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Single Blog</title>
 </head>
 <body>
@@ -40,6 +43,8 @@
 
         <div class="singleblogOne">
 
+            <div class="loader"></div>
+
             <!-- <img src="./images/blog-feed-img-1.webp" alt="">
     
             <div class="businessbetween">
@@ -62,6 +67,7 @@
             <div class="button_comment">
                 <button class="open-button" onclick="openForm()">Add Comment</button>
                 <button class="like-blog" title="like" onclick="likeBlog()"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+               <div class="loginBefore"><a href="./login.html">Login Bofore Likes and comments Blog</a></div> 
             </div>
 
             <div class="form-popup" id="myForm">
@@ -135,6 +141,7 @@
                 </div>
                 
                 <button type="submit" class="btn" onclick="addComment(event)">Post Your Comments</button>
+                
 
                 </form>
               </div>

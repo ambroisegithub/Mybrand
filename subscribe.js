@@ -63,11 +63,57 @@ function closeModal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
- 
   fetchAndPopulateSubscribeTable();
 });
 
+let loadingAnimationHTML = `
+<style>
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid black;
+  border-bottom: 8px solid #2A2C39;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+  
+ @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+ }
+  
+
+</style>
+<div class="loader" ></div>
+`;
+
+function showLoader() {
+  const loaderContainer = document.createElement("div");
+  loaderContainer.innerHTML = loadingAnimationHTML;
+  loaderContainer.classList.add("loader-container");
+  document.body.appendChild(loaderContainer);
+}
+
+function hideLoader() {
+  const loaderContainer = document.querySelector(".loader-container");
+  if (loaderContainer) {
+    document.body.removeChild(loaderContainer);
+  }
+}
+
 function fetchAndPopulateSubscribeTable() {
+  showLoader();
   fetch("https://mybackendblandts.onrender.com/api/subscribe/getall-subscribe/")
     .then((response) => {
       if (!response.ok) {
@@ -81,6 +127,9 @@ function fetchAndPopulateSubscribeTable() {
     .catch((error) => {
       console.error("Error:", error.message);
       alert("Failed to fetch Subscibes. Please try again later.");
+    })
+    .finally(() => {
+      hideLoader();
     });
 }
 
@@ -123,9 +172,12 @@ function handleDeleteSubscribe(event) {
 // Function to delete a blog
 function deleteSubscribe(subscibeId) {
   const token = localStorage.getItem("token");
-  fetch(`https://mybackendblandts.onrender.com/api/subscribe/delete-subscribe/${subscibeId}`, {
-    method: "DELETE",
-  })
+  fetch(
+    `https://mybackendblandts.onrender.com/api/subscribe/delete-subscribe/${subscibeId}`,
+    {
+      method: "DELETE",
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
