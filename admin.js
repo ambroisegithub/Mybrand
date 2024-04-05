@@ -338,7 +338,7 @@ function populateTable(blogs) {
        <td data-table="Blog Title">${blog.blogTitle}</td>
        <td data-table="Description">${blog.blogDescription}</td>
        <td data-table="Date Created">${formattedDate}</td>
-       <td>
+       <td class="action">
          <button class="btn_edit" data-table="Edit" data-blog-id="${
            blog._id
          }">Edit</button>
@@ -424,13 +424,16 @@ function updateBlogData() {
   formData.append("blogDescription", descriptionInput);
   const token = localStorage.getItem("token");
 
-  fetch(`https://mybackendblandts.onrender.com/api/blog/update-blog/${blogId}`, {
-    method: "PUT",
-    headers: {
-      Authorization: token,
-    },
-    body: formData,
-  })
+  fetch(
+    `https://mybackendblandts.onrender.com/api/blog/update-blog/${blogId}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: token,
+      },
+      body: formData,
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

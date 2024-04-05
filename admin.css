@@ -574,6 +574,10 @@ margin-top: 10px;
 .toolbar .btn-toolbar button:hover {
 	background: #f3f3f3;
 }
+.action{
+    display: flex;
+    gap: 2px;
+}
 #content {
 	padding: 16px;
 	outline: none;
@@ -648,6 +652,7 @@ margin-top: 10px;
     color:white;
     background-color:#5B69E2 ;
     font-weight:900;
+   
   }
   .tbl thead tr th{
     color:white;
