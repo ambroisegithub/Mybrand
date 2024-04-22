@@ -243,6 +243,8 @@ margin-top: 3px;
   border-radius:5px;
   cursor: pointer;
   box-shadow: 1px 1px 3px 3px #8888;
+  text-decoration: none;
+  outline: none;
  
 }
 

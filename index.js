@@ -66,12 +66,16 @@ function renderFetchedBlogs(blogs) {
                 <span class="businessspantwo">${formattedDate}</span>
             </p>
             <p class="waitUntill">
-                <p class="until">${blog.blogDescription.substring(0, 410) + '...'}</p>
+                <p class="until">${
+                  blog.blogDescription.substring(0, 410) + "..."
+                }</p>
             </p>
         </div>
         <div class="blogpartThree">
             <div>
-                <button class="singleBlogs" type="button" onclick="redirectToSingleBlog('${blog._id}')">Read More >></button>
+                <button class="singleBlogs" type="button" onclick="redirectToSingleBlog('${
+                  blog._id
+                }')">Read More >></button>
             </div>
         </div>
     `;
@@ -259,4 +263,19 @@ function subscribe(email) {
       console.error("Error:", error.message);
       alert("This email is already subscribed!");
     });
+}
+
+function handleteachme() {
+  window.location.href = "https://github.com/ambroisegithub/teachme1.git";
+}
+
+function handlebabybloom() {
+  window.location.href = "https://baby-bloom-frontend.vercel.app/";
+}
+
+function creativeP() {
+  window.location.href = "https://develop--brilliant-lolly-1205b8.netlify.app/";
+}
+function hireme() {
+  window.location.href="https://www.linkedin.com/in/ambroise-muhayimana-705914241/";
 }
